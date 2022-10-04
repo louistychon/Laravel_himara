@@ -75,31 +75,33 @@
                      <div class="footer-widget">
                          <h3>Contact Info</h3>
                          <div class="inner">
-                             {{-- <ul class="contact-details">
+                            @foreach ($hotelinfo as $info)
+                             <ul class="contact-details">
                                  <li>
                                      <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                     @env('APP_ADDRESS');
+                                     {{$info->address}}
                                  </li>
                                  <li>
                                      <i class="fa fa-phone" aria-hidden="true"></i>
-                                     @env('APP_PHONE');
+                                     {{$info->phone}}
                                  </li>
                                  <li>
                                      <i class="fa fa-fax"></i>
-                                     @env('APP_PHONE');
+                                     {{$info->phone}}
                                  </li>
                                  <li>
                                      <i class="fa fa-globe"></i>
-                                     Web: @env('APP_WEBSITE');
+                                     {{$info->website}}
                                  </li>
                                  <li>
                                      <i class="fa fa-envelope"></i>
                                      Email:
-                                     <a href="{{"mailto:" . @env('APP_EMAIL')}}">
-                                         @env('APP_EMAIL');
+                                     <a href="mailto: {{$info->email}}">
+                                        {{$info->email}}
                                      </a>
                                  </li>
-                             </ul> --}}
+                             </ul>
+                             @endforeach
                          </div>
                      </div>
                  </div>
