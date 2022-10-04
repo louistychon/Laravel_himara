@@ -1,13 +1,13 @@
 @extends('front.layouts.index')
     @section('content')
     <main class="error404-fullscreen-page gradient-overlay">
-            <div class="inner container">
-                <h1 class="error-number">
+            <div class="inner container text-center">
+                <h1 class="error-number m-auto">
                     404
                 </h1>
                 <h2 class="title">OOPS!! PAGE NOT FOUND</h2>
                 <div class="mt80">
-                    <a href="index.html" class="btn btn-dark btn-sm">
+                    <a href="{{route('home')}}" class="btn btn-dark btn-sm">
                         <i class="fa fa-angle-left"></i>
                         GO BACK TO HOME PAGE</a>
                     <div class="social-media aligncenter mt80">

@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 class ContactController extends Controller
 {
     public function index(){
-        $hotelinfos = HotelInfo::all();
-        return view('front.pages.contact', compact('hotelinfos'));
+        return view('front.pages.contact');
     }
 }

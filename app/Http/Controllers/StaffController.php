@@ -8,11 +8,6 @@ use App\Http\Requests\UpdateStaffRequest;
 
 class StaffController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $staffmembers = Staff::all();

@@ -10,7 +10,8 @@ class GalleryImgController extends Controller
 {
 
     public function index(){
-        return view('front.pages.gallery');
+        $allimgs = GalleryImg::all();
+        return view('front.pages.gallery', compact('allimgs'));
     }
 
 
@@ -43,7 +44,7 @@ class GalleryImgController extends Controller
         //
     }
 
-    
+
     public function destroy(GalleryImg $galleryImg)
     {
         //

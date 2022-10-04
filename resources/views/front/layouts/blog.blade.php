@@ -44,47 +44,53 @@
           </div>
           <div class="top-right-menu">
             <ul class="top-menu">
-              <li class="d-none d-md-inline">
-                <a href="tel:+18881234567">
-                  <i class="fa fa-phone"></i>+1 888 123 4567
-                </a>
-              </li>
-              <li class="d-none d-md-inline">
-                <a href="mailto:contact@hotelhimara.com">
-                  <i class="fa fa-envelope-o "></i>contact@hotelhimara.com</a>
-              </li>
-              <li class="language-menu">
-                <a href="#" class="active-language"><img src="images/icons/flags/gb.png" alt="Image">English</a>
-                <ul class="languages">
-                  <li class="language">
-                    <a href="#"><img src="images/icons/flags/it.png" alt="Image">Italiano</a>
-                  </li>
-                  <li class="language">
-                    <a href="#"><img src="images/icons/flags/gr.png" alt="Image">Ελληνικα</a>
-                  </li>
-                  <li class="language">
-                    <a href="#"><img src="images/icons/flags/al.png" alt="Image">Shqip</a>
-                  </li>
-                  <li class="language">
-                    <a href="#"><img src="images/icons/flags/fr.png" alt="Image">Français</a>
-                  </li>
-                  <li class="language">
-                    <a href="#"><img src="images/icons/flags/es.png" alt="Image">Español</a>
-                  </li>
-                </ul>
-              </li>
+                <li class="d-none d-md-inline">
+                    @foreach ($hotelinfo as $info)
+
+                    <a href="tel:{{$info->phone}}">
+                        <i class="fa fa-phone"></i>{{$info->phone}}
+                    </a>
+                </li>
+                <li class="d-none d-md-inline">
+                    <a href="mailto:{{$info->email}}">
+                        <i class="fa fa-envelope-o "></i>{{$info->email}}</a>
+                    </li>
+                    @endforeach
+                <li class="language-menu">
+                    <a href="#" class="active-language"><img src="images/icons/flags/gb.png" alt="Image">English</a>
+                    <ul class="languages">
+                        <li class="language">
+                            <a href="#"><img src="images/icons/flags/it.png" alt="Image">Italiano</a>
+                        </li>
+                        <li class="language">
+                            <a href="#"><img src="images/icons/flags/gr.png" alt="Image">Ελληνικα</a>
+                        </li>
+                        <li class="language">
+                            <a href="#"><img src="images/icons/flags/al.png" alt="Image">Shqip</a>
+                        </li>
+                        <li class="language">
+                            <a href="#"><img src="images/icons/flags/fr.png" alt="Image">Français</a>
+                        </li>
+                        <li class="language">
+                            <a href="#"><img src="images/icons/flags/es.png" alt="Image">Español</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
-          </div>
         </div>
-      </div>
-      <!-- ========== HEADER ========== -->
+    </div>
+</div>
+<!-- ========== HEADER ========== -->
       <header class="horizontal-header sticky-header" data-menutoggle="991">
         <div class="container">
           <!-- BRAND -->
           <div class="brand">
             <div class="logo">
-              <a href="index.html">
-                <img src="images/logo.svg" alt="Hotel Himara">
+              <a href="{{route('home')}}">
+                @foreach ($hotelinfo as $info )
+
+                <img src={{asset('/storage/logo/'. $info->logo) }} alt="Hotel Himara">
+                @endforeach
               </a>
             </div>
           </div>
@@ -440,7 +446,6 @@
         </div>
       </header>
 <body>
-    @include('front.components.headerblog');
     @yield('content');
     @include('front.components.footer');
 </body>

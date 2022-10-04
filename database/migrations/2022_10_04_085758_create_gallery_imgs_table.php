@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('gallery_imgs', function (Blueprint $table) {
             $table->id();
+            $table->string('src');
+            $table->string('caption');
+            $table->foreignId('filtergalleries_id')->references('id')->on('filtergalleries');
             $table->timestamps();
         });
     }

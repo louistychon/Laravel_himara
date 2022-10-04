@@ -1,20 +1,7 @@
 @extends('front.layouts.blog')
 @section('content')
       <!-- ========== PAGE TITLE ========== -->
-      <div class="page-title gradient-overlay op6" style="background: url(images/breadcrumb.jpg); background-repeat: no-repeat;
-  background-size: cover;">
-        <div class="container">
-          <div class="inner">
-            <h1>Blog</h1>
-            <ol class="breadcrumb">
-              <li>
-                <a href="index.html">Home</a>
-              </li>
-              <li>Blog</li>
-            </ol>
-          </div>
-        </div>
-      </div>
+      @include('front.components.pagetitle')
       <!-- ========== MAIN ========== -->
       <main>
         <div class="container">
@@ -446,9 +433,12 @@
                 <aside class="widget">
                   <h4 class="widget-title">Tags</h4>
                   <div class="tagcloud">
+                    @foreach ($tags as $tag)
+
                     <a href="#">
-                      <span class="tag">Party</span></a>
-                    <a href="#">
+                        <span class="tag">{{$tag->name}}</span></a>
+                        @endforeach
+                        <a href="#">
                       <span class="tag">Travel</span></a>
                     <a href="#">
                       <span class="tag">Wedding</span></a>

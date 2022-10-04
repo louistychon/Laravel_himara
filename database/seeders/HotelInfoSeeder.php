@@ -16,7 +16,7 @@ class HotelInfoSeeder extends Seeder
     public function run()
     {
         DB::table('hotel_infos')->insert([
-            ['address' => 'Lorem ipsum dolor, 25, Himara', 'phone'=>'+1 888 123 4567', 'website'=>"www.hotelhimara.com", 'email'=>"contact@hotelhimara.com"],
+            ['address' => 'Lorem ipsum dolor, 25, Himara', 'phone'=>'+1 888 123 4567', 'website'=>"www.hotelhimara.com", 'email'=>"contact@hotelhimara.com", "logo" => "logo.svg"],
         ]);
     }
 }

@@ -271,7 +271,10 @@
             <div class="brand-info">
               <div class="inner">
                 <div class="content">
-                  <img src="images/logo-big-transparent.svg" width="100" alt="Image">
+                    @foreach ($hotelinfo as $info )
+
+                    <img src="{{asset('/storage/logo/'.$info->logo)}}" width="100" alt="Image">
+                    @endforeach
                   <div class="stars">
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -471,95 +474,16 @@
         </div>
         <div class="gallery-owl owl-carousel image-gallery">
           <!-- ITEM -->
+          @foreach ($galleryimgs as $img)
           <div class="gallery-item">
-            <figure class="gradient-overlay image-icon">
-              <a href="images/gallery/gallery1.jpg">
-                <img src="images/gallery/gallery1.jpg" alt="Image">
-              </a>
-              <figcaption>Swimming Pool</figcaption>
+              <figure class="gradient-overlay image-icon">
+                  <a href="{{asset('/storage/gallery/'. $img->src)}}">
+                    <img src="{{asset('/storage/gallery/'. $img->src)}}" alt="Image">
+                </a>
+                <figcaption>{{$img->caption}}</figcaption>
             </figure>
-          </div>
-          <!-- ITEM -->
-          <div class="gallery-item">
-            <figure class="gradient-overlay image-icon">
-              <a href="images/gallery/gallery2.jpg">
-                <img src="images/gallery/gallery2.jpg" alt="Image">
-              </a>
-              <figcaption>Room View</figcaption>
-            </figure>
-          </div>
-          <!-- ITEM -->
-          <div class="gallery-item">
-            <figure class="gradient-overlay image-icon">
-              <a href="images/gallery/gallery3.jpg">
-                <img src="images/gallery/gallery3.jpg" alt="Image">
-              </a>
-              <figcaption>Cocktail</figcaption>
-            </figure>
-          </div>
-          <!-- ITEM -->
-          <div class="gallery-item">
-            <figure class="gradient-overlay image-icon">
-              <a href="images/gallery/gallery4.jpg">
-                <img src="images/gallery/gallery4.jpg" alt="Image">
-              </a>
-              <figcaption>Breakfast</figcaption>
-            </figure>
-          </div>
-          <!-- ITEM -->
-          <div class="gallery-item">
-            <figure class="gradient-overlay image-icon">
-              <a href="images/gallery/gallery5.jpg">
-                <img src="images/gallery/gallery5.jpg" alt="Image">
-              </a>
-              <figcaption>Playground</figcaption>
-            </figure>
-          </div>
-          <!-- ITEM -->
-          <div class="gallery-item">
-            <figure class="gradient-overlay image-icon">
-              <a href="images/gallery/gallery6.jpg">
-                <img src="images/gallery/gallery6.jpg" alt="Image">
-              </a>
-              <figcaption>Restaurant</figcaption>
-            </figure>
-          </div>
-          <!-- ITEM -->
-          <div class="gallery-item">
-            <figure class="gradient-overlay image-icon">
-              <a href="images/gallery/gallery7.jpg">
-                <img src="images/gallery/gallery7.jpg" alt="Image">
-              </a>
-              <figcaption>Wedding Ceremony</figcaption>
-            </figure>
-          </div>
-          <!-- ITEM -->
-          <div class="gallery-item">
-            <figure class="gradient-overlay image-icon">
-              <a href="images/gallery/gallery8.jpg">
-                <img src="images/gallery/gallery8.jpg" alt="Image">
-              </a>
-              <figcaption>Beach</figcaption>
-            </figure>
-          </div>
-          <!-- ITEM -->
-          <div class="gallery-item">
-            <figure class="gradient-overlay image-icon">
-              <a href="images/gallery/gallery9.jpg">
-                <img src="images/gallery/gallery9.jpg" alt="Image">
-              </a>
-              <figcaption>Honeymoon Room</figcaption>
-            </figure>
-          </div>
-          <!-- ITEM -->
-          <div class="gallery-item">
-            <figure class="gradient-overlay image-icon">
-              <a href="images/gallery/gallery10.jpg">
-                <img src="images/gallery/gallery10.jpg" alt="Image">
-              </a>
-              <figcaption>Sea</figcaption>
-            </figure>
-          </div>
+        </div>
+        @endforeach
         </div>
       </div>
     </section>
@@ -773,53 +697,33 @@
         </div>
         <div class="row">
           <!-- ITEM -->
+          @foreach ($dishes as $dish )
           <div class="col-md-6 col-sm-6 col-6">
             <div class="restaurant-menu-item">
-              <div class="row">
-                <div class="col-lg-4 col-12">
-                  <figure>
-                    <img src="images/restaurant/restaurant1.jpg" class="img-fluid " alt="Image">
-                  </figure>
-                </div>
-                <div class="col-lg-8 col-12">
-                  <div class="info">
-                    <div class="title">
-                      <span class="name">Salat</span>
-                      <span class="price">
-                        <span class="amount">€16.99</span>
-                      </span>
+                <div class="row">
+                    <div class="col-lg-4 col-12">
+                        <figure>
+                            <img src="{{asset('storage/dishes/'.$dish->src)}}" class="img-fluid " alt="Image">
+                        </figure>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, elit, sed diam nonummy nibh euismod tincidunt ut laoreet...
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- ITEM -->
-          <div class="col-md-6 col-sm-6 col-6">
-            <div class="restaurant-menu-item">
-              <div class="row">
-                <div class="col-lg-4 col-12">
-                  <figure>
-                    <img src="images/restaurant/restaurant2.jpg" class="img-fluid" alt="Image">
-                  </figure>
-                </div>
-                <div class="col-lg-8 col-12">
-                  <div class="info">
-                    <div class="title">
-                      <span class="name">Croquettes</span>
-                      <span class="price">
-                        <span class="amount">€9.99</span>
-                      </span>
+                    <div class="col-lg-8 col-12">
+                        <div class="info">
+                            <div class="title">
+                                <span class="name">{{$dish->name}}</span>
+                                <span class="price">
+                                    <span class="amount">{{$dish->price}}€</span>
+                                </span>
+                            </div>
+                            <p>{{$dish->text}}
+                            </p>
+                        </div>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, elit, sed diam nonummy nibh euismod tincidunt ut laoreet...
-                    </p>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
+        </div>
+        @endforeach
+        <!-- ITEM -->
+
         </div>
       </div>
     </section>

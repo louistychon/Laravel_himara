@@ -46,25 +46,25 @@
                             <div class="contact-info">
                                 <ul>
                                     <li>
-                                        @foreach ($hotelinfos as $hotelinfo)
+                                        @foreach ($hotelinfo as $info)
                                             <a href="#">
-                                                <i class="fa fa-map-marker"></i>{{ $hotelinfo->address }}</a>
+                                                <i class="fa fa-map-marker"></i>{{$info->address}}</a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <i class="fa fa-envelope"></i>{{ $hotelinfo->email }}</a>
+                                            <i class="fa fa-envelope"></i>{{ $info->email }}</a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <i class="fa fa-phone"></i>{{ $hotelinfo->phone }}</a>
+                                            <i class="fa fa-phone"></i>{{ $info->phone }}</a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <i class="fa fa-fax"></i>{{ $hotelinfo->phone }}</a>
+                                            <i class="fa fa-fax"></i>{{ $info->phone }}</a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <i class="fa fa-globe"></i>{{ $hotelinfo->website }}</a>
+                                            <i class="fa fa-globe"></i>{{ $info->website }}</a>
                                     </li>
                                 </ul>
                             </div>

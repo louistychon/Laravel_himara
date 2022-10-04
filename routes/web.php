@@ -1,45 +1,42 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GalleryImgController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 //front pages
 
-Route::get('/', function () {
-    return view('front.pages.home');
-})->name('home');
+//home
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
+//blog
 
-Route::get('/blog', function () {
-    return view('front.pages.blog');
-});
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 
+//booking-form
 
 Route::get('/booking-form', [BookingController::class, 'index'])->name('booking');
+
+//pages
 
 Route::get('/pages', function () {
     return view('front.pages.page');
 });
 
+//roomlist
+
 Route::get('/roomlist', [RoomController::class, 'indexall'])->name('List of rooms');
+
+//room show
+Route::get('/room', [RoomController::class, 'index'])->name('room');
 
 //staff
 
@@ -63,17 +60,13 @@ Route::controller(GalleryImgController::class)->group(function () {
     Route::delete('/gallery/{id}/delete', 'destroy');
 });
 
-
+//contact
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-Route::get('/q', function () {
-    return view('front.pages.404');
-});
+
+//events
 
 Route::get('/events', [EventsController::class, 'index'])->name('events');
-
-Route::get('/room', [RoomController::class, 'index'])->name('room');
-
 
 Route::get('/dashboard', function () {
     return view('back.pages.dashboard');
