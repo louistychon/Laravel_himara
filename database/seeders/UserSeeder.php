@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Louis Tychon',
                 'email' => 'louis.tychon1@gmail.com',
-                'country' => 'belgium',
+                'location' => 'belgium',
                 'password' => Hash::make('test1234'),
                 'role_id' => 1,
             ]

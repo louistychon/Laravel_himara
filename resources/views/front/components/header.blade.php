@@ -8,18 +8,22 @@
                 </div>
                 <div class="top-right-menu">
                     <ul class="top-menu">
+                        @foreach ($hotelinfo as $info)
+
+
                         <li class="d-none d-md-inline">
-                            <a href="tel:">
+                            <a href="tel:{{$info->phone}}">
                                 <i class="fa fa-phone"></i>
-                                +32
+                                {{$info->phone}}
                             </a>
                         </li>
                         <li class="d-none d-md-inline">
-                            <a href="mailto:xx@gmail.com">
+                            <a href="mailto:{{$info->email}}">
                                 <i class="fa fa-envelope-o "></i>
-                                www
+                                {{$info->email}}
                             </a>
                         </li>
+                        @endforeach
                         <li class="language-menu">
                             <a href="#" class="active-language"><img src="images/icons/flags/gb.png"
                                     alt="Image">English</a>

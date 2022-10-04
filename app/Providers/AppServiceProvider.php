@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\HotelInfo;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+           view()->composer('*',function($view) {
+            $view->with('user', Auth::user());
+            $view->with('hotelinfo', HotelInfo::all());
+        });
     }
 }

@@ -27,6 +27,12 @@
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 
+            <!-- Location -->
+            <div class="mt-4">
+                <label for="location" class="block font-medium text-sm text-gray-700">Country</label>
+                    <input type="text" id="location" name="location" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full">
+            </div>
+
             <!-- Password -->
             <div class="mt-4">
                 <x-input-label for="password" :value="__('Password')" />
