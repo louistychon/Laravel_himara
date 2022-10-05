@@ -6,8 +6,10 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryImgController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +44,27 @@ Route::controller(ServiceController::class)->group(function () {
     Route::delete('/back/services/{id}/delete', 'destroy');
 });
 
+
+//slider
+
+Route::controller(SliderController::class)->group(function () {
+    Route::get('/back/slider', 'index')->name("slider");
+    Route::get('/back/slider/create', 'create')->name("slidercreate");
+	Route::get('/back/slider/{id}/show', 'show');
+    Route::post('/back/slider/create', 'store');
+    Route::put('/back/slider/{id}/update', 'update');
+    Route::delete('/back/slider/{id}/delete', 'destroy');
+});
+
+//restaurant
+Route::controller(RestaurantController::class)->group(function () {
+    Route::get('/back/restaurant', 'index')->name("restaurant");
+    Route::get('/back/restaurant/create', 'create')->name("restaurantcreate");
+	Route::get('/back/restaurant/{id}/show', 'show');
+    Route::post('/back/restaurant/create', 'store');
+    Route::put('/back/restaurant/{id}/update', 'update');
+    Route::delete('/back/restaurant/{id}/delete', 'destroy');
+});
 
 
 //front pages

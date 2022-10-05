@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
+use App\Models\Icon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
@@ -15,7 +18,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $allservices = Service::all();
+        return view('back.pages.services.index', compact('allservices'));
     }
 
     /**
@@ -25,7 +29,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('back.pages.services.create');
     }
 
     /**
@@ -45,9 +49,11 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function show(Service $service)
+    public function show($id)
     {
-        //
+        $icons = Icon::all();
+        $show = Service::find($id);
+        return view('back.pages.services.show', compact('show', 'icons'));
     }
 
     /**
@@ -56,9 +62,9 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function edit(Service $service)
+    public function edit()
     {
-        //
+
     }
 
     /**
@@ -68,9 +74,20 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateServiceRequest $request, Service $service)
+    public function update(Request $request, $id)
     {
-        //
+        $update = Service::find($id);
+        $update->name = $request->name;
+        $update->short_desc = $request->short_desc;
+        $update->caption = $request->caption;
+        $update->icon_id = $request->icon_id;
+        if (!$update->src) {
+            Storage::delete('/storage/services/' . $request->src);
+            Storage::put('/storage/services/' . $update->src);
+        };
+        
+        $update->save();
+        return redirect()->back();
     }
 
     /**

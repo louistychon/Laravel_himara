@@ -3,6 +3,8 @@
 <head>
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
+    <link rel="apple-touch-icon-precomposed" href="images/favicon-apple.png" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('/fonts/flaticon.css') }}" >
 </head>
 
 <body>
