@@ -376,74 +376,29 @@
         <div class="row">
           <div class="col-lg-7 col-12">
             <div data-slider-id="services" class="services-owl owl-carousel">
+                @foreach ($services as $service)
               <figure class="gradient-overlay">
-                <img src="images/services/restaurant.jpg" class="img-fluid" alt="Image">
+                <img src="{{asset('/storage/services/'. $service->src)}}" class="img-fluid" alt="Image">
                 <figcaption>
-                  <h4>Restaurant</h4>
+                  <h4>{{$service->name}}</h4>
                 </figcaption>
               </figure>
-              <figure class="gradient-overlay">
-                <img src="images/services/spa.jpg" class="img-fluid" alt="Image">
-                <figcaption>
-                  <h4>Spa</h4>
-                </figcaption>
-              </figure>
-              <figure class="gradient-overlay">
-                <img src="images/services/conference.jpg" class="img-fluid" alt="Image">
-                <figcaption>
-                  <h4>Conference Room</h4>
-                </figcaption>
-              </figure>
-              <figure class="gradient-overlay">
-                <img src="images/services/swimming.jpg" class="img-fluid" alt="Image">
-                <figcaption>
-                  <h4>Swimming Pool</h4>
-                </figcaption>
-              </figure>
+              @endforeach
             </div>
           </div>
           <div class="col-lg-5 col-12">
             <div class="owl-thumbs" data-slider-id="services">
-              <div class="owl-thumb-item">
-                <span class="media-left">
-                  <i class="flaticon-tray-1"></i>
-                </span>
-                <div class="media-body">
-                  <h5>Restaurant</h5>
-                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                    ut laoreet.</p>
+                @foreach ($services as $service)
+                <div class="owl-thumb-item">
+                  <span class="media-left">
+                    <i class="{{$service->icon->src}}"></i>
+                  </span>
+                  <div class="media-body">
+                    <h5>{{$service->name}}</h5>
+                    <p>{{$service->short_desc}}</p>
+                  </div>
                 </div>
-              </div>
-              <div class="owl-thumb-item">
-                <span class="media-left">
-                  <i class="flaticon-nature"></i>
-                </span>
-                <div class="media-body">
-                  <h5>Spa - Beauty &amp; Health</h5>
-                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                    ut laoreet.</p>
-                </div>
-              </div>
-              <div class="owl-thumb-item">
-                <span class="media-left">
-                  <i class="flaticon-screen-1"></i>
-                </span>
-                <div class="media-body">
-                  <h5>Conference Room</h5>
-                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                    ut laoreet.</p>
-                </div>
-              </div>
-              <div class="owl-thumb-item">
-                <span class="media-left">
-                  <i class="flaticon-sports"></i>
-                </span>
-                <div class="media-body">
-                  <h5>Swimming Pool</h5>
-                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                    ut laoreet.</p>
-                </div>
-              </div>
+                @endforeach
             </div>
           </div>
         </div>
@@ -685,7 +640,7 @@
           @foreach ($dishes as $dish )
           <div class="col-md-6 col-sm-6 col-6">
             <div class="restaurant-menu-item">
-                <div class="row">
+                <div class="row mt-4">
                     <div class="col-lg-4 col-12">
                         <figure>
                             <img src="{{asset('storage/dishes/'.$dish->src)}}" class="img-fluid " alt="Image">
@@ -721,98 +676,37 @@
         </div>
         <div class="row">
           <!-- ITEM -->
+          @foreach ($blogpost as $new )
           <div class="col-md-4">
             <div class="news-grid-item">
               <figure class="gradient-overlay-hover link-icon">
                 <a href="blog-post.html">
-                  <img src="images/blog/blog-post1.jpg" class="img-fluid" alt="Image">
+                  <img src="{{asset('/storage/blog/'.$new->src)}}" class="img-fluid" alt="Image">
                 </a>
               </figure>
               <div class="news-info">
                 <h4 class="title">
-                  <a href="blog-post.html">10 Tips for Holiday Travel</a>
+                  <a href="blog-post.html">{{$new->title}}</a>
                 </h4>
-                <p>An examination of how the current political and economical climate is affecting the mental healthcare
-                  industry...</p>
+                <p>{{$new->desc}}</p>
                 <div class="post-meta">
                   <span class="author">
                     <a href="#"><img src="images/users/admin.jpg" width="16" alt="Image">
-                      JANE</a>
+                        {{$new->users->name}}</a>
                   </span>
                   <span class="date">
                     <i class="fa fa-clock-o"></i>
-                    August 13, 2017</span>
+                    {{date('d-m-Y', strtotime($new->updated_at))}}</span>
                   <span class="comments">
                     <a href="#">
                       <i class="fa fa-commenting-o"></i>
-                      1 Comment</a>
+                      {{$new->comments}} Comment</a>
                   </span>
                 </div>
               </div>
             </div>
           </div>
-          <!-- ITEM -->
-          <div class="col-md-4">
-            <div class="news-grid-item">
-              <figure class="gradient-overlay-hover link-icon">
-                <a href="blog-post.html">
-                  <img src="images/blog/blog-post2.jpg" class="img-fluid" alt="Image">
-                </a>
-              </figure>
-              <div class="news-info">
-                <h4 class="title">
-                  <a href="blog-post.html">Enjoy your holidays</a>
-                </h4>
-                <p>An examination of how the current political and economical climate is affecting the mental healthcare
-                  industry...</p>
-                <div class="post-meta">
-                  <span class="author">
-                    <a href="#"><img src="images/users/admin.jpg" width="16" alt="Image">
-                      JANE</a>
-                  </span>
-                  <span class="date">
-                    <i class="fa fa-clock-o"></i>
-                    August 16, 2017</span>
-                  <span class="comments">
-                    <a href="#">
-                      <i class="fa fa-commenting-o"></i>
-                      5 Comments</a>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- ITEM -->
-          <div class="col-md-4">
-            <div class="news-grid-item">
-              <figure class="gradient-overlay-hover link-icon">
-                <a href="blog-post.html">
-                  <img src="images/blog/blog-post3.jpg" class="img-fluid" alt="Image">
-                </a>
-              </figure>
-              <div class="news-info">
-                <h4 class="title">
-                  <a href="blog-post.html">Honeymoon at Hotel Himara</a>
-                </h4>
-                <p>An examination of how the current political and economical climate is affecting the mental healthcare
-                  industry...</p>
-                <div class="post-meta">
-                  <span class="author">
-                    <a href="#"><img src="images/users/admin.jpg" width="16" alt="Image">
-                      JANE</a>
-                  </span>
-                  <span class="date">
-                    <i class="fa fa-clock-o"></i>
-                    January 11, 2018</span>
-                  <span class="comments">
-                    <a href="#">
-                      <i class="fa fa-commenting-o"></i>
-                      3 Comments</a>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
+          @endforeach
         </div>
       </div>
     </section>

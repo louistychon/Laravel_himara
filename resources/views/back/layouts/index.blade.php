@@ -5,7 +5,6 @@
 
 <body>
     @include('back.components.header')
-
     <header class="horizontal-header sticky-header" data-menutoggle="991">
         <div class="container">
             <!-- BRAND -->

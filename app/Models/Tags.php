@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Tags extends Model
 {
     use HasFactory;
+
     public function article()
     {
-    return $this->belongsToMany(Articles::class, 'article_tag');
+        return $this->belongsToMany(Articles::class, 'article_tag');
     }
 }

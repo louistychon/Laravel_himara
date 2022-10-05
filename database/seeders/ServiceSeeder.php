@@ -16,10 +16,10 @@ class ServiceSeeder extends Seeder
     public function run()
     {
         DB::table('services')->insert([
-            ['name' => 'Restaurant', 'short_desc' => "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.", 'icon_id'=> 1, 'src' => "restaurant.jpg", 'caption' => "restaurant"],
-            ['name' => 'Spa - Beauty & Health', 'short_desc' => "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.", 'icon_id'=> 1, 'src' => "spa.jpg", 'caption' => "spa"],
-            ['name' => 'Conference Room', 'short_desc' => "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.", 'icon_id'=> 1, 'src' => "conference.jpg", 'caption' => "Conference Room"],
-            ['name' => 'Swimming Pool', 'short_desc' => "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.", 'icon_id'=> 1, 'src' => "swimming.jpg", 'caption' => "Swimming Pool"],
+            ['name' => 'Restaurant', 'short_desc' => "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.", 'icon_id'=> 8, 'src' => "restaurant.jpg", 'caption' => "restaurant"],
+            ['name' => 'Spa - Beauty & Health', 'short_desc' => "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.", 'icon_id'=> 9, 'src' => "spa.jpg", 'caption' => "spa"],
+            ['name' => 'Conference Room', 'short_desc' => "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.", 'icon_id'=> 12, 'src' => "conference.jpg", 'caption' => "Conference Room"],
+            ['name' => 'Swimming Pool', 'short_desc' => "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.", 'icon_id'=> 10, 'src' => "swimming.jpg", 'caption' => "Swimming Pool"],
         ]);
     }
 }

@@ -15,24 +15,7 @@
             <div class="nav-item pl-6 hover:bg-slate-300">
                 <a href=""><li class="list-none menu-list text-2xl p-2"><i class="fa-solid fa-gauge"></i> Dashboard</li></a>
             </div>
-            <div class="nav-item pl-6 hover:bg-slate-300">
-                <a href=""><li class="list-none menu-list text-2xl p-2"><i class="fa-solid fa-user-tie"></i> Avatars</li></a>
-            </div>
-            <div class="nav-item pl-6 hover:bg-slate-300">
-                <a href=""><li class="list-none menu-list text-2xl p-2"><i class="fa-solid fa-folder"></i> Categories</li></a>
-            </div>
-            <div class="nav-item pl-6 hover:bg-slate-300">
-                <a href=""><li class="list-none menu-list text-2xl p-2"><i class="fa-solid fa-users"></i> Utilisateurs</li></a>
-            </div>
-            <div class="nav-item pl-6 hover:bg-slate-300">
-                <a href=""><li class="list-none menu-list text-2xl p-2"><i class="fa-solid fa-camera"></i> Photos</li></a>
-            </div>
-            <div class="nav-item pl-6 hover:bg-slate-300">
-                <a href=""><li class="list-none menu-list text-2xl p-2"><i class="fa-solid fa-pen-to-square"></i> Articles</li></a>
-            </div>
-            <div class="nav-item pl-6 hover:bg-slate-300">
-                <a href=""><li class="list-none menu-list text-2xl p-2"><i class="fa-regular fa-images"></i> Gallerie</li></a>
-            </div>
+
             <div class="mt-6 space-y-1">
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
