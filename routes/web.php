@@ -1,13 +1,48 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryImgController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
+//back pages
+
+Route::get('/dashboard', function () {
+    return view('back.pages.dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+//users
+
+Route::controller(UserController::class)->group(function () {
+    Route::get('/back/users', 'index')->name("users");
+    Route::get('/back/users/create', 'create')->name("userscreate");
+	Route::get('/back/users/{id}/show', 'show');
+    Route::post('/back/users/create', 'store');
+    Route::put('/back/users/{id}/update', 'update');
+    Route::delete('/back/users/{id}/delete', 'destroy');
+});
+
+//services
+
+Route::controller(ServiceController::class)->group(function () {
+    Route::get('/back/services', 'index')->name("services");
+    Route::get('/back/services/create', 'create')->name("servicescreate");
+	Route::get('/back/services/{id}/show', 'show');
+    Route::post('/back/services/create', 'store');
+    Route::put('/back/services/{id}/update', 'update');
+    Route::delete('/back/services/{id}/delete', 'destroy');
+});
+
+
 
 //front pages
 
@@ -55,9 +90,3 @@ Route::controller(GalleryImgController::class)->group(function () {
 //contact
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-
-Route::get('/dashboard', function () {
-    return view('back.pages.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-require __DIR__.'/auth.php';

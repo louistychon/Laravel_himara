@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
                 'country' => 'belgium',
                 'city' => 'Liège',
                 'password' => Hash::make('test1234'),
-                'role_id' => 1,
+                'roles_id' => 1,
             ],
             [
                 'name' => 'moderator',
@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
                 'country' => 'belgium',
                 'city' => 'Liège',
                 'password' => Hash::make('test1234'),
-                'role_id' => 2,
+                'roles_id' => 2,
             ],
             [
                 'name' => 'editor',
@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
                 'country' => 'belgium',
                 'city' => 'Liège',
                 'password' => Hash::make('test1234'),
-                'role_id' => 3,
+                'roles_id' => 3,
             ],
             [
                 'name' => 'user',
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
                 'country' => 'belgium',
                 'city' => 'Liège',
                 'password' => Hash::make('test1234'),
-                'role_id' => 4,
+                'roles_id' => 4,
             ]
         ]);
     }
