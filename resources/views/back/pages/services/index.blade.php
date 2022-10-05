@@ -12,7 +12,7 @@
                         Name
                     </th>
                     <th scope="col" class="py-3 px-6">
-                        Short_desc
+                        Short description
                     </th>
                     <th scope="col" class="py-3 px-6">
                         Image
