@@ -20,9 +20,34 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Louis Tychon',
                 'email' => 'louis.tychon1@gmail.com',
-                'location' => 'belgium',
+                'country' => 'belgium',
+                'city' => 'Liège',
                 'password' => Hash::make('test1234'),
                 'role_id' => 1,
+            ],
+            [
+                'name' => 'moderator',
+                'email' => 'moderator@gmail.com',
+                'country' => 'belgium',
+                'city' => 'Liège',
+                'password' => Hash::make('test1234'),
+                'role_id' => 2,
+            ],
+            [
+                'name' => 'editor',
+                'email' => 'editor@gmail.com',
+                'country' => 'belgium',
+                'city' => 'Liège',
+                'password' => Hash::make('test1234'),
+                'role_id' => 3,
+            ],
+            [
+                'name' => 'user',
+                'email' => 'user@gmail.com',
+                'country' => 'belgium',
+                'city' => 'Liège',
+                'password' => Hash::make('test1234'),
+                'role_id' => 4,
             ]
         ]);
     }

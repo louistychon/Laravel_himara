@@ -6,9 +6,9 @@
                  <!-- WIDGET -->
                  <div class="col-md-3">
                      <div class="footer-widget">
-                        @foreach ($hotelinfo as $info)
-                        <img src="{{asset('/storage/logo/'.$info->logo)}}" class="footer-logo" alt="Hotel Himara">
-                        @endforeach
+                         @foreach ($hotelinfo as $info)
+                             <img src="{{ asset('/storage/logo/' . $info->logo) }}" class="footer-logo" alt="Hotel Himara">
+                         @endforeach
                          <div class="inner">
                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, velit placeat assumenda
                                  incidunt
@@ -28,21 +28,13 @@
                          <h3>LATEST NEWS</h3>
                          <div class="inner">
                              <ul class="latest-posts">
-                                 <li>
-                                     <a href="blog-post.html">10 Tips for holiday travel</a>
-                                 </li>
-                                 <li>
-                                     <a href="blog-post.html">Are you ready to enjoy your holidays</a>
-                                 </li>
-                                 <li>
-                                     <a href="blog-post.html">Honeymoon at Hotel Himara</a>
-                                 </li>
-                                 <li>
-                                     <a href="blog-post.html">Travel gift ideas for every type of traveler</a>
-                                 </li>
-                                 <li>
-                                     <a href="blog-post.html">Breakfast with coffee and orange juice</a>
-                                 </li>
+
+                                 @foreach ($news as $new)
+                                     <li>
+                                         <a href="">{{$new->title}}</a>
+                                     </li>
+                                 @endforeach
+
                              </ul>
                          </div>
                      </div>
@@ -77,32 +69,32 @@
                      <div class="footer-widget">
                          <h3>Contact Info</h3>
                          <div class="inner">
-                            @foreach ($hotelinfo as $info)
-                             <ul class="contact-details">
-                                 <li>
-                                     <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                     {{$info->address}}
-                                 </li>
-                                 <li>
-                                     <i class="fa fa-phone" aria-hidden="true"></i>
-                                     {{$info->phone}}
-                                 </li>
-                                 <li>
-                                     <i class="fa fa-fax"></i>
-                                     {{$info->phone}}
-                                 </li>
-                                 <li>
-                                     <i class="fa fa-globe"></i>
-                                     {{$info->website}}
-                                 </li>
-                                 <li>
-                                     <i class="fa fa-envelope"></i>
-                                     Email:
-                                     <a href="mailto: {{$info->email}}">
-                                        {{$info->email}}
-                                     </a>
-                                 </li>
-                             </ul>
+                             @foreach ($hotelinfo as $info)
+                                 <ul class="contact-details">
+                                     <li>
+                                         <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                         {{ $info->address }}
+                                     </li>
+                                     <li>
+                                         <i class="fa fa-phone" aria-hidden="true"></i>
+                                         {{ $info->phone }}
+                                     </li>
+                                     <li>
+                                         <i class="fa fa-fax"></i>
+                                         {{ $info->phone }}
+                                     </li>
+                                     <li>
+                                         <i class="fa fa-globe"></i>
+                                         {{ $info->website }}
+                                     </li>
+                                     <li>
+                                         <i class="fa fa-envelope"></i>
+                                         Email:
+                                         <a href="mailto: {{ $info->email }}">
+                                             {{ $info->email }}
+                                         </a>
+                                     </li>
+                                 </ul>
                              @endforeach
                          </div>
                      </div>

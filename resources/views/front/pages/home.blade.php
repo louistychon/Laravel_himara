@@ -241,29 +241,14 @@
               <div class="providers">
                 <span>Recommended on:</span>
                 <!-- ITEM -->
+                @foreach ($partners as $partner )
+
                 <div class="item">
-                  <a href="#">
-                    <img src="images/providers/provider-1.png" alt="Image">
-                  </a>
+                    <a href="#">
+                        <img src="{{asset('/storage/partners/'. $partner->src)}}" alt="Image">
+                    </a>
                 </div>
-                <!-- ITEM -->
-                <div class="item">
-                  <a href="#">
-                    <img src="images/providers/provider-2.png" alt="Image">
-                  </a>
-                </div>
-                <!-- ITEM -->
-                <div class="item">
-                  <a href="#">
-                    <img src="images/providers/provider-3.png" alt="Image">
-                  </a>
-                </div>
-                <!-- ITEM -->
-                <div class="item">
-                  <a href="#">
-                    <img src="images/providers/provider-4.png" alt="Image">
-                  </a>
-                </div>
+                @endforeach
               </div>
             </div>
           </div>

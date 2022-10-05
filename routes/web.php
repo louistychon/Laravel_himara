@@ -3,8 +3,6 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\EventsController;
-use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GalleryImgController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoomController;
@@ -24,12 +22,6 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 //booking-form
 
 Route::get('/booking-form', [BookingController::class, 'index'])->name('booking');
-
-//pages
-
-Route::get('/pages', function () {
-    return view('front.pages.page');
-});
 
 //roomlist
 
@@ -63,10 +55,6 @@ Route::controller(GalleryImgController::class)->group(function () {
 //contact
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-
-//events
-
-Route::get('/events', [EventsController::class, 'index'])->name('events');
 
 Route::get('/dashboard', function () {
     return view('back.pages.dashboard');

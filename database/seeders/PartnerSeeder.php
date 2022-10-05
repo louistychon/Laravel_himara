@@ -16,10 +16,10 @@ class PartnerSeeder extends Seeder
     public function run()
     {
         DB::table('partners')->insert([
-            ['name' => 'tripadvisor', 'src' => 'provider-1.png'],
-            ['name' => 'tripadvisor', 'src' => 'provider-2.png'],
-            ['name' => 'tripadvisor', 'src' => 'provider-3.png'],
-            ['name' => 'tripadvisor', 'src' => 'provider-4.png'],
+            [ 'src' => 'provider-1.png'],
+            [ 'src' => 'provider-2.png'],
+            [ 'src' => 'provider-3.png'],
+            [ 'src' => 'provider-4.png'],
         ]);
     }
 }
