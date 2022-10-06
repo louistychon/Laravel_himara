@@ -31,6 +31,11 @@
                         aria-current="page">Dashboard</a>
                 </li>
                 <li class="menu_item">
+                    <a href="{{route('hotelinfo')}}"
+                        class="block py-2 pr-4 pl-3 rounded md:bg-transparent md:p-0 uppercase"
+                        aria-current="page">Hotel info</a>
+                </li>
+                <li class="menu_item">
                     <a href="{{route('users')}}"
                         class="block py-2 pr-4 pl-3 rounded md:bg-transparent md:p-0 uppercase"
                         aria-current="page">Users</a>
@@ -72,7 +77,7 @@
                                 <a href="#" class="block py-2 px-4 uppercase">Blog</a>
                             </li>
                             <li class="dropdown_item">
-                                <a href="#" class="block py-2 px-4 uppercase">Gallery</a>
+                                <a href="{{route('gallery2')}}" class="block py-2 px-4 uppercase">Gallery</a>
                             </li>
                             <li class="dropdown_item">
                                 <a href="#" class="block py-2 px-4 uppercase">Team</a>

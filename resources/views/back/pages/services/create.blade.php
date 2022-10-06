@@ -4,17 +4,17 @@
         @csrf
         <div>
             <label for="Name" class="block mb-2 text-sm font-medium">Name</label>
-            <input type="text" id="Name" name="name" placeholder="">
+            <input type="text" class="focus:ring-0" id="Name" name="name" placeholder="">
         </div>
         <div class="mb-6">
             <label for="short_desc" class="block mb-2 text-sm font-medium">Short
                 description</label>
-            <input type="text" id="short_desc" name="short_desc">
+            <input type="text" class="focus:ring-0" id="short_desc" name="short_desc">
         </div>
 
         <div class="mb-6">
             <label for="caption" class="block mb-2 text-sm font-medium">Caption</label>
-            <input type="text" id="caption" name="caption">
+            <input type="text" class="focus:ring-0" id="caption" name="caption">
         </div>
         <label for="icon" class="block mb-2 text-sm font-medium dark:text-gray-400">Icon</label>
         <fieldset id="role" name="icon_id">
@@ -22,7 +22,7 @@
                 @foreach ($icons as $icon)
                     <div class="flex flex-col justify-between items-center m-auto">
                         <i class="{{ 'fa ' . $icon->src }}" class="ms-0"></i>
-                        <input type="radio" value="{{ $icon->id }}" class="mt-2" name="icon_id">
+                        <input type="radio" value="{{ $icon->id }}" class="mt-2 focus:ring-0" name="icon_id">
                     </div>
                 @endforeach
             </div>

@@ -1,27 +1,23 @@
 @extends('back.layouts.index')
 @section('content')
 
-<a href="{{route('servicescreate')}}"><button type="button"
-    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">New user</button></a>
-
+<a href="{{route('restaurantcreate')}}"><button
+    class="btn-logout font-medium text-sm px-5 py-2.5 mr-2 mb-2">New dish</button></a>
     <div class="overflow-x-auto relative">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table>
+            <thead class="">
                 <tr>
+                    <th scope="col" class="py-3 px-6">
+                        Image
+                    </th>
                     <th scope="col" class="py-3 px-6">
                         Name
                     </th>
                     <th scope="col" class="py-3 px-6">
-                        Email
+                        Text
                     </th>
                     <th scope="col" class="py-3 px-6">
-                        Country
-                    </th>
-                    <th scope="col" class="py-3 px-6">
-                        City
-                    </th>
-                    <th scope="col" class="py-3 px-6">
-                        Role
+                        Price
                     </th>
                     <th scope="col" class="py-3 px-6">
                         Edit
@@ -32,35 +28,32 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($allusers as $user)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $user->name }}
-                        </th>
+                @foreach ($alldishes as $dishes)
+                    <tr class="">
                         <td class="py-4 px-6">
-                            {{ $user->email }}
+                            <img class="img-responsive" src="{{asset('storage/dishes/'. $dishes->src)}}">
                         </td>
                         <td class="py-4 px-6">
-                            {{ $user->country }}
+                            {{ $dishes->name }}
                         </td>
                         <td class="py-4 px-6">
-                            {{ $user->city }}
+                            {{ $dishes->text }}
                         </td>
                         <td class="py-4 px-6">
-                            {{ $user->roles->name }}
+                            {{ $dishes->price}}€
                         </td>
                         <td class="py-4 px-6">
-                            <a href="/back/users/{{ $user->id }}/show">
-                                <button type="button"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Edit</button>
+                            <a href="/back/restaurant/{{ $dishes->id }}/show">
+                                <button
+                                    class="btn-logout font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Edit</button>
                             </a>
                         </td>
                         <td class="py-4 px-6">
-                            <form action="/back/users/{{ $user->id }}/delete" method="post">
+                            <form action="/back/restaurant/{{ $dishes->id }}/delete" method="post">
                                 @csrf
                                 @method('delete')
-                                <button type="submit"
-                                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+                               <button type="submit"
+                                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Delete</button>
                             </form>
                         </td>
                     </tr>

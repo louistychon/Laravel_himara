@@ -3,7 +3,9 @@
     <div class="loader-inner">
       <div class="spin">
         <span></span>
-        <img src="images/logo.svg" alt="Hotel Himara">
+        @foreach ($hotelinfo as $info )
+        <img src="{{asset('storage/logo/thumbnail/'. $info->logo)}}" alt="Hotel Himara">
+        @endforeach
       </div>
     </div>
   </div>

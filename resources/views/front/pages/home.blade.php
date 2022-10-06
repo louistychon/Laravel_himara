@@ -367,6 +367,7 @@
       </div>
     </section>
     <!-- ========== SERVICES ========== -->
+    @if($services->count() > 0)
     <section class="services">
       <div class="container">
         <div class="section-title">
@@ -404,7 +405,10 @@
         </div>
       </div>
     </section>
+    @else
+    @endif
     <!-- ========== GALLERY ========== -->
+    @if($galleryimgs->count() > 0)
     <section class="gallery">
       <div class="container">
         <div class="section-title">
@@ -417,8 +421,8 @@
           @foreach ($galleryimgs as $img)
           <div class="gallery-item">
               <figure class="gradient-overlay image-icon">
-                  <a href="{{asset('/storage/gallery/'. $img->src)}}">
-                    <img src="{{asset('/storage/gallery/'. $img->src)}}" alt="Image">
+                  <a href="{{asset('/storage/gallery/thumbnail/'. $img->src)}}">
+                    <img src="{{asset('/storage/gallery/thumbnail/'. $img->src)}}" alt="Image">
                 </a>
                 <figcaption>{{$img->caption}}</figcaption>
             </figure>
@@ -427,6 +431,8 @@
         </div>
       </div>
     </section>
+    @else
+    @endif
     <!-- ========== TESTIMONIALS ========== -->
     <section class="testimonials gray">
       <div class="container">
@@ -643,7 +649,7 @@
                 <div class="row mt-4">
                     <div class="col-lg-4 col-12">
                         <figure>
-                            <img src="{{asset('storage/dishes/'.$dish->src)}}" class="img-fluid " alt="Image">
+                            <img src="{{asset('storage/dishes/thumbnail/'.$dish->src)}}" class="img-fluid " alt="Image">
                         </figure>
                     </div>
                     <div class="col-lg-8 col-12">

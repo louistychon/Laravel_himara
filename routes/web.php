@@ -6,6 +6,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryImgController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HotelInfoController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ServiceController;
@@ -22,6 +23,15 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+
+//hotelinfo
+
+Route::controller(HotelInfoController::class)->group(function () {
+    Route::get('/back/hotelinfo', 'index')->name("hotelinfo");
+    Route::put('/back/hotelinfo/update', 'update');
+});
+
 
 //users
 
@@ -43,6 +53,17 @@ Route::controller(ServiceController::class)->group(function () {
     Route::post('/back/services/create', 'store');
     Route::put('/back/services/{id}/update', 'update');
     Route::delete('/back/services/{id}/delete', 'destroy');
+});
+
+//gallery
+
+Route::controller(GalleryImgController::class)->group(function () {
+    Route::get('/back/gallery', 'index2')->name("gallery2");
+    Route::get('/back/gallery/create', 'create')->name("gallerycreate");
+	Route::get('/back/gallery/{id}/show', 'show');
+    Route::post('/back/gallery/create', 'store');
+    Route::put('/back/gallery/{id}/update', 'update');
+    Route::delete('/back/gallery/{id}/delete', 'destroy');
 });
 
 

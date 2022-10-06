@@ -1,44 +1,47 @@
 @extends('back.layouts.index')
 @section('content')
-    <form action="/back/services/{{$show->id}}/update" method="post" enctype="multipart/form-data">
+    <form action="/back/services/{{ $show->id }}/update" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
         <div class="mb-6">
             <label for="Name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name</label>
-            <input type="text" id="Name" name="name"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="" value="{{$show->name}}">
+            <input type="text" id="Name" name="name" class="focus:ring-0" placeholder="" value="{{ $show->name }}">
         </div>
+
         <div class="mb-6">
-            <label for="short_desc" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Short description</label>
-            <input type="text" id="short_desc" name="short_desc"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$show->short_desc}}">
+            <label for="short_desc" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Short
+                description</label>
+            <input type="text" id="short_desc" name="short_desc" class="focus:ring-0" value="{{ $show->short_desc }}">
         </div>
 
         <div class="mb-6">
             <label for="caption" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Caption</label>
-            <input type="text" id="caption" name="caption"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$show->caption}}">
+            <input type="text" id="caption" name="caption" class="focus:ring-0" value="{{ $show->caption }}">
         </div>
+
         <label for="icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Icon</label>
-            <fieldset id="role" name="icon_id"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-
-
-
-            @foreach ($icons as $icon )
-                <i class="{{"fa " . $icon->src}}"></i>
-                <input type="radio" value={{$icon->id}}>
+        <fieldset id="icon" name="icon_id" class="focus:ring-0">
+            @foreach ($icons as $icon)
+                @if ($show->icon_id == $icon['id'])
+                <div class="flex flex-col justify-between items-center m-auto">
+                    <i class="{{ 'fa ' . $icon->src }}"></i>
+                    <input type="radio" class="focus:ring-0" value="{{ $icon->id }}" name="icon_id" checked>
+                </div>
+                @else
+                <div class="flex flex-col justify-between items-center m-auto">
+                    <i class="{{ 'fa ' . $icon->src }}"></i>
+                    <input type="radio" class="focus:ring-0" value="{{ $icon->id }}" name="icon_id">
+                </div>
+                @endif
             @endforeach
-
         </fieldset>
 
         <div class="mb-6">
-            <label for="src" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Image</label>
-        <div class="w-1/2 mt-4"><img src="{{asset('storage/services/'. $show->src)}}" class="rounded-lg"></div>
-            <input type="file" id="src" name="src"
-                class="mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <label for="src" class="">Image</label>
+            <div class="w-1/2 mt-4"><img src="{{ asset('storage/services/thumbnail/' . $show->src) }}" class="rounded-lg"></div>
+            <input type="file" id="src" name="src" class="mt-4">
         </div>
+
         <button type="submit" class="btn-logout font-medium text-sm px-5 py-2.5 mr-2 mb-2">Confirm modifications</button>
     </form>
 @endsection

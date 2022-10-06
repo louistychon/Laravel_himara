@@ -21,8 +21,8 @@
             @foreach ($allimgs as $img)
             <div class="gallery-item {{"filter-".$img->filter->name}} col-md-3">
               <figure class="gradient-overlay image-icon">
-                <a href="{{asset('/storage/gallery/'. $img->src)}}">
-                  <img src="{{asset('/storage/gallery/'. $img->src)}}" class="img-fluid" alt="Image">
+                <a href="{{asset('/storage/gallery/thumbnail/'. $img->src)}}">
+                  <img src="{{asset('/storage/gallery/thumbnail/'. $img->src)}}" class="img-fluid" alt="Image">
                 </a>
                 <figcaption>{{$img->caption}}</figcaption>
               </figure>

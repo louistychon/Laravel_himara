@@ -13,7 +13,7 @@ class HomeController extends Controller
 {
     public function index(){
         $dishes = Dish::all()->take(4);
-        $galleryimgs = GalleryImg::all();
+        $galleryimgs = GalleryImg::take(8);
         $partners = Partner::all();
         $services = Service::all()->take(4);
         $blogpost = Article::all()->take(3);

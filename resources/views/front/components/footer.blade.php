@@ -31,7 +31,7 @@
 
                                  @foreach ($news as $new)
                                      <li>
-                                         <a href="">{{$new->title}}</a>
+                                         <a href="">{{ucfirst(strtolower($new->title))}}</a>
                                      </li>
                                  @endforeach
 
