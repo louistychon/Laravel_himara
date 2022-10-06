@@ -13,6 +13,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Intervention\Image\Facades\Image;
 
 //back pages
 
@@ -113,3 +114,5 @@ Route::controller(GalleryImgController::class)->group(function () {
 //contact
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+
+

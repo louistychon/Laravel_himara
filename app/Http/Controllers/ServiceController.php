@@ -7,7 +7,7 @@ use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
 use App\Models\Icon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class ServiceController extends Controller
 {
@@ -22,33 +22,44 @@ class ServiceController extends Controller
         return view('back.pages.services.index', compact('allservices'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('back.pages.services.create');
+        $icons = Icon::all();
+        return view('back.pages.services.create',compact('icons'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreServiceRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreServiceRequest $request)
+
+    public function store(Request $request)
     {
-        //
+        $store = new Service();
+        $store->name = $request->name;
+        $store->short_desc = $request->short_desc;
+        $store->caption = $request->caption;
+        $store->icon_id = $request->icon_id;
+
+
+        if ($request->hasFile('src')) {
+            //get filename with extension
+            $filenamewithextension = $request->file('src')->getClientOriginalName();
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            //get file extension
+            $extension = $request->file('src')->getClientOriginalExtension();
+            //filename to store
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+            //Upload File
+            $request->file('src')->storeAs('storage/services/', $filenametostore);
+            $request->file('src')->storeAs('storage/services/thumbnail/', $filenametostore);
+            //Resize image here
+            $thumbnailpath = public_path('storage/services/thumbnail/' . $filenametostore);
+            $img = Image::make($thumbnailpath)->resize(1170, 750);
+            $img->save();
+        }
+        $store->src = $filenametostore;
+        $store->save();
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $icons = Icon::all();
@@ -56,24 +67,10 @@ class ServiceController extends Controller
         return view('back.pages.services.show', compact('show', 'icons'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
     public function edit()
     {
-
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateServiceRequest  $request
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $update = Service::find($id);
@@ -81,23 +78,14 @@ class ServiceController extends Controller
         $update->short_desc = $request->short_desc;
         $update->caption = $request->caption;
         $update->icon_id = $request->icon_id;
-        if (!$update->src) {
-            Storage::delete('/storage/services/' . $request->src);
-            Storage::put('/storage/services/' . $update->src);
-        };
-        
         $update->save();
-        return redirect()->back();
+        return redirect()->with('success', 'Service was correctly uploaded.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Service $service)
+    public function destroy($id)
     {
-        //
+        $todelete = Service::find($id);
+        $todelete->delete();
+        return redirect()->back();
     }
 }

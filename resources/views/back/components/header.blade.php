@@ -1,22 +1,10 @@
-<!-- Primary Navigation Menu -->
-{{-- <div class="bg-blue-900 text-white min-h-full min w-full">
-        <div class="flex flex-col justify-between mt-5">
-            <div class="flex flex-col">
-                <div class="card-content text-center">
-                    <p class="text-red-500">{{ Auth::user()->name }}</p>
-                    <p>{{ Auth::user()->email }}</p>
-                </div>
-            </div>
-        </div> --}}
-<!-- Navigation Links -->
-
-<nav class="px-2 bg-white border-gray-200">
-    <div class="container flex flex-wrap justify-between items-center mx-auto">
-        <a href="#" class="flex items-center">
+<nav class="p-4 border-gray-200 mm-navbar">
+    <div class="container flex flex-wrap justify-between items-center my-auto h">
+        <a href="{{route('dashboard')}}" class="flex items-center">
             @foreach ($hotelinfo as $info)
-                <img src="{{ asset('storage/logo/' . $info->logo) }}" class="w-1/2 p-2 mr-3 h-6 sm:h-10" alt="Himara Logo">
+                <img src="{{ asset('storage/logo/' . $info->logo) }}" class="w-1/2 p-2 mr-3" alt="Himara Logo">
             @endforeach
-            <span class="self-center text-xl font-semibold whitespace-nowrap ">back &copy;</span>
+            <span class="self-center text-xl font-semibold whitespace-nowrap text_logo ">back &copy;</span>
         </a>
         <button data-collapse-toggle="mobile-menu" type="button"
             class="inline-flex justify-center items-center ml-3 text-gray-400 rounded-lg md:hidden hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300  "
@@ -37,34 +25,34 @@
         </button>
         <div class="hidden w-full md:block md:w-auto" id="mobile-menu">
             <ul class="flex flex-col items-center mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-                <li>
+                <li class="menu_item">
                     <a href="{{route('dashboard')}}"
-                        class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 "
+                        class="block py-2 pr-4 pl-3 rounded md:bg-transparent md:p-0 uppercase"
                         aria-current="page">Dashboard</a>
                 </li>
-                <li>
+                <li class="menu_item">
                     <a href="{{route('users')}}"
-                        class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 "
+                        class="block py-2 pr-4 pl-3 rounded md:bg-transparent md:p-0 uppercase"
                         aria-current="page">Users</a>
                 </li>
-                <li>
+                <li class="menu_item">
                     <a href="{{route('slider')}}"
-                        class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 "
+                        class="block py-2 pr-4 pl-3 rounded md:bg-transparent md:p-0 uppercase"
                         aria-current="page">Slider</a>
                 </li>
-                <li>
+                <li class="menu_item">
                     <a href="{{route('services')}}"
-                        class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 "
+                        class="block py-2 pr-4 pl-3 rounded md:bg-transparent md:p-0 uppercase"
                         aria-current="page">Services</a>
                 </li>
-                <li>
+                <li class="menu_item">
                     <a href="{{route('restaurant')}}"
-                        class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 "
+                        class="block py-2 pr-4 pl-3 rounded md:bg-transparent md:p-0 uppercase"
                         aria-current="page">Restaurant</a>
                 </li>
-                <li>
+                <li class="menu_item">
                     <button id="dropdownNavbarButton" data-dropdown-toggle="dropdownNavbar"
-                        class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 border-b border-gray-100 md:p-0 md:w-auto">Pages
+                        class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium border-b border-gray-100 md:p-0 md:w-auto uppercase menu_item ">Pages
                         <svg class="ml-1 w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -77,37 +65,31 @@
                         data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom"
                         style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 10.1818px, 0px);">
                         <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownNavbarButton">
-                            <li>
-                                <a href="#" class="block py-2 px-4 ">Home</a>
+                            <li class="dropdown_item">
+                                <a href="#" class="block py-2 px-4 uppercase">Home</a>
                             </li>
-                            <li>
-                                <a href="#" class="block py-2 px-4 ">Blog</a>
+                            <li class="dropdown_item">
+                                <a href="#" class="block py-2 px-4 uppercase">Blog</a>
                             </li>
-                            <li>
-                                <a href="#" class="block py-2 px-4 ">Gallery</a>
+                            <li class="dropdown_item">
+                                <a href="#" class="block py-2 px-4 uppercase">Gallery</a>
                             </li>
-                            <li>
-                                <a href="#" class="block py-2 px-4 ">Team</a>
+                            <li class="dropdown_item">
+                                <a href="#" class="block py-2 px-4 uppercase">Team</a>
                             </li>
-                            <li>
-                                <a href="#" class="block py-2 px-4 ">Contact</a>
+                            <li class="dropdown_item">
+                                <a href="#" class="block py-2 px-4 uppercase">Contact</a>
                             </li>
                         </ul>
                     </div>
 
                 </li>
-                <div class="mt-3 space-y-1">
-                    <!-- Authentication -->
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-
-                        <x-responsive-nav-link :href="route('logout')"
-                                onclick="event.preventDefault();
-                                            this.closest('form').submit();">
-                            {{ __('Log Out') }}
-                        </x-responsive-nav-link>
-                    </form>
-                </div>
+                <li>
+                    <div class="">
+                        <!-- Authentication -->
+                            <a href="{{ route('logout') }}"><button class="btn-logout p-2 block m-auto">Log Out</button></a>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
