@@ -75,12 +75,49 @@ class HomeController extends Controller
             $request->file('about_img')->storeAs('storage/', $filenametostore);
             $request->file('about_img')->storeAs('storage/thumbnail/', $filenametostore);
             //Resize image here
-            $thumbnailpath = public_path('storage/logo/thumbnail/' . $filenametostore);
+            $thumbnailpath = public_path('storage/thumbnail/' . $filenametostore);
             $img = Image::make($thumbnailpath)->resize(400, 600);
             $img->save();
             $update->about_img = $filenametostore;
         }
 
+        if ($request->hasFile('background_image_restaurant')) {
+            //get filename with extension
+            $filenamewithextension = $request->file('background_image_restaurant')->getClientOriginalName();
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            //get file extension
+            $extension = $request->file('background_image_restaurant')->getClientOriginalExtension();
+            //filename to store
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+            //Upload File
+            $request->file('background_image_restaurant')->storeAs('storage/', $filenametostore);
+            $request->file('background_image_restaurant')->storeAs('storage/thumbnail/', $filenametostore);
+            //Resize image here
+            $thumbnailpath = public_path('storage/backgrounds/thumbnail/' . $filenametostore);
+            $img = Image::make($thumbnailpath)->resize(1392, 394);
+            $img->save();
+            $update->background_image_restaurant = $filenametostore;
+        }
+
+        if ($request->hasFile('background_image_video')) {
+            //get filename with extension
+            $filenamewithextension = $request->file('background_image_video')->getClientOriginalName();
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            //get file extension
+            $extension = $request->file('background_image_video')->getClientOriginalExtension();
+            //filename to store
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+            //Upload File
+            $request->file('background_image_video')->storeAs('storage/backgrounds/', $filenametostore);
+            $request->file('background_image_video')->storeAs('storage/backgrounds/thumbnail/', $filenametostore);
+            //Resize image here
+            $thumbnailpath = public_path('storage/backgrounds/thumbnail/' . $filenametostore);
+            $img = Image::make($thumbnailpath)->resize(1920, 800);
+            $img->save();
+            $update->background_image_video = $filenametostore;
+        }
 
         $update->save();
         return redirect()->back();
