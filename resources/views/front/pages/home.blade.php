@@ -215,26 +215,17 @@
         </div>
     </div>
     <!-- ========== ABOUT ========== -->
+    @foreach ($hometext as $text)
     <section class="about mt100">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="section-title">
-                        <h4 class="text-uppercase">Hotel Himara. <span class="text-himara"> since 1992</span></h4>
-                        <p class="section-subtitle">High quality accommodation services</p>
+                        <h4 class="text-uppercase">{{$text->title_intro}}</h4>
+                        <p class="section-subtitle">{{$text->under_title_intro}}</p>
                     </div>
                     <div class="info-branding">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus deleniti nulla, hic
-                            voluptatibus eum voluptatum libero suscipit nemo voluptates cupiditate, ipsum provident facere
-                            modi
-                            tempora ducimus enim dicta laborum esse aliquam rem
-                            assumenda dolores. Commodi, aperiam, blanditiis! Ipsum iure necessitatibus eaque, fuga.
-                            Excepturi
-                            facilis libero dicta soluta officiis, sint sit voluptatem, vero doloribus nesciunt suscipit
-                            dolores
-                            veritatis minus quam atque non autem quasi
-                            consequatur quae sequi ex, ipsa facere qui ut recusandae. Quod earum cupiditate quaerat
-                            assumenda.</p>
+                        <p>{{$text->text_intro}}</p>
                         <div class="providers">
                             <span>Recommended on:</span>
                             <!-- ITEM -->
@@ -249,11 +240,11 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="brand-info">
+                    <div class="brand-info" style="background-image: url('{{ asset('/storage/'.$text->about_img) }}');">
                         <div class="inner">
                             <div class="content">
                                 @foreach ($hotelinfo as $info)
-                                    <img src="{{ asset('storage/logo/thumbnail/' . $info->logo) }}" width="100"
+                                    <img src="{{ asset('storage/logo/thumbnail/' . $info->logo_square) }}" width="100"
                                         alt="Image">
                                 @endforeach
                                 <div class="stars">
@@ -263,10 +254,8 @@
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                 </div>
-                                <h5 class="title">LUXURY HOTEL</h5>
-                                <p class="mt20">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad dolorem iste
-                                    suscipit
-                                    voluptates architecto nemo.</p>
+                                <h5 class="title">{{$text->title_card}}</h5>
+                                <p class="mt20">{{$text->text_card}}</p>
                             </div>
                         </div>
                     </div>
@@ -278,9 +267,9 @@
     <section class="rooms gray">
         <div class="container">
             <div class="section-title">
-                <h4>OUR <span class="text-himara">ROOMS</span></h4>
-                <p class="section-subtitle">Our favorite rooms</p>
-                <a href="rooms-list.html" class="view-all">View all rooms</a>
+                <h4>{{$text->title_rooms}}</h4>
+                <p class="section-subtitle">{{$text->under_title_rooms}}</p>
+                <a href="{{route('List of rooms')}}" class="view-all">View all rooms</a>
             </div>
             <div class="row">
                 <!-- ITEM -->
@@ -370,12 +359,12 @@
         </div>
     </section>
     <!-- ========== SERVICES ========== -->
-    @if ($services->count() > 0)
+    @if ($services->count() == 0)
         <section class="services">
             <div class="container">
                 <div class="section-title">
-                    <h4>HIMARA. <span class="text-himara">SERVICES</span></h4>
-                    <p class="section-subtitle">Check out our awesome services</p>
+                    <h4>{{$text->title_services}}</span></h4>
+                    <p class="section-subtitle">{{$text->under_title_services}}</p>
                 </div>
                 <div class="row">
                     <div class="col-lg-7 col-12">
@@ -412,13 +401,13 @@
     @else
     @endif
     <!-- ========== GALLERY ========== -->
-    @if ($galleryimgs->count() > 0)
+    @if ($galleryimgs->count() == 0)
         <section class="gallery">
             <div class="container">
                 <div class="section-title">
-                    <h4>HIMARA. <span class="text-himara">GALLERY</span></h4>
-                    <p class="section-subtitle">Check out our image gallery</p>
-                    <a href="gallery.html" class="view-all">View gallery images</a>
+                    <h4>{{$text->title_gallery}}</h4>
+                    <p class="section-subtitle">{{$text->under_title_gallery}}</p>
+                    <a href="{{route('gallery')}}" class="view-all">View gallery images</a>
                 </div>
                 <div class="gallery-owl owl-carousel image-gallery">
                     <!-- ITEM -->
@@ -441,8 +430,8 @@
     <section class="testimonials gray">
         <div class="container">
             <div class="section-title">
-                <h4>OUR GUESTS LOVE US</h4>
-                <p class="section-subtitle">What our guests are saying about us</p>
+                <h4>{{$text->title_testimonial}}</h4>
+                <p class="section-subtitle">{{$text->under_title_services}}</p>
             </div>
             <div class="owl-carousel testimonials-owl">
                 <!-- ITEM -->
@@ -638,12 +627,12 @@
         </div>
     </section>
     <!-- ========== RESTAURANT ========== -->
-    <section class="restaurant image-bg parallax gradient-overlay op5" data-src="images/restaurant.jpg"
+    <section class="restaurant image-bg parallax gradient-overlay op5" data-src="{{ asset('/storage/backgrounds/thumbnail/'.$text->background_image_restaurant) }}"
         data-parallax="scroll" data-speed="0.3" data-mirror-selector=".wrapper" data-z-index="0">
         <div class="container">
             <div class="section-title">
-                <h4>HIMARA. RESTAURANT</h4>
-                <p class="section-subtitle">Live a gourmet dining experience</p>
+                <h4>{{$text->title_restaurant}}</h4>
+                <p class="section-subtitle">{{$text->under_title_restaurant}}</p>
             </div>
             <div class="row">
                 <!-- ITEM -->
@@ -682,8 +671,8 @@
     <section class="news">
         <div class="container">
             <div class="section-title">
-                <h4 class="title">LATEST NEWS</h4>
-                <p class="section-subtitle">Check out our latest news</p>
+                <h4 class="title">{{$text->title_news}}</h4>
+                <p class="section-subtitle">{{$text->under_title_news}}</p>
             </div>
             <div class="row">
                 <!-- ITEM -->
@@ -724,12 +713,12 @@
         </div>
     </section>
     <!-- ========== VIDEO ========== -->
-    <section class="video np parallax gradient-overlay op6" data-src="images/video.jpg" data-parallax="scroll"
+    <section class="video np parallax gradient-overlay op6" data-src="{{ asset('/storage/backgrounds/thumbnail/'.$text->background_image_video) }}" data-parallax="scroll"
         data-speed="0.3" data-mirror-selector=".wrapper" data-z-index="0">
         <div class="inner gradient-overlay">
             <div class="container">
                 <div class="video-popup">
-                    <a class="popup-vimeo" href="https://www.youtube.com/watch?v=BDDfopejpwk">
+                    <a class="popup-vimeo" href="{{$text->video_link}}">
                         <i class="fa fa-play"></i>
                     </a>
                 </div>
@@ -743,8 +732,8 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="section-title">
-                        <h4>GET IN TOUCH</h4>
-                        <p class="section-subtitle">Get in touch</p>
+                        <h4>{{$text->title_contact1}}</h4>
+                        <p class="section-subtitle">{{$text->under_title_contact1}}</p>
                     </div>
                     <ul class="contact-details">
                         @foreach ($hotelinfo as $info)
@@ -774,8 +763,8 @@
                 </div>
                 <div class="col-md-7">
                     <div class="section-title">
-                        <h4>CONTACT US</h4>
-                        <p class="section-subtitle">Say hello</p>
+                        <h4>{{$text->title_contact2}}</h4>
+                        <p class="section-subtitle">{{$text->under_title_contact2}}</p>
                     </div>
                     <form id="contact-form" name="contact-form">
                         <div class="form-group">
@@ -788,10 +777,11 @@
                             <textarea class="form-control" name="message" placeholder="Your Message"></textarea>
                         </div>
                         <button class="btn" type="submit">
-                            <i class="fa fa-location-arrow"></i>Send Message</button>
+                            <i class="fa fa-location-arrow"></i>{{$text->button_contact}}</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
+    @endforeach
 @endsection

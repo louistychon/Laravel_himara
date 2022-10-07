@@ -71,10 +71,10 @@
                         style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 10.1818px, 0px);">
                         <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownNavbarButton">
                             <li class="dropdown_item">
-                                <a href="#" class="block py-2 px-4 uppercase">Home</a>
+                                <a href="{{route('homeback')}}" class="block py-2 px-4 uppercase">Home</a>
                             </li>
                             <li class="dropdown_item">
-                                <a href="#" class="block py-2 px-4 uppercase">Blog</a>
+                                <a href="{{route('blogback')}}" class="block py-2 px-4 uppercase">Blog</a>
                             </li>
                             <li class="dropdown_item">
                                 <a href="{{route('galleryback')}}" class="block py-2 px-4 uppercase">Gallery</a>

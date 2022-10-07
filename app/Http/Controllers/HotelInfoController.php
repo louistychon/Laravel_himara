@@ -24,6 +24,7 @@ class HotelInfoController extends Controller
         $update->website = $request->website;
         $update->coordinates_x = $request->coordinates_x;
         $update->coordinates_y = $request->coordinates_y;
+
         if ($request->hasFile('logo')) {
             //get filename with extension
             $filenamewithextension = $request->file('logo')->getClientOriginalName();
@@ -42,6 +43,26 @@ class HotelInfoController extends Controller
             $img->save();
             $update->logo = $filenametostore;
         }
+
+        if ($request->hasFile('logo_square')) {
+            //get filename with extension
+            $filenamewithextension = $request->file('logo_square')->getClientOriginalName();
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            //get file extension
+            $extension = $request->file('logo_square')->getClientOriginalExtension();
+            //filename to store
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+            //Upload File
+            $request->file('logo_square')->storeAs('storage/logo/', $filenametostore);
+            $request->file('logo_square')->storeAs('storage/logo/thumbnail/', $filenametostore);
+            //Resize image here
+            $thumbnailpath = public_path('storage/logo/thumbnail/' . $filenametostore);
+            $img = Image::make($thumbnailpath)->resize(75, 103);
+            $img->save();
+            $update->logo_square = $filenametostore;
+        }
+
         $update->save();
         return redirect()->back();
     }

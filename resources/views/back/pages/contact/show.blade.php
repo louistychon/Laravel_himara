@@ -10,12 +10,6 @@
             @endforeach
             <input type="file" id="src" name="logo" class="mt-4">
         </div>
-        <div class="mb-6">
-            <label for="logo_square" class="">Logo square (expected 75x103px)</label>
-            @foreach ($hotelinfo as $info)
-                <div class="w-1/2 mt-4"><img src="{{ asset('storage/logo/thumbnail/' . $info->logo_square) }}" class=""></div>
-            @endforeach
-            <input type="file" id="logo_square" name="logo_square" class="mt-4">
 
         @foreach ($hotelinfo as $info)
             <div class="mb-6">
