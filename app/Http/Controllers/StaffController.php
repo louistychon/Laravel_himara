@@ -14,7 +14,7 @@ class StaffController extends Controller
     {
         $showceo = Staff::all()->where('id', '=', 1);
         $ceo = [1];
-        $allstaff = Staff::whereNotIn('id', $ceo)->take(7)->get();
+        $allstaff = Staff::inRandomOrder()->whereNotIn('id', $ceo)->take(7)->get();
         return view('front.pages.staff', compact('ceo','allstaff', 'showceo'));
     }
 
