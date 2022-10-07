@@ -34,7 +34,7 @@
             <input type="file" id="src" name="src" class="mt-4 border border-gray-300 form-control">
         </div>
         <button type="submit"
-            class="text-white p-3 rounded-lg mt-4 bg-blue-700 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Confirm
+            class="btn-logout font-medium text-sm px-5 py-2.5 mr-2 my-2">Confirm
             new</button>
     </form>
 @endsection

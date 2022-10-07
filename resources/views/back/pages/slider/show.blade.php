@@ -1,40 +1,40 @@
 @extends('back.layouts.index')
 @section('content')
-    <form action="/back/services/{{$show->id}}/update" method="post">
+    <form action="/back/slider/{{ $show->id }}/update" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
         <div class="mb-6">
-            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
-            <input type="email" id="email" name="email"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="" value={{$show->email}}>
+            <label for="src" class="block mb-2 text-sm font-medium">Image</label>
+            <div class="w-1/2 mt-4"><img src="{{ asset('storage/slider/thumbnail/' . $show->src) }}" class="rounded-lg"></div>
+            <input type="file" id="src" name="src" class="mt-4 border border-gray-300 form-control" >
         </div>
         <div class="mb-6">
-            <label for="Name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name</label>
-            <input type="text" id="Name" name="name"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={{$show->name}}>
+            <label for="header_stars" class="block mb-2 text-sm font-medium">Header star text</label>
+            <input type="text" class="focus:ring-0" id="header_stars" name="header_stars" value="{{$show->header_stars}}">
         </div>
         <div class="mb-6">
-            <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Country</label>
-            <input type="text" id="country" name="country"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={{$show->country}}>
+            <label for="number_stars" class="block mb-2 text-sm font-medium">Number of stars</label>
+            <input type="number" class="focus:ring-0" id="number_stars" name="number_stars" max="5" min="1" value="{{$show->number_stars}}">
         </div>
         <div class="mb-6">
-            <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">City</label>
-            <input type="text" id="city" name="city"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={{$show->city}}>
+            <label for="slogan" class="block mb-2 text-sm font-medium">Slogan</label>
+            <input type="text" class="focus:ring-0" id="slogan" name="slogan" value="{{$show->slogan}}">
+        </div>
+        <div class="mb-6">
+            <label for="title" class="block mb-2 text-sm font-medium">Title</label>
+            <input type="text" class="focus:ring-0" id="title" name="title" value="{{$show->title}}">
         </div>
 
-        <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Role</label>
-            <select id="role" name="roles_id"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <div class="mb-6">
+            <label for="button1text" class="block mb-2 text-sm font-medium text-gray-900">Button1 text</label>
+            <input type="text" class="focus:ring-0" id="button1text" name="button1_text" value="{{$show->button1_text}}">
+        </div>
 
-            @foreach ($roles as $role )
-            <option value="{{$role->id}}" name="roles_id">{{$role->name}}</option>
-            @endforeach
+        <div class="mb-6">
+            <label for="button2text" class="block mb-2 text-sm font-medium text-gray-900">Button2 text</label>
+            <input type="text" class="focus:ring-0" id="button2text" name="button2_text" value="{{$show->button2_text}}">
+        </div>
 
-        </select>
-        <button type="submit"
-            class="text-white mt-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Confirm modifications</button>
+        <button type="submit" class="btn-logout font-medium text-sm px-5 py-2.5 mr-2 my-2">Confirm</button>
     </form>
 @endsection

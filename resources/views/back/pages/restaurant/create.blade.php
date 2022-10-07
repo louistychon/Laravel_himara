@@ -19,7 +19,7 @@
             <label for="src" class="block text-sm font-medium mt-4">Image (expected 640x423px)</label>
             <input type="file" id="src" name="src" class="mt-4 border border-gray-300 form-control">
         </div>
-        <button type="submit" class="btn-logout font-medium text-sm px-5 py-2.5 mr-2 mb-2">Confirm
+        <button type="submit" class="btn-logout font-medium text-sm px-5 py-2.5 mr-2 my-2">Confirm
             new</button>
     </form>
 @endsection
