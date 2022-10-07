@@ -3,80 +3,106 @@
 namespace App\Http\Controllers;
 
 use App\Models\Staff;
-use App\Http\Requests\StoreStaffRequest;
-use App\Http\Requests\UpdateStaffRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+
 
 class StaffController extends Controller
 {
     public function index()
     {
-        $staffmembers = Staff::all();
-        return view('front.pages.staff', compact('staffmembers'));
+        $showceo = Staff::all()->where('id', '=', 1);
+        $ceo = [1];
+        $allstaff = Staff::whereNotIn('id', $ceo)->take(7)->get();
+        return view('front.pages.staff', compact('ceo','allstaff', 'showceo'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function index2()
+    {
+        $allstaff = Staff::all();
+        return view('back.pages.staff.index', compact('allstaff'));
+    }
+
     public function create()
     {
-        //
+        return view('back.pages.staff.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreStaffRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreStaffRequest $request)
+
+    public function store(Request $request)
     {
-        //
+            $store = new Staff();
+            $store->name = $request->name;
+            $store->title = $request->title;
+            $store->text = $request->text;
+
+            if ($request->hasFile('src')) {
+                //get filename with extension
+                $filenamewithextension = $request->file('src')->getClientOriginalName();
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+                //get file extension
+                $extension = $request->file('src')->getClientOriginalExtension();
+                //filename to store
+                $filenametostore = $filename . '_' . time() . '.' . $extension;
+                //Upload File
+                $request->file('src')->storeAs('storage/staff/', $filenametostore);
+                $request->file('src')->storeAs('storage/staff/thumbnail/', $filenametostore);
+                //Resize image here
+                $thumbnailpath = public_path('storage/staff/thumbnail/' . $filenametostore);
+                $img = Image::make($thumbnailpath)->resize(540, 540);
+                $img->save();
+                $store->src = $filenametostore;
+            }
+            $store->save();
+            return redirect()->back();
+        }
+
+    public function show($id)
+    {
+        $show = Staff::find($id);
+        return view('back.pages.staff.show', compact('show'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Staff  $staff
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Staff $staff)
+    public function update(Request $request, $id)
     {
-        //
+        $update = Staff::find($id);
+        $update->name = $request->name;
+        $update->title = $request->title;
+        $update->text = $request->text;
+
+        if ($request->hasFile('src')) {
+            Storage::delete('storage/staff/thumbnail/' . $update->src);
+            Storage::delete('storage/staff/' . $update->src);
+            //get filename with extension
+            $filenamewithextension = $request->file('src')->getClientOriginalName();
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            //get file extension
+            $extension = $request->file('src')->getClientOriginalExtension();
+            //filename to store
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+            //Upload File
+            $request->file('src')->storeAs('storage/staff/', $filenametostore);
+            $request->file('src')->storeAs('storage/staff/thumbnail/', $filenametostore);
+            //Resize image here
+            $thumbnailpath = public_path('storage/staff/thumbnail/' . $filenametostore);
+            $img = Image::make($thumbnailpath)->resize(540, 540);
+            $img->save();
+            $update->src = $filenametostore;
+        }
+
+        $update->save();
+        return redirect()->back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Staff  $staff
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Staff $staff)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateStaffRequest  $request
-     * @param  \App\Models\Staff  $staff
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateStaffRequest $request, Staff $staff)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Staff  $staff
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Staff $staff)
-    {
-        //
+        $todelete = Staff::find($id);
+        Storage::delete('storage/staff/thumbnail/' . $todelete->src);
+        Storage::delete('storage/staff/' . $todelete->src);
+        $todelete->delete();
+        return redirect()->back();
     }
 }

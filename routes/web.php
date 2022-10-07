@@ -58,7 +58,7 @@ Route::controller(ServiceController::class)->group(function () {
 //gallery
 
 Route::controller(GalleryImgController::class)->group(function () {
-    Route::get('/back/gallery', 'index2')->name("gallery2");
+    Route::get('/back/gallery', 'index2')->name("galleryback");
     Route::get('/back/gallery/create', 'create')->name("gallerycreate");
 	Route::get('/back/gallery/{id}/show', 'show');
     Route::post('/back/gallery/create', 'store');
@@ -114,11 +114,12 @@ Route::get('/room', [RoomController::class, 'index'])->name('room');
 
 Route::controller(StaffController::class)->group(function () {
     Route::get('/staff', 'index')->name("staff");
-    Route::get('/staff/create', 'create')->name("staffcreate");
-	Route::get('/staff/{id}/show', 'show');
-    Route::post('/staff/create', 'store');
-    Route::put('/staff/{id}/update', 'update');
-    Route::delete('/staff/{id}/delete', 'destroy');
+    Route::get('/back/staff', 'index2')->name("staffback");
+    Route::get('/back/staff/create', 'create')->name("staffcreate");
+	Route::get('/back/staff/{id}/show', 'show');
+    Route::post('/back/staff/create', 'store');
+    Route::put('/back/staff/{id}/update', 'update');
+    Route::delete('/back/staff/{id}/delete', 'destroy');
 });
 
 //gallery
@@ -135,5 +136,6 @@ Route::controller(GalleryImgController::class)->group(function () {
 //contact
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::get('/contact', [ContactController::class, 'index2'])->name('contactback');
 
 

@@ -77,13 +77,13 @@
                                 <a href="#" class="block py-2 px-4 uppercase">Blog</a>
                             </li>
                             <li class="dropdown_item">
-                                <a href="{{route('gallery2')}}" class="block py-2 px-4 uppercase">Gallery</a>
+                                <a href="{{route('galleryback')}}" class="block py-2 px-4 uppercase">Gallery</a>
                             </li>
                             <li class="dropdown_item">
-                                <a href="#" class="block py-2 px-4 uppercase">Team</a>
+                                <a href="{{route('staffback')}}" class="block py-2 px-4 uppercase">Team</a>
                             </li>
                             <li class="dropdown_item">
-                                <a href="#" class="block py-2 px-4 uppercase">Contact</a>
+                                <a href="{{route('contactback')}}" class="block py-2 px-4 uppercase">Contact</a>
                             </li>
                         </ul>
                     </div>

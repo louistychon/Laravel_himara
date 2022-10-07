@@ -59,8 +59,8 @@ class ServiceController extends Controller
                 $thumbnailpath = public_path('storage/services/thumbnail/' . $filenametostore);
                 $img = Image::make($thumbnailpath)->resize(1170, 750);
                 $img->save();
+                $store->src = $filenametostore;
             }
-            $store->src = $filenametostore;
             $store->save();
             return redirect()->back();
         }
@@ -103,9 +103,9 @@ class ServiceController extends Controller
             $thumbnailpath = public_path('storage/services/thumbnail/' . $filenametostore);
             $img = Image::make($thumbnailpath)->resize(1170, 750);
             $img->save();
+            $update->src = $filenametostore;
         }
 
-        $update->src = $filenametostore;
         $update->save();
         return redirect()->back();
     }
