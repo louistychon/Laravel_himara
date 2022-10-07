@@ -258,7 +258,7 @@
                 <div class="content">
                     @foreach ($hotelinfo as $info )
 
-                    <img src="{{asset('/storage/logo/'.$info->logo)}}" width="100" alt="Image">
+                    <img src="{{asset('storage/logo/thumbnail/'. $info->logo)}}" width="100" alt="Image">
                     @endforeach
                   <div class="stars">
                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -740,38 +740,41 @@
               <p class="section-subtitle">Get in touch</p>
             </div>
             <ul class="contact-details">
-              <li>
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                Lorem ipsum dolor, 25, Himara
-              </li>
-              <li>
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                Phone: +1 888 123 4567
-              </li>
-              <li>
+                @foreach ($hotelinfo as $info )
+
+                <li>
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    {{$info->address}}
+                </li>
+                <li>
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    Phone:  {{$info->phone}}
+                </li>
+                <li>
                 <i class="fa fa-fax"></i>
-                Fax: +1 888 123 4567
+                Fax:  {{$info->phone}}
               </li>
               <li>
-                <i class="fa fa-globe"></i>
-                Web: www.hotelhimara.com
-              </li>
-              <li>
-                <i class="fa fa-envelope"></i>
-                Email:
-                <a href="mailto:info@site.com">contact@hotelhimara.com</a>
-              </li>
+                  <i class="fa fa-globe"></i>
+                  Web:  {{$info->website}}
+                </li>
+                <li>
+                    <i class="fa fa-envelope"></i>
+                    Email:
+                    <a href="mailto:{{$info->email}}"> {{$info->email}}</a>
+                </li>
+                @endforeach
             </ul>
-          </div>
-          <div class="col-md-7">
+        </div>
+        <div class="col-md-7">
             <div class="section-title">
-              <h4>CONTACT US</h4>
-              <p class="section-subtitle">Say hello</p>
+                <h4>CONTACT US</h4>
+                <p class="section-subtitle">Say hello</p>
             </div>
             <form id="contact-form" name="contact-form">
-              <div class="form-group">
-                <input class="form-control" name="name" placeholder="Your Name" type="text">
-              </div>
+                <div class="form-group">
+                    <input class="form-control" name="name" placeholder="Your Name" type="text">
+                </div>
               <div class="form-group">
                 <input class="form-control" name="email" type="email" placeholder="Your Email Address">
               </div>

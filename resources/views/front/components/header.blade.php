@@ -54,7 +54,7 @@
             <div class="brand">
                 <div class="logo">
                     <a href="{{ route('home') }}">
-                        <img src="{{ asset('/storage/logo/' . $info->logo) }}" alt="Hotel Himara">
+                        <img src="{{asset('storage/logo/thumbnail/'. $info->logo)}}" alt="Hotel Himara">
                     </a>
                 </div>
             </div>
@@ -67,19 +67,19 @@
             <!-- MAIN MENU -->
             <nav id="main-menu" class="main-menu">
                 <ul class="menu">
-                    <li class="menu-item dropdown active">
+                    <li class="menu-item {{Route::currentRouteName() == "home" ? 'active': ''}}">
                         <a href="{{ url('/') }}">HOME</a>
                     </li>
-                    <li class="menu-item dropdown">
+                    <li class="menu-item {{Route::currentRouteName() == "List of rooms" ? 'active': ''}} ">
                         <a href="{{ url('/roomlist') }}">ROOMS</a>
                     </li>
-                    <li class="menu-item dropdown">
+                    <li class="menu-item {{Route::currentRouteName() == "staff" ? 'active': ''}}">
                         <a href="{{ url('/staff') }}">TEAM</a>
                     </li>
-                    <li class="menu-item dropdown">
+                    <li class="menu-item {{Route::currentRouteName() == "gallery" ? 'active': ''}}">
                         <a href="{{ url('/gallery') }}">GALLERY</a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{Route::currentRouteName() == "contact" ? 'active': ''}}">
                         <a href="{{ url('/contact') }}">CONTACT US</a>
                     </li>
                     <li class="menu-item menu-btn">

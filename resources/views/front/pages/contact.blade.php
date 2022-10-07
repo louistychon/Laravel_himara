@@ -38,9 +38,22 @@
                     <div class="sidebar">
                         <div class="google-map">
                             <div class="toggle-streetview" id="openStreetView">
-                                <i class="fa fa-street-view" aria-hidden="true"></i>
+                                <a target="blank" href="https://www.google.com/maps/@50.8552782,4.3412854,3a,75y,4.37h,91.41t/data=!3m7!1e1!3m5!1sRH73ZZlfUNs7RfcnVCEQAw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fpanoid%3DRH73ZZlfUNs7RfcnVCEQAw%26cb_client%3Dmaps_sv.tactile.gps%26w%3D203%26h%3D100%26yaw%3D16.714003%26pitch%3D0%26thumbfov%3D100!7i16384!8i8192"><i class="fa fa-street-view" aria-hidden="true"></i></a>
                             </div>
-                            <div id="map-canvas"></div>
+                            <div id="map-canvas">
+                                @foreach ($hotelinfo as $info)
+                                <iframe
+                                width="600"
+                                height="450"
+                                style="border:0"
+                                loading="lazy"
+                                allowfullscreen
+                                referrerpolicy="no-referrer-when-downgrade"
+                                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyALbVaXhUfCrNshLggJurnIsKAp6OUD1xw
+                                  &q=l&center={{$info->coordinates_x}},{{$info->coordinates_y}}">
+                              </iframe>
+                              @endforeach
+                            </div>
                         </div>
                         <div class="contact-details mt75">
                             <div class="contact-info">
@@ -48,7 +61,7 @@
                                     <li>
                                         @foreach ($hotelinfo as $info)
                                             <a href="#">
-                                                <i class="fa fa-map-marker"></i>{{$info->address}}</a>
+                                                <i class="fa fa-map-marker"></i>{{ $info->address }}</a>
                                     </li>
                                     <li>
                                         <a href="#">

@@ -22,6 +22,8 @@ class HotelInfoController extends Controller
         $update->address = $request->address;
         $update->phone = $request->phone;
         $update->website = $request->website;
+        $update->coordinates_x = $request->coordinates_x;
+        $update->coordinates_y = $request->coordinates_y;
         if ($request->hasFile('logo')) {
             //get filename with extension
             $filenamewithextension = $request->file('logo')->getClientOriginalName();

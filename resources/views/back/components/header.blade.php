@@ -2,7 +2,7 @@
     <div class="container flex flex-wrap justify-between items-center my-auto h">
         <a href="{{route('dashboard')}}" class="flex items-center">
             @foreach ($hotelinfo as $info)
-                <img src="{{ asset('storage/logo/' . $info->logo) }}" class="w-1/2 p-2 mr-3" alt="Himara Logo">
+                <img src="{{ asset('storage/logo/thumbnail/' . $info->logo) }}" class="w-1/2 p-2 mr-3" alt="Himara Logo">
             @endforeach
             <span class="self-center text-xl font-semibold whitespace-nowrap text_logo ">back &copy;</span>
         </a>
