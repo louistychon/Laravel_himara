@@ -89,11 +89,12 @@
                     </div>
 
                 </li>
-                <li>
-                    <div class="">
-                        <!-- Authentication -->
-                            <a href="{{ route('logout') }}"><button class="btn-logout p-2 block m-auto">Log Out</button></a>
-                    </div>
+                <li class="menu-item">
+                    <a class="block py-2 pr-4 pl-3 rounded md:bg-transparent md:p-0 uppercase" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><button class="btn-logout p-2">Logout</button></a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </li>
             </ul>
         </div>
