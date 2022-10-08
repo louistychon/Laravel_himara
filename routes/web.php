@@ -141,6 +141,13 @@ Route::controller(GalleryImgController::class)->group(function () {
 });
 
 //contact
+Route::controller(ContactController::class)->group(function () {
+    Route::get('/contact', 'index')->name('contact');
+    Route::get('/back/contact', 'index2')->name("contactback");
+    Route::get('/back/contact/create', 'create')->name("contactcreate");
+    Route::get('/back/contact/{id}/show', 'show');
+    Route::post('/back/contact/create', 'store');
+    Route::put('/back/contact/{id}/update', 'update');
+});
 
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-Route::get('/contact', [ContactController::class, 'index2'])->name('contactback');
+

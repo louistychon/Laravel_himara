@@ -121,3 +121,9 @@ label{
 
 
 /* radio & check input */
+
+[type='checkbox'], [type='radio'] {
+    -webkit-appearance: auto !important;
+    -moz-appearance: auto !important;
+    appearance: auto !important;
+}
