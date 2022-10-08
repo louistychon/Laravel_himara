@@ -33,12 +33,13 @@
             <hr class="my-5">
             @foreach ($tags as $tag)
                 {{-- @foreach ($show->tags as $tag) --}}
-                    @if (dd($tag->id == $show->tags['id']))
+                    @if ($tag->id == $show->tags_id)
                         <div class="flex justify-between">
                             <label>{{ $tag->name }}</label>
                             <input type="checkbox" checked />
                         </div>
                     @else
+                    <p>{{$show->tags->tags_id}}</p>
                         <div class="flex justify-between">
                             <label>{{ $tag->name }}</label>
                             <input type="checkbox" />

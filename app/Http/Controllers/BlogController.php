@@ -75,7 +75,7 @@ class BlogController extends Controller
     {
         $show = Article::find($id);
         $categories = CategorieBlog::all();
-        $tags = Tags::all()->where('article', 'article_id', $id);
+        $tags = Tags::all();
         return view('back.pages.blog.show', compact('show', 'categories', 'tags'));
     }
 
