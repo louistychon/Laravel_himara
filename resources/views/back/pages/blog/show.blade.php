@@ -45,6 +45,27 @@
             @endforeach
         </div>
 
+        <div class="mb-6">
+            <label for="author" class="">User</label>
+            <select name="" id="">
+                @foreach ($users as $user)
+                    @if ($user->id == $show->users->id)
+                        <option value="{{ $user->id }}" selected>{{ $user->name }}</option>
+                    @else
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-6">
+            <label for="title" class="">Number of Comments</label>
+            <p>{{ $show->comments }}</p>
+        </div>
+
+
+
+
+
         <button type="submit" class="btn-logout font-medium text-sm px-5 py-2.5 mr-2 mb-2">Confirm modifications</button>
     </form>
 @endsection

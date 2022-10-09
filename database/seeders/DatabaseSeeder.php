@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
             IconSeeder::class,
             ServiceSeeder::class,
             HometextSeeder::class,
+            CommentsSeeder::class,
         ]);
     }
 }

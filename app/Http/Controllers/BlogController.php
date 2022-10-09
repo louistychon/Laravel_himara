@@ -7,6 +7,7 @@ use App\Models\Article;
 use App\Models\Article_tags;
 use App\Models\CategorieBlog;
 use App\Models\Tags;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -76,7 +77,8 @@ class BlogController extends Controller
         $show = Article::find($id);
         $categories = CategorieBlog::all();
         $tags = Tags::all();
-        return view('back.pages.blog.show', compact('show', 'categories', 'tags'));
+        $users = User::all();
+        return view('back.pages.blog.show', compact('show', 'categories', 'tags', 'users'));
     }
 
 

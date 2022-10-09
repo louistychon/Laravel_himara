@@ -23,4 +23,9 @@ class Article extends Model
     {
         return $this->belongsTo(CategorieBlog::class, 'categorie_id', 'id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comments::class, 'comments');
+    }
 }
