@@ -31,21 +31,17 @@
         <div class="mb-6 w-1/3">
             <label for="tags" class="">Tags</label>
             <hr class="my-5">
+            @foreach ($show->tags as $tag)
+                <div class="flex justify-between">
+                    <label>{{ $tag->name }}</label>
+                    <input type="checkbox" checked>
+                </div>
+            @endforeach
             @foreach ($tags as $tag)
-                {{-- @foreach ($show->tags as $tag) --}}
-                    @if ($tag->id == $show->tags_id)
-                        <div class="flex justify-between">
-                            <label>{{ $tag->name }}</label>
-                            <input type="checkbox" checked />
-                        </div>
-                    @else
-                    <p>{{$show->tags->tags_id}}</p>
-                        <div class="flex justify-between">
-                            <label>{{ $tag->name }}</label>
-                            <input type="checkbox" />
-                        </div>
-                    @endif
-                {{-- @endforeach --}}
+                <div class="flex justify-between">
+                    <label>{{ $tag->name }}</label>
+                    <input type="checkbox">
+                </div>
             @endforeach
         </div>
 
