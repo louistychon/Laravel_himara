@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('testimonials', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_id')->references('id')->on('users');
+            $table->foreignId('rooms_id')->references('id')->on('rooms');
             $table->string('rating');
             $table->text('text');
             $table->timestamps();

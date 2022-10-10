@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             HometextSeeder::class,
             CommentsSeeder::class,
             ArticleTagsSeeder::class,
+            RoomSeeder::class,
             TestimonialSeeder::class,
         ]);
     }

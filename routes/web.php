@@ -12,6 +12,7 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Intervention\Image\Facades\Image;
@@ -41,6 +42,17 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/back/users/create', 'store');
     Route::put('/back/users/{id}/update', 'update');
     Route::delete('/back/users/{id}/delete', 'destroy');
+});
+
+//users
+
+Route::controller(TestimonialController::class)->group(function () {
+    Route::get('/back/testimonials', 'index')->name("testimonials");
+    Route::get('/back/testimonials/create', 'create')->name("testimonialscreate");
+    Route::get('/back/testimonials/{id}/show', 'show');
+    Route::post('/back/testimonials/create', 'store');
+    Route::put('/back/testimonials/{id}/update', 'update');
+    Route::delete('/back/testimonials/{id}/delete', 'destroy');
 });
 
 //services

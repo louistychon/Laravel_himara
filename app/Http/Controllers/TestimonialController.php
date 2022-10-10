@@ -5,82 +5,63 @@ namespace App\Http\Controllers;
 use App\Models\Testimonial;
 use App\Http\Requests\StoreTestimonialRequest;
 use App\Http\Requests\UpdateTestimonialRequest;
+use App\Models\Room;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TestimonialController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $alltestimonials = Testimonial::all();
+        return view('back.pages.testimonial.index', compact('alltestimonials'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        $users = User::all();
+        $rooms = Room::all();
+        return view('back.pages.testimonial.create', compact('users', 'rooms'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreTestimonialRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreTestimonialRequest $request)
+    public function store(Request $request)
     {
-        //
+        $store = new Testimonial();
+        $store->user_id = $request->user_id;
+        $store->rating = $request->rating;
+        $store->text = $request->text;
+        $store->save();
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Testimonial  $testimonial
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Testimonial $testimonial)
+    public function show($id)
     {
-        //
+
+        $alltestimonials = Testimonial::find($id);
+        $users = User::all();
+        $rooms = Room::all();
+        return view('back.pages.testimonial.show', compact('alltestimonials', 'users', 'rooms'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Testimonial  $testimonial
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Testimonial $testimonial)
+
+    public function update(Request $request, $id)
     {
-        //
+        $update = Testimonial::find($id);
+        $update->user_id = $request->user_id;
+        $update->rating = $request->rating;
+        $update->text = $request->text;
+
+        $update->save();
+        return redirect()->back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateTestimonialRequest  $request
-     * @param  \App\Models\Testimonial  $testimonial
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateTestimonialRequest $request, Testimonial $testimonial)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Testimonial  $testimonial
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Testimonial $testimonial)
-    {
-        //
+        $todelete = Testimonial::find($id);
+        $todelete->delete();
+        return redirect()->back();
     }
 }

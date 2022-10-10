@@ -16,7 +16,7 @@
 
         <div class="mb-6">
             <label for="title" class="block mb-2 text-sm font-medium">Title</label>
-            <input type="title" id="title" name="title" class="focus:ring-0" value="{{ $show->title }}">
+            <input type="text" id="title" name="title" class="focus:ring-0" value="{{ $show->title }}">
         </div>
 
         <div class="mb-6">
