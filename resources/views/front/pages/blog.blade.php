@@ -17,7 +17,7 @@
                       <div class="post-thumbnail">
                         <figure class="gradient-overlay-hover link-icon">
                           <a href="#">
-                            <img src="{{asset('storage/blog/'. $article->src)}}" class="img-fluid" alt="Image">
+                            <img src="{{asset('storage/blog/thumbnail/'. $article->src)}}" class="img-fluid" alt="Image">
                           </a>
                         </figure>
                       </div>

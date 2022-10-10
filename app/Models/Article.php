@@ -19,11 +19,6 @@ class Article extends Model
         return $this->hasOne(User::class, 'id', 'users_id');
     }
 
-    public function category()
-    {
-        return $this->belongsTo(CategorieBlog::class, 'categorie_id', 'id');
-    }
-
     public function comments()
     {
         return $this->hasMany(Comments::class, 'articles_id', 'id');

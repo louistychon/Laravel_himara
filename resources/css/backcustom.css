@@ -127,3 +127,15 @@ label{
     -moz-appearance: auto !important;
     appearance: auto !important;
 }
+
+select, textarea{
+    border: 1px solid #edcb9a !important;
+    border-color: none !important;
+    outline: none !important;
+    color:#a4a4a4;
+}
+
+select > option{
+    color:#a4a4a4;
+
+}

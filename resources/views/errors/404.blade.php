@@ -1,9 +1,9 @@
 @extends('front.layouts.index')
     @section('content')
     <main class="error404-fullscreen-page gradient-overlay">
-            <div class="inner container text-center">
-                <h1 class="error-number m-auto">
-                    404
+            <div class="inner container flex justify-center">
+                <h1 class="error-number w-full text-center">
+                   404
                 </h1>
                 <h2 class="title">OOPS!! PAGE NOT FOUND</h2>
                 <div class="mt80">

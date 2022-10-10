@@ -6,9 +6,11 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Article_tags;
 use App\Models\CategorieBlog;
+use App\Models\Comments;
 use App\Models\Tags;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -18,9 +20,9 @@ class BlogController extends Controller
     public function index()
     {
         $tags = Tags::all();
+        $articles = Article::all();
         // $categories = CategorieBlog::all();
         $categories = CategorieBlog::withCount('articles')->get(); //compte le nombre de categories + renvoie les infos
-        $articles = Article::all();
         return view('front.pages.blog', ['articles' => Article::paginate(5)], compact('tags', 'categories', 'articles'));
     }
 
@@ -35,18 +37,20 @@ class BlogController extends Controller
 
     public function create()
     {
-        return view('back.pages.blog.create');
+        $users = User::all();
+        $tags = Tags::all();
+        $categories = CategorieBlog::all();
+        return view('back.pages.blog.create',  compact('users', 'categories', 'tags'));
     }
 
     public function store(Request $request)
     {
-        
+
         $store = new Article();
         $store->title = $request->title;
         $store->long_desc = $request->long_desc;
-        $store->comments = $request->comments;
         $store->categorie_id = $request->categorie_id;
-        $store->users_id = $request->users_id;
+        $store->users_id = Auth::user()->id;
 
         if ($request->hasFile('src')) {
             //get filename with extension
@@ -68,7 +72,7 @@ class BlogController extends Controller
         }
 
         $store->save();
-        return redirect()->back();
+        return redirect('/back/blog')->with('success', 'article created successfully');
     }
 
 
@@ -76,9 +80,10 @@ class BlogController extends Controller
     {
         $show = Article::find($id);
         $categories = CategorieBlog::all();
-        $tags = Tags::all();
         $users = User::all();
-        return view('back.pages.blog.show', compact('show', 'categories', 'tags', 'users'));
+        $tags = Tags::all();
+        $comments = Comments::all()->where('articles_id','=', $id);
+        return view('back.pages.blog.show', compact('show', 'categories', 'tags', 'users', 'comments'));
     }
 
 
@@ -87,7 +92,6 @@ class BlogController extends Controller
         $update = Article::find($id);
         $update->title = $request->title;
         $update->long_desc = $request->long_desc;
-        $update->comments = $request->comments;
         $update->categorie_id = $request->categorie_id;
         $update->users_id = $request->users_id;
 
@@ -109,6 +113,8 @@ class BlogController extends Controller
             $img->save();
             $update->src = $filenametostore;
         }
+
+        $update->tags()->detach([1,2,3]);
 
         $update->save();
         return redirect()->back();

@@ -34,8 +34,14 @@
             </div>
             <!-- city-->
             <div class="mt-4">
-                <label for="location" class="block font-medium text-sm text-gray-700">Country</label>
+                <label for="location" class="block font-medium text-sm text-gray-700">City</label>
                     <input type="text" id="location" name="city" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full">
+            </div>
+
+             <!-- profile pic-->
+             <div class="mt-4">
+                <label for="src" class="block font-medium text-sm text-gray-700">Profile picture</label>
+                    <input type="file" id="src" name="src" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full">
             </div>
 
             <!-- Password -->

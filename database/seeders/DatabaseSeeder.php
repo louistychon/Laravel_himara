@@ -37,6 +37,8 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             HometextSeeder::class,
             CommentsSeeder::class,
+            ArticleTagsSeeder::class,
+            TestimonialSeeder::class,
         ]);
     }
 }

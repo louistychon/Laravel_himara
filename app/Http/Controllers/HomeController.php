@@ -9,6 +9,8 @@ use App\Models\Hometext;
 use App\Models\Partner;
 use App\Models\Service;
 use App\Models\Slider;
+use App\Models\Testimonial;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -23,7 +25,8 @@ class HomeController extends Controller
         $services = Service::all()->take(4);
         $blogpost = Article::all()->take(3);
         $hometext = Hometext::all();
-        return view('front.pages.home', compact('dishes', 'galleryimgs', 'partners', 'services', 'blogpost', 'allslider', 'hometext'));
+        $testimonials = Testimonial::all();
+        return view('front.pages.home', compact('dishes', 'galleryimgs', 'partners', 'services', 'blogpost', 'allslider', 'hometext', 'testimonials'));
     }
 
 

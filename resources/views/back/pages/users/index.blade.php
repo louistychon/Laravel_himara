@@ -9,6 +9,9 @@
             <thead class="">
                 <tr>
                     <th scope="col" class="py-3 px-6">
+                        Image
+                    </th>
+                    <th scope="col" class="py-3 px-6">
                         Name
                     </th>
                     <th scope="col" class="py-3 px-6">
@@ -34,6 +37,9 @@
             <tbody>
                 @foreach ($allusers as $user)
                     <tr class="">
+                        <td scope="row" class="font-bold py-4 px-6">
+                            <img src="{{asset('storage/users/thumbnail/'. $user->src)}}" alt="user">
+                        </td>
                         <td scope="row" class="font-bold py-4 px-6">
                             {{ $user->name }}
                         </td>

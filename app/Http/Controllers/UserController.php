@@ -6,6 +6,8 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
@@ -29,7 +31,29 @@ class UserController extends Controller
         $store->country = $request->country;
         $store->city = $request->city;
         $store->password = Hash::make($request->password);
-        $store->roles_id = $request->roles_id;
+        $store->roles_id = 4;
+
+        if ($request->hasFile('src')) {
+            Storage::delete('storage/users/thumbnail/' . $store->src);
+            Storage::delete('storage/users/' . $store->src);
+            //get filename with extension
+            $filenamewithextension = $request->file('src')->getClientOriginalName();
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            //get file extension
+            $extension = $request->file('src')->getClientOriginalExtension();
+            //filename to store
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+            //Upload File
+            $request->file('src')->storeAs('storage/users/', $filenametostore);
+            $request->file('src')->storeAs('storage/users/thumbnail/', $filenametostore);
+            //Resize image here
+            $thumbnailpath = public_path('storage/users/thumbnail/' . $filenametostore);
+            $img = Image::make($thumbnailpath)->resize(500,500);
+            $img->save();
+            $store->src = $filenametostore;
+        }
+
         $store->save();
         return redirect()->back();
     }
@@ -56,6 +80,28 @@ class UserController extends Controller
         $update->country = $request->country;
         $update->city = $request->city;
         $update->roles_id = $request->roles_id;
+
+        if ($request->hasFile('src')) {
+            Storage::delete('storage/users/thumbnail/' . $update->src);
+            Storage::delete('storage/users/' . $update->src);
+            //get filename with extension
+            $filenamewithextension = $request->file('src')->getClientOriginalName();
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            //get file extension
+            $extension = $request->file('src')->getClientOriginalExtension();
+            //filename to store
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+            //Upload File
+            $request->file('src')->storeAs('storage/users/', $filenametostore);
+            $request->file('src')->storeAs('storage/users/thumbnail/', $filenametostore);
+            //Resize image here
+            $thumbnailpath = public_path('storage/users/thumbnail/' . $filenametostore);
+            $img = Image::make($thumbnailpath)->resize(500,500);
+            $img->save();
+            $update->src = $filenametostore;
+        }
+
         $update->save();
         return redirect()->back();
     }

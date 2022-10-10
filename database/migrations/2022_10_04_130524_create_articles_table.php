@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->text('title');
             $table->text('long_desc');
-            $table->integer('comments');
             $table->integer('categorie_id')->references('id')->on('categorie_blogs');
             $table->foreignId('users_id')->references('id')->on('users');
             $table->string('src');
