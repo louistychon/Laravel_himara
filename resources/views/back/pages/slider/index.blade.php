@@ -9,9 +9,11 @@
             <thead class="">
                 <tr>
                     <th scope="col" class="py-3 px-6">
+                        Place
+                    </th>
+                    <th scope="col" class="py-3 px-6">
                         Image
                     </th>
-
                     <th scope="col" class="py-3 px-6">
                         Header star text
                     </th>
@@ -43,9 +45,11 @@
                 @foreach ($allslider as $slide)
                     <tr class="">
                         <td class="py-4 px-6">
+                            <p class="text-gray-400">{{$slide->place}}</p>
+                        </td>
+                        <td class="py-4 px-6">
                             <img class="" src="{{asset('storage/slider/'. $slide->src)}}">
                         </td>
-
                         <td class="py-4 px-6">
                             {{ $slide->header_stars}}
                         </td>

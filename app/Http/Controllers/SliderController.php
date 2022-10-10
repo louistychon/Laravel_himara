@@ -58,8 +58,9 @@ class SliderController extends Controller
 
     public function show($id)
     {
+        $slides = Slider::all();
         $show = Slider::find($id);
-        return view('back.pages.slider.show', compact('show'));
+        return view('back.pages.slider.show', compact('show', 'slides'));
     }
 
     public function edit()
@@ -74,6 +75,7 @@ class SliderController extends Controller
         $update->slogan = $request->slogan;
         $update->button1_text = $request->button1_text;
         $update->button2_text = $request->button2_text;
+        $update->place = $request->place;
 
         if ($request->hasFile('src')) {
             Storage::delete('storage/slider/thumbnail/' . $update->src);
@@ -93,9 +95,9 @@ class SliderController extends Controller
             $thumbnailpath = public_path('storage/slider/thumbnail/' . $filenametostore);
             $img = Image::make($thumbnailpath)->resize(1170, 750);
             $img->save();
+            $update->src = $filenametostore;
         }
 
-        $update->src = $filenametostore;
         $update->save();
         return redirect()->back();
     }

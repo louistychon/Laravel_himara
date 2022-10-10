@@ -18,7 +18,7 @@ use Intervention\Image\Facades\Image;
 class HomeController extends Controller
 {
     public function index(){
-        $allslider = Slider::all();
+        $allslider = Slider::orderBy('place')->get();
         $dishes = Dish::all()->take(4);
         $galleryimgs = GalleryImg::take(8);
         $partners = Partner::all();

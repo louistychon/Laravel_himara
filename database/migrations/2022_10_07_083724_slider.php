@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('src');
             $table->string('header_stars')->nullable();
             $table->integer('number_stars')->nullable();
+            $table->integer('place')->nullable();
             $table->string('title')->nullable();
             $table->string('slogan')->nullable();
             $table->string('button1_text')->nullable();
