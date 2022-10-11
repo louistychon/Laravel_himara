@@ -28,28 +28,28 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($alldishes as $dishes)
+                @foreach ($allrooms as $rooms)
                     <tr class="">
                         <td class="py-4 px-6">
-                            <img class="img-responsive" src="{{asset('storage/dishes/'. $dishes->src)}}">
+                            <img class="img-responsive" src="{{asset('storage/rooms/'. $rooms->imgs()->first()->src)}}">
                         </td>
                         <td class="py-4 px-6">
-                            {{ $dishes->name }}
+                            {{ $rooms->name }}
                         </td>
                         <td class="py-4 px-6">
-                            {{ $dishes->text }}
+                            {{ $rooms->text }}
                         </td>
                         <td class="py-4 px-6">
-                            {{ $dishes->price}}€
+                            {{ $rooms->price}}€
                         </td>
                         <td class="py-4 px-6">
-                            <a href="/back/restaurant/{{ $dishes->id }}/show">
+                            <a href="/back/restaurant/{{ $rooms->id }}/show">
                                 <button
                                     class="btn-logout font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Edit</button>
                             </a>
                         </td>
                         <td class="py-4 px-6">
-                            <form action="/back/restaurant/{{ $dishes->id }}/delete" method="post">
+                            <form action="/back/restaurant/{{ $rooms->id }}/delete" method="post">
                                 @csrf
                                 @method('delete')
                                <button type="submit"
