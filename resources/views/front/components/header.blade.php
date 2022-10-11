@@ -3,12 +3,12 @@
     <!-- ========== TOP MENU ========== -->
     <div class="topbar">
         <div class="container">
+            @foreach ($hotelinfo as $info)
             <div class="welcome-mssg">
-                Welcome to Hotel Himara.
+                {{$info->welcome_top}}
             </div>
             <div class="top-right-menu">
                 <ul class="top-menu">
-                    @foreach ($hotelinfo as $info)
                         <li class="d-none d-md-inline">
                             <a href="tel:{{ $info->phone }}">
                                 <i class="fa fa-phone"></i>

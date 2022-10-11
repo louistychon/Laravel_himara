@@ -3,6 +3,14 @@
     <form action="/back/hotelinfo/update" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
+
+        <div class="mb-6">
+            @foreach ($hotelinfo as $info)
+            <label for="welcome_top" class="block mb-2 text-sm font-medium">Welcome topbar</label>
+            <input type="text" id="welcome_top" name="welcome_top" class="focus:ring-0"
+                value="{{ $info->welcome_top}}">
+                @endforeach
+        </div>
         <div class="mb-6">
             <label for="src" class="">Logo (expected 107x22px)</label>
             @foreach ($hotelinfo as $info)

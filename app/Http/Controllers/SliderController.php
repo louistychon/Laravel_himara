@@ -12,7 +12,7 @@ class SliderController extends Controller
 
     public function index()
     {
-        $allslider = Slider::all();
+        $allslider = Slider::orderBy('place')->get();
         return view('back.pages.slider.index', compact('allslider'));
     }
 

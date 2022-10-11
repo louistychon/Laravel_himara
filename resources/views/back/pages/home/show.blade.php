@@ -3,6 +3,7 @@
     <form action="/back/home/update" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
+
         @foreach ($hometext as $text)
             <div class="mb-6">
                 <label for="src" class="">Background Image intro</label>

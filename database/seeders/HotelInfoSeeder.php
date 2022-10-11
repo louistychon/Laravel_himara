@@ -16,7 +16,7 @@ class HotelInfoSeeder extends Seeder
     public function run()
     {
         DB::table('hotel_infos')->insert([
-            ['address' => 'Lorem ipsum dolor, 25, Himara', 'phone' => '+1 888 123 4567', 'website' => "www.hotelhimara.com", 'email' => "contact@hotelhimara.com", "logo" => "logo.svg", "logo_square" => "logo-big-transparent.svg", "coordinates_x" => "50.854797", "coordinates_y" => "4.344408"],
+            ['welcome_top' => 'WELCOME TO HOTEL HIMARA.' , 'address' => 'Lorem ipsum dolor, 25, Himara', 'phone' => '+1 888 123 4567', 'website' => "www.hotelhimara.com", 'email' => "contact@hotelhimara.com", "logo" => "logo.svg", "logo_square" => "logo-big-transparent.svg", "coordinates_x" => "50.854797", "coordinates_y" => "4.344408"],
         ]);
     }
 }

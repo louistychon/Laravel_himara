@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('hotel_infos', function (Blueprint $table) {
             $table->id();
+            $table->string('welcome_top');
             $table->string('address');
             $table->string('phone');
             $table->string('website');
