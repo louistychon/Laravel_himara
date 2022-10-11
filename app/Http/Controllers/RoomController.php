@@ -5,47 +5,40 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
+use App\Models\RoomType;
 
 class RoomController extends Controller
 {
 
     public function indexall()
     {
-        return view('front.pages.rooms-list');
+        $allrooms = Room::all();
+        $roomtypes = Room::withcount('roomtypes_id')->get();
+        return view('front.pages.rooms-list', compact('allrooms', 'roomtypes'));
     }
 
     public function index()
     {
-        return view('front.pages.room');
+        $allrooms = Room::all();
+        return view('front.pages.room', compact('allrooms'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function index2()
+    {
+        $allrooms = Room::all();
+        return view('back.pages.room.index', compact('allrooms'));
+    }
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreRoomRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreRoomRequest $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Room  $room
-     * @return \Illuminate\Http\Response
-     */
     public function show(Room $room)
     {
         //

@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
+            RoomTypeSeeder::class,
             SliderSeeder::class,
             PartnerSeeder::class,
             FiltergallerySeeder::class,
@@ -39,6 +40,8 @@ class DatabaseSeeder extends Seeder
             CommentsSeeder::class,
             ArticleTagsSeeder::class,
             RoomSeeder::class,
+            RoomtagsSeeder::class,
+            RoomImgSeeder::class,
             TestimonialSeeder::class,
         ]);
     }

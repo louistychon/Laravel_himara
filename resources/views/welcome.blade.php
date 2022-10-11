@@ -1,3 +1,0 @@
-   <body class="antialiased">
-       
-   </body>

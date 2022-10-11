@@ -51,6 +51,11 @@
                         aria-current="page">Services</a>
                 </li>
                 <li class="menu_item">
+                    <a href="{{route('roomback')}}"
+                        class="block py-2 pr-4 pl-3 rounded md:bg-transparent md:p-0 uppercase"
+                        aria-current="page">Rooms</a>
+                </li>
+                <li class="menu_item">
                     <a href="{{route('testimonials')}}"
                         class="block py-2 pr-4 pl-3 rounded md:bg-transparent md:p-0 uppercase"
                         aria-current="page">Testimonials</a>

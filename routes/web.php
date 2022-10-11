@@ -15,7 +15,6 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use Intervention\Image\Facades\Image;
 
 
 Route::get('/dashboard', function () {
@@ -44,7 +43,7 @@ Route::controller(UserController::class)->group(function () {
     Route::delete('/back/users/{id}/delete', 'destroy');
 });
 
-//users
+//testimonials
 
 Route::controller(TestimonialController::class)->group(function () {
     Route::get('/back/testimonials', 'index')->name("testimonials");
@@ -122,12 +121,16 @@ Route::controller(BlogController::class)->group(function () {
 
 Route::get('/booking-form', [BookingController::class, 'index'])->name('booking');
 
-//roomlist
-
-Route::get('/roomlist', [RoomController::class, 'indexall'])->name('List of rooms');
-
-//room show
-Route::get('/room', [RoomController::class, 'index'])->name('room');
+//room
+Route::controller(RoomController::class)->group(function () {
+    Route::get('/room/{id}/show', 'index')->name('room');
+    Route::get('/roomlist', 'indexall')->name('List of rooms');
+    Route::get('/back/room', 'index2')->name("roomback");
+    Route::get('/back/room/create', 'create')->name("roomcreate");
+    Route::get('/back/room/{id}/show', 'show');
+    Route::post('/back/room/create', 'store');
+    Route::put('/back/room/{id}/update', 'update');
+});
 
 //staff
 
