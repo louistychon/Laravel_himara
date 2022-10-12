@@ -46,10 +46,9 @@ class RoomController extends Controller
     public function show($id)
     {
         $show = Room::find($id);
-        $images = RoomImg::where('room_id', '=', $id)->get();
+        $services = RoomService::all();
         $tags = Roomtags::where('rooms_id', '=', $id)->get();
-        $services = RoomService::where('room_id', '=', $id)->get();
-        return view('back.pages.room.show', compact('show', 'images', 'tags'));
+        return view('back.pages.room.show', compact('show', 'tags', 'services'));
     }
 
     /**

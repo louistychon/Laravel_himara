@@ -6,11 +6,11 @@
         <div class="mb-6">
             <label for="grid" class="">Room imgs</label>
             <div class="grid grid-cols-5 gap-5 my-5">
-                @foreach ($images as $image)
+                @foreach ($show->imgs as $image)
                     <div class="w-1/4"><img src="{{ asset('storage/rooms/' . $image->src) }}"></div>
                 @endforeach
             </div>
-            <label for="src" class="">Add an image</label>
+            <label for="src" class="">Add an image (expected: 1920 x 1200px)</label>
             <input type="file" id="src" name="src" class="mt-4">
         </div>
 
@@ -47,11 +47,12 @@
                 name="discount" value="{{ $show->discount }}">
         </div>
 
-        <div class="mb-6">
+        <div class="mb-6 flex flex-col justify-between">
             @foreach ($services as $service)
-                <label for="services" class="block mb-2 text-sm font-medium">services</label>
-                <input type="number" step="0.1" min="0" max="0.9" class="focus:ring-0" id="services"
-                    name="services" value="{{ $show->discount }}">
+            <div class="flex justify-between w-1/3">
+                <label class="block mb-2 text-sm font-medium">{{$service->name}}</label>
+                <input type="checkbox" name="services[]" value="{{$service->id}}" @if($show->services->contains($service->id)) checked @endif>
+            </div>
             @endforeach
         </div>
 

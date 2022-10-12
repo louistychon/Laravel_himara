@@ -28,7 +28,7 @@ class HomeController extends Controller
         $blogpost = Article::all()->take(3);
         $hometext = Hometext::all();
         $testimonials = Testimonial::all();
-        $rooms = Room::all()->take(3);
+        $rooms = Room::all()->sortByDesc('id')->take(3);
 
         return view('front.pages.home', compact('dishes', 'galleryimgs', 'partners', 'services', 'blogpost', 'allslider', 'hometext', 'testimonials', 'rooms'));
     }

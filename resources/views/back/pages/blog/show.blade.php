@@ -23,7 +23,7 @@
             <select name="categorie_id" class="flex justify-between mt-4 focus:ring-0" id="category">
                 @foreach ($categories as $category)
                     @if ($show->categorie_id == $category->id)
-                        <option value="{{ $show->categorie_id }}" selected>{{ $show->category->name }}</option>
+                        <option value="{{ $show->categorie_id }}" selected>{{ $category->name }}</option>
                     @else
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endif
@@ -36,14 +36,7 @@
             @foreach ($show->tags as $tag)
                 <div class="flex justify-between">
                     <label>{{ $tag->name }}</label>
-                    <input type="checkbox" name="tag" value={{ $tag->id }} checked>
-                </div>
-            @endforeach
-            <hr class="my-5">
-            @foreach ($tags as $tag)
-                <div class="flex justify-between">
-                    <label>{{ $tag->name }}</label>
-                    <input type="checkbox" name="tag" value={{ $tag->id }}>
+                    <input type="checkbox" name="tag" value="{{ $tag->id }}"  @if($show->tags->contains($tags->id)) checked @endif>
                 </div>
             @endforeach
         </div>
