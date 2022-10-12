@@ -473,7 +473,7 @@
                 @endforeach
             </div>
             @if ($dishescount > 4)
-                <div class="row">
+                <div class="row text-center d-block m-auto">
                     <div class="text-black">{{ $dishes->links() }}</div>
                 </div>
             @endif
