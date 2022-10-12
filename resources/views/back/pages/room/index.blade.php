@@ -35,7 +35,7 @@
                     <tr class="">
                         <td class="py-4 px-6 grid grid-cols-5">
                             @foreach ($rooms->imgs as $images)
-                                <img class="img-responsive" src="{{asset('storage/rooms/'. $images->src)}}">
+                                <img src="{{asset('storage/rooms/'. $images->src)}}">
                             @endforeach
                         </td>
                         <td class="py-4 px-6">

@@ -14,10 +14,15 @@ class Room extends Model
     }
 
     public function imgs(){
-        return $this->hasMany(RoomImg::class, 'room_id');
+        return $this->belongsToMany(RoomImg::class, 'room_roomimg', 'rooms_id', 'roomimg_id');
     }
 
     public function services(){
-        return $this->hasMany(RoomService::class);
+        return $this->belongsToMany(RoomService::class, 'room_roomservices', 'rooms_id', 'room_services_id' );
     }
+
+    public function type(){
+        return $this->hasOne(RoomType::class, 'id', 'roomtypes_id');
+    }
+
 }

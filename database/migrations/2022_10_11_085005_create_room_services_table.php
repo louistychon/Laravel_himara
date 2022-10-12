@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('small_desc');
-            $table->integer('room_id');
             $table->string('icon_classname');
             $table->timestamps();
         });

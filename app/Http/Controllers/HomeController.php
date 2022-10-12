@@ -7,6 +7,8 @@ use App\Models\Dish;
 use App\Models\GalleryImg;
 use App\Models\Hometext;
 use App\Models\Partner;
+use App\Models\Room;
+use App\Models\RoomService;
 use App\Models\Service;
 use App\Models\Slider;
 use App\Models\Testimonial;
@@ -26,9 +28,10 @@ class HomeController extends Controller
         $blogpost = Article::all()->take(3);
         $hometext = Hometext::all();
         $testimonials = Testimonial::all();
-        return view('front.pages.home', compact('dishes', 'galleryimgs', 'partners', 'services', 'blogpost', 'allslider', 'hometext', 'testimonials'));
-    }
+        $rooms = Room::all()->take(3);
 
+        return view('front.pages.home', compact('dishes', 'galleryimgs', 'partners', 'services', 'blogpost', 'allslider', 'hometext', 'testimonials', 'rooms'));
+    }
 
     public function index2(){
         $hometext = Hometext::all();

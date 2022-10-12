@@ -1,6 +1,6 @@
 @extends('back.layouts.index')
 @section('content')
-    <form action="/back/restaurant/create" method="post" enctype="multipart/form-data">
+    <form action="/back/room/create" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-6">
             <label for="name" class="block mb-2 text-sm font-medium">name</label>
@@ -20,12 +20,8 @@
             <input type="number" id="discount" name="discount" class="mt-4 border border-gray-300 form-control">
         </div>
         <div class="mb-6">
-            <label for="discount" class="block text-sm font-medium mt-4">Discount</label>
-            <input type="number" id="discount" name="discount" class="mt-4 border border-gray-300 form-control">
-        </div>
-        <div class="mb-6">
-            <label for="discount" class="block text-sm font-medium mt-4">Discount</label>
-            <input type="number" id="discount" name="discount" class="mt-4 border border-gray-300 form-control">
+            <label for="src" class="block text-sm font-medium mt-4">Images (expected: 1920 x 1200px)</label>
+            <input type="file" id="src" name="src" class="mt-4 border border-gray-300 form-control">
         </div>
         <button type="submit" class="btn-logout font-medium text-sm px-5 py-2.5 mr-2 my-2">Confirm
             new</button>
