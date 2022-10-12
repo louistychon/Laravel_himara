@@ -471,9 +471,13 @@
                         </div>
                     </div>
                 @endforeach
-                <!-- ITEM -->
-
             </div>
+            @if ($dishescount > 4)
+                <div class="row">
+                    <div class="text-black">{{ $dishes->links() }}</div>
+                </div>
+            @endif
+
         </div>
     </section>
     <!-- ========== NEWS ==========-->
@@ -501,8 +505,9 @@
                                 <p>{{ $new->desc }}</p>
                                 <div class="post-meta">
                                     <span class="author">
-                                        <a href="#"><img src="{{asset('storage/users/thumbnail/'. $new->users->src )}}" width="16"
-                                                alt="Image">
+                                        <a href="#"><img
+                                                src="{{ asset('storage/users/thumbnail/' . $new->users->src) }}"
+                                                width="16" alt="Image">
                                             {{ $new->users->name }}</a>
                                     </span>
                                     <span class="date">

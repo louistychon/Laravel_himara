@@ -33,10 +33,10 @@
         <div class="mb-6 w-1/3">
             <label for="tags" class="">Tags</label>
             <hr class="my-5">
-            @foreach ($show->tags as $tag)
+            @foreach ($tags as $tag)
                 <div class="flex justify-between">
                     <label>{{ $tag->name }}</label>
-                    <input type="checkbox" name="tag" value="{{ $tag->id }}"  @if($show->tags->contains($tags->id)) checked @endif>
+                    <input type="checkbox" name="tag" value="{{ $tag->id }}"  @if($show->tags->contains($tag->id)) checked @endif>
                 </div>
             @endforeach
         </div>

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Article;
 use App\Models\HotelInfo;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -33,5 +34,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('hotelinfo', HotelInfo::all());
             $view->with('news', Article::all()->take(4));
         });
+
     }
 }

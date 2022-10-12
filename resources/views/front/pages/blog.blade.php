@@ -29,7 +29,7 @@
                         </h2>
                         <div class="post-meta">
                           <span class="author">
-                            <a href="#"><img src="images/users/admin.jpg" width="16" alt="Image">{{$article->users->name}}</a>
+                            <a href="#"><img src="{{asset('storage/users/thumbnail/'. $article->users->src )}}" width="16" alt="Image">{{$article->users->name}}</a>
                           </span>
                           <span class="date">
                             <a href="#">
@@ -37,7 +37,7 @@
                           </span>
                           <span class="comments">
                             <a href="#">
-                              <i class="fa fa-commenting-o"></i>{{$article->comments}} Comment</a>
+                              <i class="fa fa-commenting-o"></i>{{$article->comments->count()}} Comment</a>
                           </span>
                           <span class="category">
                             <i class="fa fa-folder-open-o"></i>IN
@@ -92,7 +92,7 @@
                             <div class="col-5">
                                 <figure class="gradient-overlay-hover link-icon sm">
                                     <a href="#">
-                                        <img src="{{asset('storage/blog/'. $article->src)}}" class="img-fluid" alt="Image">
+                                        <img src="{{asset('storage/blog/thumbnail/'. $article->src)}}" class="img-fluid" alt="Image">
                                     </a>
                                 </figure>
                             </div>

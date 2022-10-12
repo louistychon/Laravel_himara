@@ -21,7 +21,7 @@ class HomeController extends Controller
 {
     public function index(){
         $allslider = Slider::orderBy('place')->get();
-        $dishes = Dish::all()->take(4);
+        $dishes = Dish::all();
         $galleryimgs = GalleryImg::take(8);
         $partners = Partner::all();
         $services = Service::all()->take(4);
@@ -30,7 +30,9 @@ class HomeController extends Controller
         $testimonials = Testimonial::all();
         $rooms = Room::all()->sortByDesc('id')->take(3);
 
-        return view('front.pages.home', compact('dishes', 'galleryimgs', 'partners', 'services', 'blogpost', 'allslider', 'hometext', 'testimonials', 'rooms'));
+        $dishescount = Dish::count();
+
+        return view('front.pages.home', ['dishes'=> Dish::paginate(4)], compact('dishes', 'galleryimgs', 'partners', 'services', 'blogpost', 'allslider', 'hometext', 'testimonials', 'rooms', 'dishescount'));
     }
 
     public function index2(){
