@@ -13,12 +13,8 @@ class Room extends Model
         return $this->hasMany(Roomtags::class);
     }
 
-    public function type(){
-        return $this->hasOne(RoomType::class);
-    }
-
     public function imgs(){
-        return $this->hasMany(RoomImg::class);
+        return $this->hasMany(RoomImg::class, 'room_id');
     }
 
     public function services(){

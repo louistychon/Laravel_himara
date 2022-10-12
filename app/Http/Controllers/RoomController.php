@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
+use App\Models\RoomImg;
 use App\Models\RoomType;
 
 class RoomController extends Controller
@@ -13,7 +14,7 @@ class RoomController extends Controller
     public function indexall()
     {
         $allrooms = Room::all();
-        $roomtypes = Room::withcount('roomtypes_id')->get();
+        $roomtypes = RoomType::all();
         return view('front.pages.rooms-list', compact('allrooms', 'roomtypes'));
     }
 
@@ -39,9 +40,11 @@ class RoomController extends Controller
         //
     }
 
-    public function show(Room $room)
+    public function show($id)
     {
-        //
+        $show = Room::find($id);
+        $images = RoomImg::where('room_id', '=', $id)->get();
+        return view('back.pages.room.show', compact('show', 'images'));
     }
 
     /**

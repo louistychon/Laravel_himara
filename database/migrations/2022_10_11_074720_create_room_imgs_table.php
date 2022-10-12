@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('room_imgs', function (Blueprint $table) {
             $table->id();
             $table->string('src');
-            $table->foreignId('rooms_id')->references('id')->on('rooms');
+            $table->foreignId('room_id')->references('id')->on('rooms');
             $table->timestamps();
         });
     }

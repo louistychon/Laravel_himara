@@ -20,6 +20,9 @@
                         Price
                     </th>
                     <th scope="col" class="py-3 px-6">
+                        Discount
+                    </th>
+                    <th scope="col" class="py-3 px-6">
                         Edit
                     </th>
                     <th scope="col" class="py-3 px-6">
@@ -30,8 +33,10 @@
             <tbody>
                 @foreach ($allrooms as $rooms)
                     <tr class="">
-                        <td class="py-4 px-6">
-                            <img class="img-responsive" src="{{asset('storage/rooms/'. $rooms->imgs()->first()->src)}}">
+                        <td class="py-4 px-6 grid grid-cols-5">
+                            @foreach ($rooms->imgs as $images)
+                                <img class="img-responsive" src="{{asset('storage/rooms/'. $images->src)}}">
+                            @endforeach
                         </td>
                         <td class="py-4 px-6">
                             {{ $rooms->name }}
@@ -43,13 +48,16 @@
                             {{ $rooms->price}}€
                         </td>
                         <td class="py-4 px-6">
-                            <a href="/back/restaurant/{{ $rooms->id }}/show">
+                            {{ round((float)$rooms->discount * 100 ) . '%';}}
+                        </td>
+                        <td class="py-4 px-6">
+                            <a href="/back/room/{{ $rooms->id }}/show">
                                 <button
                                     class="btn-logout font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Edit</button>
                             </a>
                         </td>
                         <td class="py-4 px-6">
-                            <form action="/back/restaurant/{{ $rooms->id }}/delete" method="post">
+                            <form action="/back/room/{{ $rooms->id }}/delete" method="post">
                                 @csrf
                                 @method('delete')
                                <button type="submit"
