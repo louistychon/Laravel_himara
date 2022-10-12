@@ -6,7 +6,10 @@ use App\Models\Room;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
 use App\Models\RoomImg;
+use App\Models\RoomService;
+use App\Models\Roomtags;
 use App\Models\RoomType;
+use App\Models\Service;
 
 class RoomController extends Controller
 {
@@ -44,7 +47,9 @@ class RoomController extends Controller
     {
         $show = Room::find($id);
         $images = RoomImg::where('room_id', '=', $id)->get();
-        return view('back.pages.room.show', compact('show', 'images'));
+        $tags = Roomtags::where('rooms_id', '=', $id)->get();
+        $services = RoomService::where('room_id', '=', $id)->get();
+        return view('back.pages.room.show', compact('show', 'images', 'tags'));
     }
 
     /**
