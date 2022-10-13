@@ -28,7 +28,7 @@
             @foreach ($tags as $tag)
                 <div class="flex justify-between">
                     <label>{{ $tag->name }}</label>
-                    <input type="checkbox" name="tag" value={{$tag->id}}>
+                    <input type="checkbox" name="tag[]" value={{$tag->id}}>
                 </div>
             @endforeach
         </div>

@@ -50,7 +50,7 @@
                                 allowfullscreen
                                 referrerpolicy="no-referrer-when-downgrade"
                                 src="https://www.google.com/maps/embed/v1/place?key=AIzaSyALbVaXhUfCrNshLggJurnIsKAp6OUD1xw
-                                  &q=l&center={{$info->coordinates_x}},{{$info->coordinates_y}}">
+                                  &q=molengeek&center={{$info->coordinates_x}},{{$info->coordinates_y}}">
                               </iframe>
                               @endforeach
                             </div>

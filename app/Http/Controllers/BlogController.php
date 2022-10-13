@@ -70,8 +70,19 @@ class BlogController extends Controller
             $img->save();
             $store->src = $filenametostore;
         }
-
         $store->save();
+
+        $checked = $request->input('tag');
+
+        $article_tags = new Article_tags;
+        $article_tags->article_id = $store->id;
+
+        foreach ($checked as $c){
+            $article_tags->tags_id = $c;
+            $article_tags->save();
+        }
+
+
         return redirect('/back/blog')->with('success', 'article created successfully');
     }
 
