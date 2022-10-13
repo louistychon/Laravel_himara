@@ -1,12 +1,11 @@
 @extends('front.layouts.index')
 @section('content')
-    <!-- ========== PAGE TITLE ========== -->
-    @include('front.components.pagetitle')
+
     <!-- ========== MAIN ========== -->
-    <main class="room">
+    <main class="room w-full pt-0">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-9 col-12">
+            <div class="row col-12">
+                <div class="col-12">
                     <!-- ROOM SLIDER -->
                     <div class="room-slider">
                         <div id="room-main-image" class="owl-carousel image-gallery">

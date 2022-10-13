@@ -13,7 +13,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus sit, fugiat at in assumenda
                         corrupti autem iste eveniet eaque vitae beatae tenetur, voluptatem eius. Numquam.</p>
                     <!-- CONTACT FORM -->
-                    <form id="contact-form" class="contact-form">
+                    <form id="contact-form" class="contact-form" method="post" action="mail/contact">
                         <div class="form-group">
                             <input class="form-control" name="name" placeholder="Name" type="text">
                         </div>

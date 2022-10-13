@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryImgController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelInfoController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ServiceController;
@@ -166,4 +167,8 @@ Route::controller(ContactController::class)->group(function () {
     Route::put('/back/contact/{id}/update', 'update');
 });
 
+//mails
 
+Route::controller(MailController::class)->group(function () {
+    Route::get('/mail/contact', 'mailcontact')->name('mailcontact');
+});

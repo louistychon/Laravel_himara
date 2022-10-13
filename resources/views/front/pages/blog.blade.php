@@ -16,7 +16,7 @@
                     <div class="col-sm-4">
                       <div class="post-thumbnail">
                         <figure class="gradient-overlay-hover link-icon">
-                          <a href="#">
+                          <a href="/{{$article->id}}">
                             <img src="{{asset('storage/blog/thumbnail/'. $article->src)}}" class="img-fluid" alt="Image">
                           </a>
                         </figure>
@@ -25,7 +25,7 @@
                     <div class="col-sm-8">
                       <div class="post-details">
                         <h2 class="post-title">
-                          <a href="#">{{$article->title}}</a>
+                          <a href="/{{$article->id}}">{{$article->title}}</a>
                         </h2>
                         <div class="post-meta">
                           <span class="author">
