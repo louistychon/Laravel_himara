@@ -10,7 +10,7 @@ class Room extends Model
     use HasFactory;
 
     public function tags(){
-        return $this->hasMany(Roomtags::class);
+        return $this->belongsToMany(Roomtags::class, 'room_tags', 'rooms_id', 'roomtags_id');
     }
 
     public function imgs(){

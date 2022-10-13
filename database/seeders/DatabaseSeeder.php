@@ -46,6 +46,7 @@ class DatabaseSeeder extends Seeder
             TestimonialSeeder::class,
             RoomRoomServiceSeeder::class,
             RoomRoomImgSeeder::class,
+            RoomRoomTagsSeeder::class,
         ]);
     }
 }

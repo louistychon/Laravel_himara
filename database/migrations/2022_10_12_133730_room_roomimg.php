@@ -13,7 +13,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('rooms_id')->references('id')->on('rooms');
             $table->foreignId('roomimg_id')->references('id')->on('room_imgs');
-        });    
+            $table->timestamps();
+        });
     }
 
 

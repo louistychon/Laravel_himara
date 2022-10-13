@@ -20,8 +20,42 @@
         </div>
 
         <div class="mb-6">
-            <label for="text" class="block mb-2 text-sm font-medium">Text</label>
-            <input type="text" id="text" name="text" class="focus:ring-0" value="{{ $show->text }}">
+            <label for="room_type" class="block mb-2 text-sm font-medium">Room type</label>
+            <select name="roomtypes_id" class="focus:ring-0" id="room_type">
+                @foreach ($roomtypes as $roomtype)
+                    @if ($roomtype->id == $show->type->id)
+                        <option id="room_type" name="roomtypes_id" class="focus:ring-0" value="{{ $show->type->id }}"
+                            selected>{{ $show->type->name }}</option>
+                    @else
+                        <option id="room_type" name="roomtypes_id" class="focus:ring-0" value="{{ $roomtype->id }}"
+                            selected>{{ $roomtype->name }}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-6">
+            <label for="surface" class="block mb-2 text-sm font-medium">Room size</label>
+            <input type="number" id="surface" name="surface" class="focus:ring-0" value="{{ $show->surface}}">
+        </div>
+        <div class="mb-6">
+            <label for="king_bed" class="block mb-2 text-sm font-medium">King beds</label>
+            <input type="number" id="king_bed" name="king_bed" class="focus:ring-0" value="{{ $show->king_bed }}">
+        </div>
+
+        <div class="mb-6">
+            <label for="sofa_bed" class="block mb-2 text-sm font-medium">Sofa beds</label>
+            <input type="number" id="sofa_bed" name="sofa_bed" class="focus:ring-0" value="{{ $show->sofa_bed }}">
+        </div>
+
+        <div class="mb-6">
+            <label for="max_guests" class="block mb-2 text-sm font-medium">Max guests</label>
+            <input type="text" id="max_guests" name="max_guests" class="focus:ring-0" value="{{ $show->max_guests }}">
+        </div>
+
+
+        <div class="mb-6">
+            <label for="long_desc" class="block mb-2 text-sm font-medium">Text</label>
+            <textarea cols="75" rows="25" id="long_desc" name="long_desc" class="focus:ring-0">{{ $show->long_desc }}</textarea>
         </div>
 
         <div class="mb-6">
@@ -29,34 +63,29 @@
             <input type="number" step="0.01" min="0" max="500" class="focus:ring-0" id="price"
                 name="price" value="{{ $show->price }}">
         </div>
-        <div class="mb-6">
-            <label for="discount" class="block mb-2 text-sm font-medium">Discount</label>
-            <input type="number" step="0.1" min="0" max="0.9" class="focus:ring-0" id="discount"
-                name="discount" value="{{ $show->discount }}">
-        </div>
-        <div class="mb-6">
-            <label for="checktags" class="block mb-2 text-sm font-medium">Tags</label>
+        <div class="mb-6 flex flex-col justify-between">
             @foreach ($tags as $tag)
+            <div class="flex justify-between w-1/3">
                 <label class="block mb-2 text-sm font-medium">{{ $tag->name }}</label>
-                <input type="checkbox" name="name" id="checktags" value="{{ $tag->id }}">
+                <input type="checkbox" name="tag[]" value="{{ $tag->id }}"  @if ($show->tags->contains($tag->id)) checked @endif>
+            </div>
             @endforeach
         </div>
         <div class="mb-6">
             <label for="discount" class="block mb-2 text-sm font-medium">Discount</label>
             <input type="number" step="0.1" min="0" max="0.9" class="focus:ring-0" id="discount"
-                name="discount" value="{{ $show->discount }}">
+            name="discount" value="{{ $show->discount }}">
         </div>
 
         <div class="mb-6 flex flex-col justify-between">
             @foreach ($services as $service)
-            <div class="flex justify-between w-1/3">
-                <label class="block mb-2 text-sm font-medium">{{$service->name}}</label>
-                <input type="checkbox" name="services[]" value="{{$service->id}}" @if($show->services->contains($service->id)) checked @endif>
-            </div>
+                <div class="flex justify-between w-1/3">
+                    <label class="block mb-2 text-sm font-medium">{{ $service->name }}</label>
+                    <input type="checkbox" name="services[]" value="{{ $service->id }}"
+                        @if ($show->services->contains($service->id)) checked @endif>
+                </div>
             @endforeach
         </div>
-
-
         <button type="submit" class="btn-logout font-medium text-sm px-5 py-2.5 mr-2 mb-2">Confirm modifications</button>
     </form>
 @endsection

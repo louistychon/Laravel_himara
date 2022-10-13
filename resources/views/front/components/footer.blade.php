@@ -25,16 +25,14 @@
                  <!-- WIDGET -->
                  <div class="col-md-3">
                      <div class="footer-widget">
-                         <h3>LATEST NEWS</h3>
+                         <h3>LATEST ROOMS</h3>
                          <div class="inner">
                              <ul class="latest-posts">
-
-                                 @foreach ($news as $new)
+                                 @foreach ($rooms4 as $room)
                                      <li>
-                                         <a href="">{{ucfirst(strtolower($new->title))}}</a>
+                                         <a href="room/{{$room->id}}/show">{{ucfirst(strtolower($room->name))}} - {{$room->type->name}}</a>
                                      </li>
                                  @endforeach
-
                              </ul>
                          </div>
                      </div>

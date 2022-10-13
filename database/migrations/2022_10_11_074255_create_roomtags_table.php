@@ -12,7 +12,6 @@ return new class extends Migration
         Schema::create('roomtags', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('rooms_id')->references('id')->on('rooms');
             $table->timestamps();
         });
     }

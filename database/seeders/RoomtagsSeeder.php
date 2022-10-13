@@ -16,14 +16,14 @@ class RoomtagsSeeder extends Seeder
     public function run()
     {
         DB::table('roomtags')->insert([
-            ['name' => 'red', "rooms_id" => 1],
-            ['name' => 'dark', "rooms_id" => 2],
-            ['name' => 'yellow', "rooms_id" => 2],
-            ['name' => 'blue', "rooms_id" => 5],
-            ['name' => 'pink', "rooms_id" => 4],
-            ['name' => 'green',"rooms_id" => 8],
-            ['name' => 'gray', "rooms_id" => 7],
-            ['name' => 'brown', "rooms_id" => 6],
+            ['name' => 'red'],
+            ['name' => 'dark'],
+            ['name' => 'yellow'],
+            ['name' => 'blue'],
+            ['name' => 'pink'],
+            ['name' => 'green'],
+            ['name' => 'gray'],
+            ['name' => 'brown'],
         ]);
     }
 }
