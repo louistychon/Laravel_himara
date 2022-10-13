@@ -36,7 +36,7 @@
             @foreach ($tags as $tag)
                 <div class="flex justify-between">
                     <label>{{ $tag->name }}</label>
-                    <input type="checkbox" name="tag" value="{{ $tag->id }}"  @if($show->tags->contains($tag->id)) checked @endif>
+                    <input type="checkbox" name="tag[]" value="{{ $tag->id }}"  @if($show->tags->contains($tag->id)) checked @endif>
                 </div>
             @endforeach
         </div>
@@ -51,17 +51,6 @@
                     @endif
                 @endforeach
             </select>
-        </div>
-        <div class="mb-6">
-            <label class="my-4">Comments</label>
-            <div>
-                @foreach ($comments as $comment)
-                    <div class="flex flex-col justify-evenly">
-                        <textarea class="focus:ring-0" name="" id="" cols="30" rows="10">{{ $comment->comment }}</textarea>
-                        <button type="button" class="w-1/2 m-auto mt-4btn btn-logout p-2">Edit comment</button></a>
-                    </div>
-                @endforeach
-            </div>
         </div>
         <button type="submit" class="btn-logout font-medium text-sm px-5 py-2.5 mr-2 mb-2">Confirm modifications</button>
     </form>

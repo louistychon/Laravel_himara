@@ -74,10 +74,10 @@ class BlogController extends Controller
 
         $checked = $request->input('tag');
 
-        $article_tags = new Article_tags;
-        $article_tags->article_id = $store->id;
 
         foreach ($checked as $c){
+            $article_tags = new Article_tags;
+            $article_tags->article_id = $store->id;
             $article_tags->tags_id = $c;
             $article_tags->save();
         }
@@ -95,6 +95,15 @@ class BlogController extends Controller
         $tags = Tags::all();
         $comments = Comments::all()->where('articles_id','=', $id);
         return view('back.pages.blog.show', compact('show', 'categories', 'tags', 'users', 'comments'));
+    }
+
+    public function showfront($id)
+    {
+        $show = Article::find($id);
+        $users = User::all();
+        $tags = Tags::all();
+        $comments = Comments::all()->where('articles_id','=', $id);
+        return view('front.pages.article', compact('show', 'tags', 'users', 'comments'));
     }
 
 
@@ -124,10 +133,17 @@ class BlogController extends Controller
             $img->save();
             $update->src = $filenametostore;
         }
-
-        $update->tags()->detach([1,2,3]);
-
         $update->save();
+
+        $checked = $request->input('tag');
+
+        foreach ($checked as $c){
+            $article_tags = new Article_tags();
+            $article_tags->article_id = $update->id;
+            $article_tags->tags_id = $c;
+            $article_tags->save();
+        }
+
         return redirect()->back();
     }
 
