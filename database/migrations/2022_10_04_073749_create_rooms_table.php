@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('max_guests');
             $table->integer('surface');
             $table->text('long_desc');
+            $table->text('long_desc2');
             $table->float('price');
             $table->float('discount');
             $table->timestamps();

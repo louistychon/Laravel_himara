@@ -36,12 +36,10 @@
 
 <body>
     @include('front.components.preloader')
-    <!-- ========== WRAPPER ========== -->
     <div class="wrapper">
-
-    @include('front.components.header')
-    @yield('content')
-    @include('front.components.footer')
+        @include('front.components.header')
+        @yield('content')
+        @include('front.components.footer')
     </div>
 </body>
 

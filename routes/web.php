@@ -125,7 +125,7 @@ Route::get('/booking-form', [BookingController::class, 'index'])->name('booking'
 
 //room
 Route::controller(RoomController::class)->group(function () {
-    Route::get('/room/{id}/show', 'index')->name('room');
+    Route::get('/room/{id}/show', 'showfront');
     Route::get('/roomlist', 'indexall')->name('List of rooms');
     Route::get('/back/room', 'index2')->name("roomback");
     Route::get('/back/room/create', 'create')->name("roomcreate");

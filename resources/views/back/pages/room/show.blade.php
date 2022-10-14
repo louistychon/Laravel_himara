@@ -7,7 +7,7 @@
             <label for="grid" class="">Room imgs</label>
             <div class="grid grid-cols-5 gap-5 my-5">
                 @foreach ($show->imgs as $image)
-                    <div class="w-1/4"><img src="{{ asset('storage/rooms/' . $image->src) }}"></div>
+                    <div class="w-1/2"><img src="{{ asset('storage/room/thumbnail/' . $image->src) }}"></div>
                 @endforeach
             </div>
             <label for="src" class="">Add an image (expected: 1920 x 1200px)</label>
@@ -60,7 +60,7 @@
 
         <div class="mb-6">
             <label for="price" class="block mb-2 text-sm font-medium">Price (before discount)</label>
-            <input type="number" step="0.01" min="0" max="500" class="focus:ring-0" id="price"
+            <input type="number" class="focus:ring-0" id="price"
                 name="price" value="{{ $show->price }}">
         </div>
         <div class="mb-6 flex flex-col justify-between">

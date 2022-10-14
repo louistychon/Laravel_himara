@@ -302,15 +302,18 @@
                                 <figure class="gradient-overlay-hover link-icon">
                                     <a href="/room/{{ $room->id }}/">
                                         @foreach ($room->imgs as $i => $imgs)
-                                            @if ($i > 1)
+                                            @if ($i >= 1)
                                             @break
                                         @endif
-                                        <img src="{{ asset('storage/rooms/' . $imgs->src) }}" class="img-fluid"
+                                        <img src="{{ asset('storage/room/thumbnail/' . $imgs->src) }}" class="img-fluid"
                                             alt="Image">
                                     @endforeach
                                 </a>
                                 <div class="room-services">
-                                    @foreach ($room->services as $service)
+                                    @foreach ($room->services as $i => $service)
+                                    @if ($i >= 3)
+                                        @break
+                                        @endif
                                         <i class="fa {{ $service->icon_classname }}" aria-hidden="true"
                                             data-toggle="popover" data-placement="right" data-trigger="hover"
                                             data-content="{{ $service->small_desc }}"
@@ -500,9 +503,9 @@
                             </figure>
                             <div class="news-info">
                                 <h4 class="title">
-                                    <a href="blog-post.html">{{ $new->title }}</a>
+                                    <a href="/blog/.{{$new->id}}">{{ $new->title }}</a>
                                 </h4>
-                                <p>{{ $new->desc }}</p>
+                                <p>{{ $new->long_desc }}</p>
                                 <div class="post-meta">
                                     <span class="author">
                                         <a href="#"><img

@@ -10,6 +10,8 @@ use App\Models\RoomService;
 use App\Models\Roomtags;
 use App\Models\RoomType;
 use App\Models\Service;
+use App\Models\Testimonial;
+use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -20,13 +22,18 @@ class RoomController extends Controller
     {
         $allrooms = Room::all();
         $roomtypes = RoomType::all();
-        return view('front.pages.rooms-list', compact('allrooms', 'roomtypes'));
+        return view('front.pages.rooms-list', ['room'=> Room::paginate(10)], compact('allrooms', 'roomtypes'));
     }
 
-    public function index()
+    public function showfront($id)
     {
-        $allrooms = Room::all();
-        return view('front.pages.room', compact('allrooms'));
+        $testimonials = Testimonial::where('rooms_id', '=', $id)->get();
+        $room = Room::find($id);
+        $rooms = Room::all()->take(3);
+        $services = RoomService::all();
+        $rating = $testimonials->avg('rating');
+
+        return view('front.pages.room', compact('room', 'services', 'testimonials', 'rooms', 'rating'));
     }
 
     public function index2()
@@ -37,12 +44,59 @@ class RoomController extends Controller
 
     public function create()
     {
-        //
+        $roomtypes = RoomType::all();
+        $services = RoomService::all();
+        $tags = Roomtags::all();
+        return view('back.pages.room.create', compact('tags', 'services', 'roomtypes'));
     }
 
     public function store(Request $request)
     {
-        //
+        $store = new Room();
+        $store->name = $request->name;
+        $store->long_desc = $request->long_desc;
+        $store->roomtypes_id = $request->roomtypes_id;
+        $store->surface = $request->surface;
+        $store->king_bed = $request->king_bed;
+        $store->sofa_bed = $request->sofa_bed;
+        $store->max_guests = $request->max_guests;
+        $store->price = $request->price;
+        $store->discount = $request->discount;
+
+        $store->save();
+
+        if ($request->hasFile('src')) {
+            $newroomimg = new RoomImg();
+            //get filename with extension
+            $filenamewithextension = $request->file('src')->getClientOriginalName();
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            //get file extension
+            $extension = $request->file('src')->getClientOriginalExtension();
+            //filename to store
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+            //Upload File
+            $request->file('src')->storeAs('storage/room/', $filenametostore);
+            $request->file('src')->storeAs('storage/room/thumbnail/', $filenametostore);
+            //Resize image here
+            $thumbnailpath = public_path('storage/room/thumbnail/' . $filenametostore);
+            $img = Image::make($thumbnailpath)->resize(1170, 780);
+            $img->save();
+            $newroomimg->src = $filenametostore;
+            $newroomimg->room_id = $store->id;
+            $newroomimg->save();
+        }
+
+        $store->imgs()->attach($newroomimg->id);
+
+        $checked = $request->input('tag');
+        $store->tags()->sync($checked);
+
+
+        $checked2 = $request->input('services');
+        $store->services()->sync($checked2);
+
+        return redirect()->back();
     }
 
     public function show($id)
@@ -78,7 +132,10 @@ class RoomController extends Controller
         $update->price = $request->price;
         $update->discount = $request->discount;
 
+        $update->save();
+
         if ($request->hasFile('src')) {
+            $newroomimg = new RoomImg();
             //get filename with extension
             $filenamewithextension = $request->file('src')->getClientOriginalName();
             //get filename without extension
@@ -93,12 +150,13 @@ class RoomController extends Controller
             //Resize image here
             $thumbnailpath = public_path('storage/room/thumbnail/' . $filenametostore);
             $img = Image::make($thumbnailpath)->resize(1170, 780);
-
-
             $img->save();
-            $update->src = $filenametostore;
+            $newroomimg->src = $filenametostore;
+            $newroomimg->room_id = $update->id;
+            $newroomimg->save();
         }
-        $update->save();
+
+        $update->imgs()->attach($newroomimg->id);
 
         $checked = $request->input('tag');
         $update->tags()->sync($checked);
@@ -110,12 +168,6 @@ class RoomController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Room  $room
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Room $room)
     {
         //

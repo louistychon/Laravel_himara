@@ -13,4 +13,8 @@ class Testimonial extends Model
     {
         return $this->hasOne(User::class, 'id', 'users_id');
     }
+
+    public function testimonial(){
+        return $this->hasOne(Room::class, 'id', 'rooms_id');
+    }
 }
