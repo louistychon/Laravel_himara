@@ -227,7 +227,7 @@
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="review-summary">
-                                    <div class="average">{{$rating}}</div>
+                                    <div class="average">{{$ratings}}</div>
                                     <div class="rating">
                                         <i class="fa fa-star voted" aria-hidden="true"></i>
                                         <i class="fa fa-star voted" aria-hidden="true"></i>
@@ -235,7 +235,7 @@
                                         <i class="fa fa-star voted" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </div>
-                                    <small>Based on {{$testimonials->count()}} ratings</small>
+                                    <small>Based on {{$ratingcount}} ratings</small>
                                 </div>
                             </div>
                             <div class="col-lg-9">
@@ -249,13 +249,13 @@
                                             <div class="progress">
 
 
-                                                <div class="progress-bar" role="progressbar" style="width:%"
-                                                    aria-valuenow="91" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar" role="progressbar" style="width:{{round((float)$numberrating5/$ratingcount * 100)}}%"
+                                                    aria-valuenow="{{$numberrating5/$ratingcount}}" aria-valuemin="0" aria-valuemax="100">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-1 col-sm-1 col-1">
-                                            <div class="progress-value">91%</div>
+                                            <div class="progress-value">{{round((float)$numberrating5/$ratingcount * 100 ) . '%'}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -267,13 +267,13 @@
                                         </div>
                                         <div class="col-lg-9 col-sm-9 col-8">
                                             <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width: 0%"
+                                                <div class="progress-bar" role="progressbar" style="width: {{round((float)$numberrating4/$ratingcount * 100)}}%"
                                                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-1 col-sm-1 col-1">
-                                            <div class="progress-value">0%</div>
+                                            <div class="progress-value">{{round((float)$numberrating4/$ratingcount * 100)}}%</div>
                                         </div>
                                     </div>
                                 </div>
@@ -285,13 +285,13 @@
                                         </div>
                                         <div class="col-lg-9 col-sm-2 col-8">
                                             <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width: 8%"
+                                                <div class="progress-bar" role="progressbar" style="width: {{round((float)$numberrating3/$ratingcount * 100)}}%"
                                                     aria-valuenow="8" aria-valuemin="0" aria-valuemax="100">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-1 col-sm-1 col-1">
-                                            <div class="progress-value">8%</div>
+                                            <div class="progress-value">{{round((float)$numberrating3/$ratingcount * 100)}}%</div>
                                         </div>
                                     </div>
                                 </div>
@@ -303,13 +303,13 @@
                                         </div>
                                         <div class="col-lg-9 col-sm-9 col-8">
                                             <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width: 0%"
+                                                <div class="progress-bar" role="progressbar" style="width: {{round((float)$numberrating2/$ratingcount * 100)}}%"
                                                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-1 col-sm-1 col-1">
-                                            <div class="progress-value">0%</div>
+                                            <div class="progress-value">{{round((float)$numberrating2/$ratingcount * 100)}}%</div>
                                         </div>
                                     </div>
                                 </div>
@@ -321,13 +321,13 @@
                                         </div>
                                         <div class="col-lg-9 col-sm-9 col-8">
                                             <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width: 0%"
+                                                <div class="progress-bar" role="progressbar" style="width: {{round((float)$numberrating1/$ratingcount * 100)}}%"
                                                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-1 col-sm-1 col-1">
-                                            <div class="progress-value">0%</div>
+                                            <div class="progress-value">{{round((float)$numberrating1/$ratingcount * 100)}}%</div>
                                         </div>
                                     </div>
                                 </div>

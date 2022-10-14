@@ -31,9 +31,33 @@ class RoomController extends Controller
         $room = Room::find($id);
         $rooms = Room::all()->take(3);
         $services = RoomService::all();
-        $rating = $testimonials->avg('rating');
+        $ratings = $testimonials->avg('rating');
+        $ratingcount = $testimonials->count();
+        $numberrating5 = 0;
+        $numberrating4 = 0;
+        $numberrating3 = 0;
+        $numberrating2 = 0;
+        $numberrating1 = 0;
 
-        return view('front.pages.room', compact('room', 'services', 'testimonials', 'rooms', 'rating'));
+        foreach ($testimonials as $rating){
+            if($rating->rating == 5){
+                $numberrating5++;
+            }
+            elseif($rating->rating == 4){
+                $numberrating4++;
+            }
+            elseif($rating->rating == 3){
+                $numberrating3++;
+            }
+            elseif($rating->rating == 2){
+                $numberrating2++;
+            }
+            elseif($rating->rating == 1){
+                $numberrating1++;
+            }
+        }
+
+        return view('front.pages.room', compact('room', 'services', 'testimonials', 'rooms', 'ratings', 'ratingcount', 'numberrating1', 'numberrating2', 'numberrating3', 'numberrating4', 'numberrating5'));
     }
 
     public function index2()
