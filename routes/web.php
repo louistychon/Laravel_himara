@@ -171,4 +171,6 @@ Route::controller(ContactController::class)->group(function () {
 
 Route::controller(MailController::class)->group(function () {
     Route::get('/mail/contact', 'mailcontact')->name('mailcontact');
+    Route::get('/mail/subscription', 'subscription')->name('subscription');
+    Route::get('/mail/reservation', 'reservation')->name('reservation');
 });

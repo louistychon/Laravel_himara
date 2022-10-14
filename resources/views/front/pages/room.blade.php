@@ -218,6 +218,7 @@
                 <p>{{ $room->long_desc2 }}
                 </p>
                 <!-- ROOM REVIEWS -->
+                @if($ratingcount != 0)
                 <div id="room-reviews" class="room-reviews">
                     <div class="section-title sm">
                         <h4>ROOM REVIEWS</h4>
@@ -358,6 +359,7 @@
                         </div>
                     @endforeach
                 </div>
+                @endif
                 <div class="similar-rooms">
                     <div class="section-title sm">
                         <h4>SIMILAR ROOMS</h4>
@@ -369,7 +371,7 @@
                             <div class="col-md-4">
                                 <div class="room-grid-item">
                                     <figure class="gradient-overlay-hover link-icon">
-                                        <a href="/room/{{ $room->id }}/">
+                                        <a href="/room/{{ $room->id }}/show">
                                             @foreach ($room->imgs as $i => $imgs)
                                                 @if ($i >= 1)
                                                 @break
@@ -417,16 +419,18 @@
                             <!-- EMAIL -->
                             <div class="form-group">
                                 <input class="form-control" name="booking-email" type="email"
-                                    placeholder="Your Email Address">
+                                    placeholder="Your Email Address" value="{{ Auth::user() ? Auth::user()->email : null }}" disabled>
                             </div>
+                              <!-- ROOM NAME -->
+                              <div class="form-group">
+                                <input class="form-control" name="booking-roomname"
+                                    title="Room Name" data-header="Room Name" value="{{$room->name}}" disabled>
+                            </div>
+
                             <!-- ROOM TYPE -->
                             <div class="form-group">
-                                <select class="form-control" name="booking-roomtype"
-                                    title="Select Room Type" data-header="Room Type" disabled="disabled">
-                                    <option value="Single" selected="selected">Single Room</option>
-                                    <option value="Double">Double Room</option>
-                                    <option value="Deluxe">Deluxe Room</option>
-                                </select>
+                                <input class="form-control" name="booking-roomtype"
+                                    title="Room Type" data-header="Room Type" value="{{$room->type->name}}" disabled>
                             </div>
                             <!-- DATE -->
                             <div class="form-group">
@@ -488,6 +492,7 @@
     </div>
 </div>
 </div>
+
 </main>
 <!-- ========== FOOTER ========== -->
 <footer>

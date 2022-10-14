@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('user', Auth::user());
             $view->with('hotelinfo', HotelInfo::all());
             $view->with('news', Article::all()->take(4));
-            $view->with('rooms4', Room::all()->take(4));
+            $view->with('rooms5', Room::all()->take(5));
             $view->with('rooms3', Room::all()->take(3));
         });
 

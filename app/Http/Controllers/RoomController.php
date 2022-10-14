@@ -33,6 +33,11 @@ class RoomController extends Controller
         $services = RoomService::all();
         $ratings = $testimonials->avg('rating');
         $ratingcount = $testimonials->count();
+
+        if ($testimonials->count() == 0) {
+            $ratingcount = 0;
+        }
+
         $numberrating5 = 0;
         $numberrating4 = 0;
         $numberrating3 = 0;

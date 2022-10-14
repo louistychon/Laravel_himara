@@ -300,7 +300,7 @@
                         <div class="col-md-4">
                             <div class="room-grid-item">
                                 <figure class="gradient-overlay-hover link-icon">
-                                    <a href="/room/{{ $room->id }}/">
+                                    <a href="/room/{{ $room->id }}/show">
                                         @foreach ($room->imgs as $i => $imgs)
                                             @if ($i >= 1)
                                             @break

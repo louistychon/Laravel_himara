@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('rooms_id')->references('id')->on('rooms');
-            $table->date('date_start');
-            $table->date('date_end');
+            $table->string('date_start');
+            $table->string('date_end');
             $table->timestamps();
         });
     }
