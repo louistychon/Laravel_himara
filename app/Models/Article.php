@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Article extends Model
 {
@@ -25,11 +24,4 @@ class Article extends Model
         return $this->hasMany(Comments::class, 'articles_id', 'id');
     }
 
-    public function getNextId()
-    {
-
-        $statement = DB::select("show table status like 'articles'");
-
-        return $statement[0]->Auto_increment;
-    }
 }

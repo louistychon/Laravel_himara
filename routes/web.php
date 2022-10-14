@@ -110,7 +110,7 @@ Route::controller(HomeController::class)->group(function () {
 //blog
 Route::controller(BlogController::class)->group(function () {
     Route::get('/blog', 'index')->name('blog');
-    Route::get('/{id}', 'showfront');
+    Route::get('/blog/{id}', 'showfront');
     Route::get('/back/blog', 'index2')->name("blogback");
     Route::get('/back/blog/create', 'create')->name("blogcreate");
     Route::get('/back/blog/{id}/show', 'show');

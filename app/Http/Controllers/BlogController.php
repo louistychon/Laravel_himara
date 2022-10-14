@@ -73,14 +73,7 @@ class BlogController extends Controller
         $store->save();
 
         $checked = $request->input('tag');
-
-
-        foreach ($checked as $c){
-            $article_tags = new Article_tags;
-            $article_tags->article_id = $store->id;
-            $article_tags->tags_id = $c;
-            $article_tags->save();
-        }
+        $store->tags()->sync($checked);
 
 
         return redirect('/back/blog')->with('success', 'article created successfully');
@@ -136,13 +129,7 @@ class BlogController extends Controller
         $update->save();
 
         $checked = $request->input('tag');
-
-        foreach ($checked as $c){
-            $article_tags = new Article_tags();
-            $article_tags->article_id = $update->id;
-            $article_tags->tags_id = $c;
-            $article_tags->save();
-        }
+        $update->tags()->sync($checked);
 
         return redirect()->back();
     }

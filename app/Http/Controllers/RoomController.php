@@ -88,11 +88,13 @@ class RoomController extends Controller
             //filename to store
             $filenametostore = $filename . '_' . time() . '.' . $extension;
             //Upload File
-            $request->file('src')->storeAs('storage/blog/', $filenametostore);
-            $request->file('src')->storeAs('storage/blog/thumbnail/', $filenametostore);
+            $request->file('src')->storeAs('storage/room/', $filenametostore);
+            $request->file('src')->storeAs('storage/room/thumbnail/', $filenametostore);
             //Resize image here
-            $thumbnailpath = public_path('storage/blog/thumbnail/' . $filenametostore);
+            $thumbnailpath = public_path('storage/room/thumbnail/' . $filenametostore);
             $img = Image::make($thumbnailpath)->resize(1170, 780);
+
+
             $img->save();
             $update->src = $filenametostore;
         }
