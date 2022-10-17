@@ -4,15 +4,15 @@
         @csrf
         <div class="mb-6">
             <label for="src" class="">Image</label>
-            <input type="file" id="src" name="src" class="mt-4">
+            <input type="file" id="src" name="src" class="mt-4 focus:ring-0">
         </div>
         <div class="mb-6">
             <label for="title" class="">Title</label>
-            <input type="text" id="title" name="title" class="mt-4">
+            <input type="text" id="title" name="title" class="mt-4 focus:ring-0">
         </div>
         <div class="mb-6 flex flex-col">
             <label for="long_desc" class="">Long description</label>
-            <textarea rows="25" id="long_desc" name="long_desc" class="mt-4"> </textarea>
+            <textarea rows="25" id="long_desc" name="long_desc" class="mt-4 focus:ring-0"> </textarea>
         </div>
         <div class="mb-6">
             <label for="category" class="">Category</label>
@@ -23,7 +23,7 @@
             </select>
         </div>
         <div class="mb-6 w-1/3">
-            <label for="tags" class="">Tags</label>
+            <label for="tags" class="focus:ring-0">Tags</label>
             <hr class="my-5">
             @foreach ($tags as $tag)
                 <div class="flex justify-between">

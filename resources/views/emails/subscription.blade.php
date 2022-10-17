@@ -1,13 +1,15 @@
 @component('mail::message')
 
-Hello {{$user['name']}}
+New customer account !
 
-Your account is confirmed. Feel free to book a room anytime you need.
+{{$data3['name']}}
+{{$data3['city']}}
+{{$data3['country']}}
+{{$data3['email']}}
 
-@component('mail::button', ['url' => 'localhost:800'])
+@component('mail::button', ['url' => 'localhost:8000'])
 Back on Himara
 @endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
+
 @endcomponent

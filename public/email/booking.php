@@ -9,13 +9,13 @@ if($_POST)
 
     // Site Settings
     $site_title          = "Hotel Himara";
-    $site_url            = "https://eagle-themes.com/templates/himara";
+    $site_url            = "http://localhost:8000/";
     $facebook_link       = "https://www.facebook.com/";
     $twitter_link        = "https://twitter.com/";
     $admin_phone         = "+1 888 123 4567";
 
     // Email Settings
-    $admin_email         = "noreply@eagle-themes.com";
+    $admin_email         = "louis.himara@gmail.com";
     $admin_subject       = "Himara Hotel - New Reservation";
     $customer_subject    = "Himara Hotel - Booking Details";
 

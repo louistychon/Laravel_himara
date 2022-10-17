@@ -11,7 +11,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
+
+use Intervention\Image\Facades\Image;
 
 class RegisteredUserController extends Controller
 {
@@ -51,10 +54,33 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        if ($request->hasFile('src')) {
+            $filenamewithextension = $request->file('src')->getClientOriginalName();
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            //get file extension
+            $extension = $request->file('src')->getClientOriginalExtension();
+            //filename to store
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+            //Upload File
+            $request->file('src')->storeAs('storage/users/', $filenametostore);
+            $request->file('src')->storeAs('storage/users/thumbnail/', $filenametostore);
+            //Resize image here
+            $thumbnailpath = public_path('storage/users/thumbnail/' . $filenametostore);
+            $img = Image::make($thumbnailpath)->resize(500,500);
+            $img->save();
+        }
+
+        $userinfo = ['name' => $request->get('name'),
+        'email' => $request->get('email'),
+        'country' => $request->get('country'),
+        'city' => $request->get('city') ];
+
+        Mail::to('louis.tychon1@gmail.com')->send(new SubscriptionConfirmed($userinfo));
+
         event(new Registered($user));
 
         Auth::login($user);
-        redirect('/mail/register');
         return redirect(RouteServiceProvider::HOME);
     }
 }

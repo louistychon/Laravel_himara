@@ -13,7 +13,8 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus sit, fugiat at in assumenda
                         corrupti autem iste eveniet eaque vitae beatae tenetur, voluptatem eius. Numquam.</p>
                     <!-- CONTACT FORM -->
-                    <form id="contact-form" class="contact-form" method="post" action="mail/contact">
+                    <form class="contact-form" method="post" action="/mail/contact">
+                        @csrf
                         <div class="form-group">
                             <input class="form-control" name="name" placeholder="Name" type="text">
                         </div>
@@ -30,7 +31,7 @@
                             <textarea class="form-control" name="message" placeholder="Message"></textarea>
                         </div>
                         <div class="form-group">
-                            <button class="btn mt30">SEND YOUR MESSAGE</button>
+                          <button type="submit" class="btn">SEND YOUR MESSAGE</button>
                         </div>
                     </form>
                 </div>

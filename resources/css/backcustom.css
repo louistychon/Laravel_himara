@@ -6,6 +6,15 @@ p{
     color: #f5f5f5;
 }
 
+h4{
+    color: #e3e3e3;
+    font-size: 68px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size:large !important;
+}
+
 .btn-logout{
     background: #edcb9a !important;
     color: #fff;

@@ -5,7 +5,7 @@ if ($_POST)
 
     // Email Settings
     $site_title       = "Himara Hotel";
-    $to_email         = "noreply@eagle-themes.com";
+    $to_email         = "louis.himara@gmail.com";
     $default_subject  = "Himara Hotel - New Message";
 
     // Output Messages

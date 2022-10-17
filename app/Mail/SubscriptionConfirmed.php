@@ -11,11 +11,11 @@ class SubscriptionConfirmed extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data = [];
+    public $data3 = [];
 
-    public function __construct(array $user)
+    public function __construct(array $userinfo)
     {
-        $this->data = $user;
+        $this->data3 = $userinfo;
     }
 
     /**

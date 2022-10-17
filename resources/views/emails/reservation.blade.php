@@ -2,8 +2,9 @@
 
 Thanks for your reservation. It's now confirmed.
 
-Details : 
+Details :
 
-Thanks,<br>
-{{ config('app.name') }}
+Thanks,
+
+
 @endcomponent
