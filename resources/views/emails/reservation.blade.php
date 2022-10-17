@@ -1,11 +1,8 @@
 @component('mail::message')
-# Introduction
 
-The body of your message.
+Thanks for your reservation. It's now confirmed.
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
+Details : 
 
 Thanks,<br>
 {{ config('app.name') }}

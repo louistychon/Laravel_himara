@@ -22,7 +22,7 @@ class RoomRoomServiceSeeder extends Seeder
             ['rooms_id' => 3, 'room_services_id' => 4],
             ['rooms_id' => 4, 'room_services_id' => 2],
             ['rooms_id' => 5, 'room_services_id' => 2],
-            ['rooms_id' => 6, 'room_services_id' => 2],
+            ['rooms_id' => 6, 'room_services_id' => 4],
             ['rooms_id' => 7, 'room_services_id' => 2],
             ['rooms_id' => 2, 'room_services_id' => 4],
             ['rooms_id' => 1, 'room_services_id' => 4],

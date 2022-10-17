@@ -1,10 +1,11 @@
 @component('mail::message')
-# Introduction
 
-The body of your message.
+Hello {{$user['name']}}
 
-@component('mail::button', ['url' => ''])
-Button Text
+Your account is confirmed. Feel free to book a room anytime you need.
+
+@component('mail::button', ['url' => 'localhost:800'])
+Back on Himara
 @endcomponent
 
 Thanks,<br>

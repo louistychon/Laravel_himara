@@ -2342,7 +2342,7 @@ header.vertical-header .main-menu {
 }
 
 header.vertical-header.open-header .main-menu {
- visibility: visible;    
+ visibility: visible;
 }
 
 header.vertical-header.open-header .main-menu {
@@ -3803,7 +3803,7 @@ section.dark .countup-box .number, section.dark .countup-box .text {
   border-radius: 2px;
 }
 
-.subscribe .inner button i { 
+.subscribe .inner button i {
   font-size: 1.5em;
   text-align: center;
   left: 50%;
@@ -6109,6 +6109,7 @@ blockquote:after {
   -webkit-transform: translate3d(0px, 0px, 0px);
   border-radius: 180px;
   -webkit-mask-image: -webkit-radial-gradient(white, black);
+  overflow: hidden;
 }
 
 .contact-page .google-map {

@@ -15,9 +15,12 @@ class MailController extends Controller
         Mail::to('louis.tychon1@gmail.com')->send(new ContactformRequest());
     }
 
-    public function subscription()
+    public function subscription(Request $request)
     {
-        Mail::to('louis.tychon1@gmail.com')->send(new SubscriptionConfirmed());
+        $user  = [];
+        $user['name'] = $request->name;
+
+        Mail::to('louis.tychon1@gmail.com')->send(new SubscriptionConfirmed($user));
     }
 
     public function reservation()

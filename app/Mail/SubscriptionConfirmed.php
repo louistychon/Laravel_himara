@@ -11,14 +11,11 @@ class SubscriptionConfirmed extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public $data = [];
+
+    public function __construct(array $user)
     {
-        //
+        $this->data = $user;
     }
 
     /**
