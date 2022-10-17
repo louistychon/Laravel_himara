@@ -61,9 +61,9 @@
               <div class="sidebar">
                 <aside class="widget noborder">
                   <div class="search">
-                    <form class="widget-search">
-                      <input type="search" placeholder="Search">
-                      <button class="btn-search" id="searchsubmit" type="submit">
+                    <form class="widget-search" action={{url('search')}} method="get">
+                      <input type="search" placeholder="Search" name="search" value="{{Request::get('search')}}">
+                      <button class="btn-search" id="searchsubmit" type="submit" data-action="{{ route('blogsearch')}}">
                         <i class="fa fa-search"></i>
                       </button>
                     </form>
@@ -113,7 +113,7 @@
                   <h4 class="widget-title">Tags</h4>
                   <div class="tagcloud">
                     @foreach ($tags as $tag)
-                    <a href="#">
+                    <a href="/blog/">
                         <span class="tag">{{$tag->name}}</span></a>
                         @endforeach
                   </div>

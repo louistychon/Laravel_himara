@@ -13,6 +13,8 @@ use App\Models\Service;
 use App\Models\Testimonial;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 
 class RoomController extends Controller
@@ -21,8 +23,10 @@ class RoomController extends Controller
     public function indexall()
     {
         $allrooms = Room::all();
-        $roomtypes = RoomType::all();
-        return view('front.pages.rooms-list', ['room'=> Room::paginate(10)], compact('allrooms', 'roomtypes'));
+        $roomtypes = RoomType::withCount('rooms')->get();
+        $testimonials = Testimonial::all();
+        $allroomsimg = RoomImg::all();
+        return view('front.pages.rooms-list', ['allrooms' => Room::paginate(10)], compact('allrooms', 'roomtypes', 'testimonials'));
     }
 
     public function showfront($id)
@@ -44,20 +48,16 @@ class RoomController extends Controller
         $numberrating2 = 0;
         $numberrating1 = 0;
 
-        foreach ($testimonials as $rating){
-            if($rating->rating == 5){
+        foreach ($testimonials as $rating) {
+            if ($rating->rating == 5) {
                 $numberrating5++;
-            }
-            elseif($rating->rating == 4){
+            } elseif ($rating->rating == 4) {
                 $numberrating4++;
-            }
-            elseif($rating->rating == 3){
+            } elseif ($rating->rating == 3) {
                 $numberrating3++;
-            }
-            elseif($rating->rating == 2){
+            } elseif ($rating->rating == 2) {
                 $numberrating2++;
-            }
-            elseif($rating->rating == 1){
+            } elseif ($rating->rating == 1) {
                 $numberrating1++;
             }
         }
@@ -73,9 +73,12 @@ class RoomController extends Controller
 
     public function create()
     {
+        $rooms = Room::all();
         $roomtypes = RoomType::all();
         $services = RoomService::all();
         $tags = Roomtags::all();
+
+
         return view('back.pages.room.create', compact('tags', 'services', 'roomtypes'));
     }
 
@@ -84,6 +87,7 @@ class RoomController extends Controller
         $store = new Room();
         $store->name = $request->name;
         $store->long_desc = $request->long_desc;
+        $store->long_desc2 = $request->long_desc2;
         $store->roomtypes_id = $request->roomtypes_id;
         $store->surface = $request->surface;
         $store->king_bed = $request->king_bed;
@@ -153,6 +157,7 @@ class RoomController extends Controller
         $update = Room::find($id);
         $update->name = $request->name;
         $update->long_desc = $request->long_desc;
+        $update->long_desc2 = $request->long_desc2;
         $update->roomtypes_id = $request->roomtypes_id;
         $update->surface = $request->surface;
         $update->king_bed = $request->king_bed;
@@ -197,8 +202,12 @@ class RoomController extends Controller
         return redirect()->back();
     }
 
-    public function destroy(Room $room)
+    public function destroy($id)
     {
-        //
+        $todelete = Room::find($id);
+        Storage::delete('storage/room/thumbnail/' . $todelete->src);
+        Storage::delete('storage/room/' . $todelete->src);
+        $todelete->delete();
+        return redirect()->back();
     }
 }

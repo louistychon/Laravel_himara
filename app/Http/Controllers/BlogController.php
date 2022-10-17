@@ -7,6 +7,7 @@ use App\Models\Article;
 use App\Models\Article_tags;
 use App\Models\CategorieBlog;
 use App\Models\Comments;
+use App\Models\Room;
 use App\Models\Tags;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,14 +18,34 @@ use Intervention\Image\Facades\Image;
 class BlogController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $tags = Tags::all();
         $articles = Article::all();
         // $categories = CategorieBlog::all();
         $categories = CategorieBlog::withCount('articles')->get(); //compte le nombre de categories + renvoie les infos
+
         return view('front.pages.blog', ['articles' => Article::paginate(5)], compact('tags', 'categories', 'articles'));
     }
+
+
+    public function searcharticle(Request $request)
+    {
+        $tags = Tags::all();
+        $articles = Article::all();
+        // $categories = CategorieBlog::all();
+        $categories = CategorieBlog::withCount('articles')->get();
+        $articles = Article::query();
+
+        if (isset($request->search)) {
+            $articles = Article::where('title', 'like', '%' . $request->search . '%')->paginate(10);
+            return view('front.pages.blog', compact('articles', 'categories', 'tags'));
+        } else {
+            return redirect()->back();
+        }
+    }
+
+
 
     public function index2()
     {
@@ -86,7 +107,7 @@ class BlogController extends Controller
         $categories = CategorieBlog::all();
         $users = User::all();
         $tags = Tags::all();
-        $comments = Comments::all()->where('articles_id','=', $id);
+        $comments = Comments::all()->where('articles_id', '=', $id);
         return view('back.pages.blog.show', compact('show', 'categories', 'tags', 'users', 'comments'));
     }
 
@@ -95,7 +116,7 @@ class BlogController extends Controller
         $show = Article::find($id);
         $users = User::all();
         $tags = Tags::all();
-        $comments = Comments::all()->where('articles_id','=', $id);
+        $comments = Comments::all()->where('articles_id', '=', $id);
         return view('front.pages.article', compact('show', 'tags', 'users', 'comments'));
     }
 

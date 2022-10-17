@@ -19,8 +19,12 @@
             </select>
         </div>
         <div class="mb-6">
-            <label for="long_desc" class="block mb-2 text-sm font-medium">text</label>
+            <label for="long_desc" class="block mb-2 text-sm font-medium">Long description 1</label>
             <textarea class="focus:ring-0" cols="75" rows="25" id="long_desc" name="long_desc" ></textarea>
+        </div>
+        <div class="mb-6">
+            <label for="long_desc2" class="block mb-2 text-sm font-medium">Long description 2</label>
+            <textarea class="focus:ring-0" cols="75" rows="25" id="long_desc2" name="long_desc2" ></textarea>
         </div>
         <div class="mb-6">
             <label for="surface" class="block mb-2 text-sm font-medium">Room size</label>
@@ -38,7 +42,7 @@
 
         <div class="mb-6">
             <label for="max_guests" class="block mb-2 text-sm font-medium">Max guests</label>
-            <input type="text" id="max_guests" name="max_guests" class="focus:ring-0" >
+            <input type="number" id="max_guests" name="max_guests" class="focus:ring-0" >
         </div>
 
         <div class="mb-6 flex flex-col justify-between">

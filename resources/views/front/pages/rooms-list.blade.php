@@ -13,8 +13,14 @@
                             <div class="row">
                                 <div class="col-lg-5">
                                     <figure class="gradient-overlay-hover link-icon">
-                                        <a href="room.html"><img src="images/rooms/single/single1.jpg" class="img-fluid"
-                                                alt="Image"></a>
+                                        <a href="/room/{{ $room->id }}/show">
+                                            @foreach ($room->imgs as $i => $imgs)
+                                                @if ($i >= 1)
+                                                @break
+                                            @endif
+                                            <img src="{{ asset('storage/room/thumbnail/' . $imgs->src) }}" class="img-fluid"
+                                                alt="Image">
+                                        @endforeach
                                     </figure>
                                 </div>
                                 <div class="col-lg-5">
@@ -59,41 +65,7 @@
                     </div>
                 @endforeach
                 <!-- PAGINATION -->
-                <nav class="pagination">
-                    <ul>
-                        <li class="prev-pagination">
-                            <a href="#">
-                                &nbsp;<i class="fa fa-angle-left"></i>
-                                Previous &nbsp;</a>
-                        </li>
-                        <li class="active">
-                            <a href="#">1</a>
-                        </li>
-                        <li>
-                            <a href="#">2</a>
-                        </li>
-                        <li>
-                            <a href="#">3</a>
-                        </li>
-                        <li>...</li>
-                        <li>
-                            <a href="#">7</a>
-                        </li>
-                        <li>
-                            <a href="#">8</a>
-                        </li>
-                        <li>
-                            <a href="#">9</a>
-                        </li>
-                        <li class="next_pagination">
-                            <a href="#">
-                                &nbsp; Next
-                                <i class="fa fa-angle-right"></i>
-                                &nbsp;
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                {{$allrooms->links()}}
             </div>
             <div class="col-lg-3 col-12">
                 <div class="sidebar">
@@ -112,10 +84,10 @@
                         <h4 class="widget-title">CATEGORIES</h4>
                         <ul class="categories">
                             @foreach ($roomtypes as $roomtype)
-                                <li>
-                                    <a href="#">{{ $roomtype->name }}<span
-                                            class="posts-num">{{ $roomtype->count() }}</span></a>
-                                </li>
+                                    <li>
+                                        <a href="#">{{ $roomtype->name }}<span
+                                                class="posts-num">{{ $roomtype->rooms_count }}</span></a>
+                                    </li>
                             @endforeach
                         </ul>
                     </aside>

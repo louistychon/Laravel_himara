@@ -57,6 +57,10 @@
             <label for="long_desc" class="block mb-2 text-sm font-medium">Text</label>
             <textarea cols="75" rows="25" id="long_desc" name="long_desc" class="focus:ring-0">{{ $show->long_desc }}</textarea>
         </div>
+        <div class="mb-6">
+            <label for="long_desc2" class="block mb-2 text-sm font-medium">Text</label>
+            <textarea cols="75" rows="25" id="long_desc2" name="long_desc2" class="focus:ring-0">{{ $show->long_desc2 }}</textarea>
+        </div>
 
         <div class="mb-6">
             <label for="price" class="block mb-2 text-sm font-medium">Price (before discount)</label>
