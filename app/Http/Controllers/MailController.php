@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Mail;
 
 class MailController extends Controller
 {
+    public function index(){
+        $allmails = mails::all();
+        return view('back.pages.mails.index', compact('allmails'));
+    }
+
+
     public function mailcontact(Request $request)
     {
         $store = new mails();
@@ -36,29 +42,32 @@ class MailController extends Controller
 
     public function subscription(Request $request)
     {
+        $store = new mails();
+        $store->name = $request->name;
+        $store->email = $request->email;
+        $store->subject = $request->subject;
+        $store->phone = $request->phone;
+        $store->message = $request->message;
+        $store->save();
 
     }
 
     public function reservation()
     {
-        Mail::to('louis.tychon1@gmail.com')->send(new ReservationConfirmed());
+        // Mail::to('louis.tychon1@gmail.com')->send(new ReservationConfirmed());
     }
 
-
-    public function store(Request $request)
-    {
-    }
 
     public function show($id)
     {
-        $show = Mail::find($id);
-        return view('back.pages.mail.show', compact('show'));
+        $show = mails::find($id);
+        return view('back.pages.mails.show', compact('show'));
     }
 
     public function destroy($id)
     {
-        $todelete = Mail::find($id);
+        $todelete = mails::find($id);
         $todelete->delete();
-        return redirect()->back();
+        return redirect('/mail/')->with('success', 'Mail has been successfully deleted');
     }
 }

@@ -336,7 +336,7 @@
         </div>
     </section>
     <!-- ========== SERVICES ========== -->
-    @if ($services->count() == 0)
+    @if ($services->count() > 0)
         <section class="services">
             <div class="container">
                 <div class="section-title">

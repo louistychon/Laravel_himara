@@ -1,6 +1,6 @@
 @extends('back.layouts.index')
 @section('content')
-    <form action="/back/services/create" method="post" enctype="multipart/form-data">
+    <form action="/back/mails/create" method="post" enctype="multipart/form-data">
         @csrf
         <div>
             <label for="Name" class="block mb-2 text-sm font-medium">Name</label>
