@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('room_tags', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rooms_id')->constrained('rooms');
-            $table->foreignId('roomtags_id')->constrained('roomtags');
+            $table->foreignId('rooms_id')->constrained('rooms')->onDelete('cascade');
+            $table->foreignId('roomtags_id')->constrained('roomtags')->onDelete('cascade');
             $table->timestamps();
         });
     }

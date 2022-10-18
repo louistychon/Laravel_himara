@@ -33,6 +33,14 @@ class GalleryImgController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'caption' => 'required',
+            'long_desc' => 'required',
+            'filtergalleries_id' => 'required|integer',
+            'src' => 'image | mimes:jpeg,png,jpg,gif',
+        ]);
+
+
             $store = new GalleryImg();
             $store->caption = $request->caption;
             $store->filtergalleries_id = $request->filtergalleries_id;

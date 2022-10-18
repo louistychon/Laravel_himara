@@ -15,10 +15,18 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('reservation_id');
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('rooms_id')->references('id')->on('rooms');
+            $table->foreignId('roomtype_id')->references('id')->on('room_types');
+            $table->integer('number_adults');
+            $table->integer('number_children');
             $table->string('date_start');
             $table->string('date_end');
+            $table->text('booking_comment')->nullable();
+            $table->string('country')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('name')->nullable();
             $table->timestamps();
         });
     }

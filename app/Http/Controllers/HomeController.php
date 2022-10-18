@@ -9,6 +9,7 @@ use App\Models\Hometext;
 use App\Models\Partner;
 use App\Models\Room;
 use App\Models\RoomService;
+use App\Models\RoomType;
 use App\Models\Service;
 use App\Models\Slider;
 use App\Models\Testimonial;
@@ -29,10 +30,11 @@ class HomeController extends Controller
         $hometext = Hometext::all();
         $testimonials = Testimonial::all();
         $rooms = Room::all()->sortByDesc('id')->take(3);
+        $roomtypes = RoomType::all();
 
         $dishescount = Dish::count();
 
-        return view('front.pages.home', ['dishes'=> Dish::paginate(4)], compact('dishes', 'galleryimgs', 'partners', 'services', 'blogpost', 'allslider', 'hometext', 'testimonials', 'rooms', 'dishescount'));
+        return view('front.pages.home', ['dishes'=> Dish::paginate(4)], compact('dishes', 'galleryimgs', 'partners', 'services', 'blogpost', 'allslider', 'hometext', 'testimonials', 'rooms', 'dishescount', 'roomtypes'));
     }
 
     public function index2(){
@@ -43,6 +45,34 @@ class HomeController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'title_intro' => 'required|max:100',
+            'title_card' => 'required',
+            'text_card' => 'required',
+            'title_rooms' => 'required|max:100',
+            'title_services' => 'required|max:100',
+            'title_gallery' => 'required|max:100',
+            'title_testimonial' => 'required|max:100',
+            'title_restaurant' => 'required|max:100',
+            'title_news' => 'required|max:100',
+            'title_contact1' => 'required|max:100',
+            'title_contact2' => 'required|max:100',
+            'text_intro' => 'required',
+            'under_title_intro' => 'required',
+            'under_title_rooms' => 'required',
+            'under_title_services' => 'required',
+            'under_title_gallery' => 'required',
+            'under_title_testimonial' => 'required',
+            'under_title_restaurant' => 'required',
+            'under_title_news' => 'required',
+            'under_title_contact1' => 'required',
+            'under_title_contact2' => 'required',
+            'button_contact' => 'required',
+            'video_link' => 'required',
+            'src' => 'image | mimes:jpeg,png,jpg,gif',
+        ]);
+
+
         $update = Hometext::first();
         $update->title_intro = $request->title_intro;
         $update->title_card = $request->title_card;
@@ -57,7 +87,6 @@ class HomeController extends Controller
         $update->title_contact1 = $request->title_contact1;
         $update->title_contact2 = $request->title_contact2;
         $update->text_intro = $request->text_intro;
-        $update->title_contact2 = $request->title_contact2;
         $update->under_title_intro = $request->under_title_intro;
         $update->under_title_rooms = $request->under_title_rooms;
         $update->under_title_services = $request->under_title_services;

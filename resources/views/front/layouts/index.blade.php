@@ -36,6 +36,7 @@
 
 <body>
     @include('front.components.preloader')
+    @include('front.layouts.flash')
     <div class="wrapper">
         @include('front.components.header')
         @yield('content')

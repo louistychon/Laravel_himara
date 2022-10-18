@@ -84,6 +84,22 @@ class RoomController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|unique:rooms|max:255',
+            'long_desc' => 'required',
+            'long_desc2' => 'required',
+            'roomtypes_id' => 'required',
+            'price' => 'required',
+            'discount' => 'required',
+            'max_guests' => 'required',
+            'sofa_bed' => 'required',
+            'king_bed' => 'required',
+            'surface' => 'required',
+            'src' => 'image | mimes:jpeg,png,jpg,gif',
+        ]);
+
+        $allrooms = Room::all();
+
         $store = new Room();
         $store->name = $request->name;
         $store->long_desc = $request->long_desc;
@@ -95,6 +111,11 @@ class RoomController extends Controller
         $store->max_guests = $request->max_guests;
         $store->price = $request->price;
         $store->discount = $request->discount;
+
+
+        if ($allrooms->count() >= 24) {
+            return redirect('/back/room/create')->with('warning', 'There are too many rooms');
+        }
 
         $store->save();
 
@@ -118,9 +139,9 @@ class RoomController extends Controller
             $newroomimg->src = $filenametostore;
             $newroomimg->room_id = $store->id;
             $newroomimg->save();
+            $store->imgs()->attach($newroomimg->id);
         }
 
-        $store->imgs()->attach($newroomimg->id);
 
         $checked = $request->input('tag');
         $store->tags()->sync($checked);
@@ -129,7 +150,8 @@ class RoomController extends Controller
         $checked2 = $request->input('services');
         $store->services()->sync($checked2);
 
-        return redirect()->back();
+
+        return redirect('/back/room/create')->with('success', 'room created successfully');
     }
 
     public function show($id)
@@ -154,6 +176,22 @@ class RoomController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|unique:rooms|max:255',
+            'long_desc' => 'required',
+            'long_desc2' => 'required',
+            'roomtypes_id' => 'required',
+            'price' => 'required',
+            'discount' => 'required',
+            'max_guests' => 'required',
+            'sofa_bed' => 'required',
+            'king_bed' => 'required',
+            'surface' => 'required',
+            'src' => 'image | mimes:jpeg,png,jpg,gif | max:20018',
+        ]);
+
+
+
         $update = Room::find($id);
         $update->name = $request->name;
         $update->long_desc = $request->long_desc;
@@ -208,6 +246,6 @@ class RoomController extends Controller
         Storage::delete('storage/room/thumbnail/' . $todelete->src);
         Storage::delete('storage/room/' . $todelete->src);
         $todelete->delete();
-        return redirect()->back();
+        return redirect('/back/room/create')->with('warning', 'room deleted successfully');
     }
 }

@@ -105,7 +105,8 @@
                 <div class="inner box-shadow-007">
                     <!-- ========== BOOKING NOTIFICATION ========== -->
                     <div id="booking-notification" class="notification"></div>
-                    <form id="booking-form">
+                    <form action="/booking/store" method="post">
+                        @csrf
                         <!-- NAME -->
                         <div class="row">
                             <div class="col-md-2">
@@ -116,7 +117,7 @@
                                             <i class="fa fa-info-circle"></i>
                                         </a>
                                     </label>
-                                    <input class="form-control" name="booking-name" type="text" data-trigger="hover"
+                                    <input class="form-control" name="name" type="text" data-trigger="hover"
                                         placeholder="Write Your Name"
                                         value="{{ Auth::user() ? Auth::user()->name : null }}">
                                 </div>
@@ -130,7 +131,7 @@
                                             <i class="fa fa-info-circle"></i>
                                         </a>
                                     </label>
-                                    <input class="form-control" name="booking-email" type="email"
+                                    <input class="form-control" name="email" type="email"
                                         placeholder="Write your Email"
                                         value="{{ Auth::user() ? Auth::user()->email : null }}"
                                         {{ Auth::user() ? 'disabled' : '' }}>
@@ -145,11 +146,11 @@
                                             <i class="fa fa-info-circle"></i>
                                         </a>
                                     </label>
-                                    <select class="form-control" name="booking-roomtype" title="Select Room Type"
+                                    <select class="form-control" name="roomtype_id" title="Select Room Type"
                                         data-header="Room Type">
-                                        <option value="Single">Single Room</option>
-                                        <option value="Double">Double Room</option>
-                                        <option value="Deluxe">Deluxe Room</option>
+                                        @foreach ($roomtypes as $roomtype)
+                                            <option value="{{ $roomtype->id }}">{{ $roomtype->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -163,7 +164,7 @@
                                             <i class="fa fa-info-circle"></i>
                                         </a>
                                     </label>
-                                    <input type="text" class="datepicker form-control" name="booking-date"
+                                    <input type="text" class="datepicker form-control" name="date_start"
                                         placeholder="Arrival & Departure" readonly="readonly">
                                 </div>
                             </div>
@@ -191,7 +192,7 @@
                                                 </label>
                                                 <div class="guests-button">
                                                     <div class="minus"></div>
-                                                    <input type="text" name="booking-adults" class="booking-guests"
+                                                    <input type="text" name="number_adults" class="booking-guests"
                                                         value="0">
                                                     <div class="plus"></div>
                                                 </div>
@@ -206,7 +207,7 @@
                                                 </label>
                                                 <div class="guests-button">
                                                     <div class="minus"></div>
-                                                    <input type="text" name="booking-children" class="booking-guests"
+                                                    <input type="text" name="number_children" class="booking-guests"
                                                         value="0">
                                                     <div class="plus"></div>
                                                 </div>
@@ -220,7 +221,7 @@
                                 @auth
                                     <button type="submit" class="btn btn-book">BOOK A ROOM</button>
                                     <div class="advanced-form-link">
-                                        <a href="booking-form.html">
+                                        <a href="{{route('booking')}}">
                                             Advanced Booking Form
                                         </a>
                                     </div>
@@ -305,302 +306,302 @@
                                             @if ($i >= 1)
                                             @break
                                         @endif
-                                        <img src="{{ asset('storage/room/thumbnail/' . $imgs->src) }}" class="img-fluid"
-                                            alt="Image">
+                                        <img src="{{ asset('storage/room/thumbnail/' . $imgs->src) }}"
+                                            class="img-fluid" alt="Image">
                                     @endforeach
                                 </a>
                                 <div class="room-services">
                                     @foreach ($room->services as $i => $service)
-                                    @if ($i >= 3)
+                                        @if ($i >= 3)
                                         @break
-                                        @endif
-                                        <i class="fa {{ $service->icon_classname }}" aria-hidden="true"
-                                            data-toggle="popover" data-placement="right" data-trigger="hover"
-                                            data-content="{{ $service->small_desc }}"
-                                            data-original-title="{{ $service->name }}"></i>
-                                    @endforeach
-                                </div>
-                                <div class="room-price">€{{ $room->price }} / night</div>
-                            </figure>
-                            <div class="room-info">
-                                <h2 class="room-title">
-                                    <a href="room.html">{{ $room->name }}</a>
-                                </h2>
-                                <p>Enjoy our {{ $room->type->name }}</p>
+                                    @endif
+                                    <i class="fa {{ $service->icon_classname }}" aria-hidden="true"
+                                        data-toggle="popover" data-placement="right" data-trigger="hover"
+                                        data-content="{{ $service->small_desc }}"
+                                        data-original-title="{{ $service->name }}"></i>
+                                @endforeach
                             </div>
+                            <div class="room-price">€{{ $room->price }} / night</div>
+                        </figure>
+                        <div class="room-info">
+                            <h2 class="room-title">
+                                <a href="room.html">{{ $room->name }}</a>
+                            </h2>
+                            <p>Enjoy our {{ $room->type->name }}</p>
                         </div>
                     </div>
-                @endforeach
+                </div>
+            @endforeach
 
-            </div>
         </div>
-    </section>
-    <!-- ========== SERVICES ========== -->
-    @if ($services->count() > 0)
-        <section class="services">
-            <div class="container">
-                <div class="section-title">
-                    <h4>{{ $text->title_services }}</span></h4>
-                    <p class="section-subtitle">{{ $text->under_title_services }}</p>
-                </div>
-                <div class="row">
-                    <div class="col-lg-7 col-12">
-                        <div data-slider-id="services" class="services-owl owl-carousel">
-                            @foreach ($services as $service)
-                                <figure class="gradient-overlay">
-                                    <img src="{{ asset('/storage/services/thumbnail/' . $service->src) }}"
-                                        class="img-fluid" alt="Image">
-                                    <figcaption>
-                                        <h4>{{ $service->name }}</h4>
-                                    </figcaption>
-                                </figure>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-12">
-                        <div class="owl-thumbs" data-slider-id="services">
-                            @foreach ($services as $service)
-                                <div class="owl-thumb-item">
-                                    <span class="media-left">
-                                        <i class="{{ $service->icon->src }}"></i>
-                                    </span>
-                                    <div class="media-body">
-                                        <h5>{{ $service->name }}</h5>
-                                        <p>{{ $service->short_desc }}</p>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    @else
-    @endif
-    <!-- ========== GALLERY ========== -->
-    @if ($galleryimgs->count() == 0)
-        <section class="gallery">
-            <div class="container">
-                <div class="section-title">
-                    <h4>{{ $text->title_gallery }}</h4>
-                    <p class="section-subtitle">{{ $text->under_title_gallery }}</p>
-                    <a href="{{ route('gallery') }}" class="view-all">View gallery images</a>
-                </div>
-                <div class="gallery-owl owl-carousel image-gallery">
-                    <!-- ITEM -->
-                    @foreach ($galleryimgs as $img)
-                        <div class="gallery-item">
-                            <figure class="gradient-overlay image-icon">
-                                <a href="{{ asset('/storage/gallery/thumbnail/' . $img->src) }}">
-                                    <img src="{{ asset('/storage/gallery/thumbnail/' . $img->src) }}" alt="Image">
-                                </a>
-                                <figcaption>{{ $img->caption }}</figcaption>
-                            </figure>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @else
-    @endif
-    <!-- ========== TESTIMONIALS ========== -->
-    <section class="testimonials gray">
+    </div>
+</section>
+<!-- ========== SERVICES ========== -->
+@if ($services->count() > 0)
+    <section class="services">
         <div class="container">
             <div class="section-title">
-                <h4>{{ $text->title_testimonial }}</h4>
+                <h4>{{ $text->title_services }}</span></h4>
                 <p class="section-subtitle">{{ $text->under_title_services }}</p>
             </div>
-            <div class="owl-carousel testimonials-owl">
-                <!-- ITEM -->
-                @foreach ($testimonials as $testimonial)
-                    <div class="item">
-                        <div class="testimonial-item">
-                            <div class="author-img">
-                                <img alt="Image" class="img-fluid"
-                                    src="{{ asset('storage/users/thumbnail/' . $testimonial->user->src) }}">
-                            </div>
-                            <div class="author">
-                                <h4 class="name">{{ $testimonial->user->name }}</h4>
-                                <div class="location">{{ $testimonial->user->country }} /
-                                    {{ $testimonial->user->city }}</div>
-                            </div>
-                            <div class="rating">
-                                @for ($i = 0; $i < $testimonial->rating; $i++)
-                                    <i class="fa fa-star voted" aria-hidden="true"></i>
-                                @endfor
-                            </div>
-                            <p>{{ $testimonial->text }}</p>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-        </div>
-    </section>
-    <!-- ========== RESTAURANT ========== -->
-    <section class="restaurant image-bg parallax gradient-overlay op5"
-        data-src="{{ asset('/storage/backgrounds/thumbnail/' . $text->background_image_restaurant) }}"
-        data-parallax="scroll" data-speed="0.3" data-mirror-selector=".wrapper" data-z-index="0">
-        <div class="container">
-            <div class="section-title">
-                <h4>{{ $text->title_restaurant }}</h4>
-                <p class="section-subtitle">{{ $text->under_title_restaurant }}</p>
-            </div>
             <div class="row">
-                <!-- ITEM -->
-                @foreach ($dishes as $dish)
-                    <div class="col-md-6 col-sm-6 col-6">
-                        <div class="restaurant-menu-item">
-                            <div class="row mt-4">
-                                <div class="col-lg-4 col-12">
-                                    <figure>
-                                        <img src="{{ asset('storage/dishes/thumbnail/' . $dish->src) }}"
-                                            class="img-fluid " alt="Image">
-                                    </figure>
-                                </div>
-                                <div class="col-lg-8 col-12">
-                                    <div class="info">
-                                        <div class="title">
-                                            <span class="name">{{ $dish->name }}</span>
-                                            <span class="price">
-                                                <span class="amount">{{ $dish->price }}€</span>
-                                            </span>
-                                        </div>
-                                        <p>{{ $dish->text }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            @if ($dishescount > 4)
-                <div class="row text-center d-block m-auto">
-                    <div class="text-black">{{ $dishes->links() }}</div>
-                </div>
-            @endif
-
-        </div>
-    </section>
-    <!-- ========== NEWS ==========-->
-    <section class="news">
-        <div class="container">
-            <div class="section-title">
-                <h4 class="title">{{ $text->title_news }}</h4>
-                <p class="section-subtitle">{{ $text->under_title_news }}</p>
-            </div>
-            <div class="row">
-                <!-- ITEM -->
-                @foreach ($blogpost as $new)
-                    <div class="col-md-4">
-                        <div class="news-grid-item">
-                            <figure class="gradient-overlay-hover link-icon">
-                                <a href="blog-post.html">
-                                    <img src="{{ asset('/storage/blog/thumbnail/' . $new->src) }}" class="img-fluid"
-                                        alt="Image">
-                                </a>
+                <div class="col-lg-7 col-12">
+                    <div data-slider-id="services" class="services-owl owl-carousel">
+                        @foreach ($services as $service)
+                            <figure class="gradient-overlay">
+                                <img src="{{ asset('/storage/services/thumbnail/' . $service->src) }}"
+                                    class="img-fluid" alt="Image">
+                                <figcaption>
+                                    <h4>{{ $service->name }}</h4>
+                                </figcaption>
                             </figure>
-                            <div class="news-info">
-                                <h4 class="title">
-                                    <a href="/blog/.{{$new->id}}">{{ $new->title }}</a>
-                                </h4>
-                                <p>{{ $new->long_desc }}</p>
-                                <div class="post-meta">
-                                    <span class="author">
-                                        <a href="#"><img
-                                                src="{{ asset('storage/users/thumbnail/' . $new->users->src) }}"
-                                                width="16" alt="Image">
-                                            {{ $new->users->name }}</a>
-                                    </span>
-                                    <span class="date">
-                                        <i class="fa fa-clock-o"></i>
-                                        {{ date('d-m-Y', strtotime($new->updated_at)) }}</span>
-                                    <span class="comments">
-                                        <a href="#">
-                                            <i class="fa fa-commenting-o"></i>
-                                            {{ $new->comments->count() }} Comment</a>
-                                    </span>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="col-lg-5 col-12">
+                    <div class="owl-thumbs" data-slider-id="services">
+                        @foreach ($services as $service)
+                            <div class="owl-thumb-item">
+                                <span class="media-left">
+                                    <i class="{{ $service->icon->src }}"></i>
+                                </span>
+                                <div class="media-body">
+                                    <h5>{{ $service->name }}</h5>
+                                    <p>{{ $service->short_desc }}</p>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@else
+@endif
+<!-- ========== GALLERY ========== -->
+@if ($galleryimgs->count() == 0)
+    <section class="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h4>{{ $text->title_gallery }}</h4>
+                <p class="section-subtitle">{{ $text->under_title_gallery }}</p>
+                <a href="{{ route('gallery') }}" class="view-all">View gallery images</a>
+            </div>
+            <div class="gallery-owl owl-carousel image-gallery">
+                <!-- ITEM -->
+                @foreach ($galleryimgs as $img)
+                    <div class="gallery-item">
+                        <figure class="gradient-overlay image-icon">
+                            <a href="{{ asset('/storage/gallery/thumbnail/' . $img->src) }}">
+                                <img src="{{ asset('/storage/gallery/thumbnail/' . $img->src) }}" alt="Image">
+                            </a>
+                            <figcaption>{{ $img->caption }}</figcaption>
+                        </figure>
                     </div>
                 @endforeach
             </div>
         </div>
     </section>
-    <!-- ========== VIDEO ========== -->
-    <section class="video np parallax gradient-overlay op6"
-        data-src="{{ asset('/storage/backgrounds/thumbnail/' . $text->background_image_video) }}"
-        data-parallax="scroll" data-speed="0.3" data-mirror-selector=".wrapper" data-z-index="0">
-        <div class="inner gradient-overlay">
-            <div class="container">
-                <div class="video-popup">
-                    <a class="popup-vimeo" href="{{ $text->video_link }}">
-                        <i class="fa fa-play"></i>
-                    </a>
-                </div>
-            </div>
+@else
+@endif
+<!-- ========== TESTIMONIALS ========== -->
+<section class="testimonials gray">
+    <div class="container">
+        <div class="section-title">
+            <h4>{{ $text->title_testimonial }}</h4>
+            <p class="section-subtitle">{{ $text->under_title_services }}</p>
         </div>
-    </section>
+        <div class="owl-carousel testimonials-owl">
+            <!-- ITEM -->
+            @foreach ($testimonials as $testimonial)
+                <div class="item">
+                    <div class="testimonial-item">
+                        <div class="author-img">
+                            <img alt="Image" class="img-fluid"
+                                src="{{ asset('storage/users/thumbnail/' . $testimonial->user->src) }}">
+                        </div>
+                        <div class="author">
+                            <h4 class="name">{{ $testimonial->user->name }}</h4>
+                            <div class="location">{{ $testimonial->user->country }} /
+                                {{ $testimonial->user->city }}</div>
+                        </div>
+                        <div class="rating">
+                            @for ($i = 0; $i < $testimonial->rating; $i++)
+                                <i class="fa fa-star voted" aria-hidden="true"></i>
+                            @endfor
+                        </div>
+                        <p>{{ $testimonial->text }}</p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+    </div>
+</section>
+<!-- ========== RESTAURANT ========== -->
+<section class="restaurant image-bg parallax gradient-overlay op5"
+    data-src="{{ asset('/storage/backgrounds/thumbnail/' . $text->background_image_restaurant) }}"
+    data-parallax="scroll" data-speed="0.3" data-mirror-selector=".wrapper" data-z-index="0">
+    <div class="container">
+        <div class="section-title">
+            <h4>{{ $text->title_restaurant }}</h4>
+            <p class="section-subtitle">{{ $text->under_title_restaurant }}</p>
+        </div>
+        <div class="row">
+            <!-- ITEM -->
+            @foreach ($dishes as $dish)
+                <div class="col-md-6 col-sm-6 col-6">
+                    <div class="restaurant-menu-item">
+                        <div class="row mt-4">
+                            <div class="col-lg-4 col-12">
+                                <figure>
+                                    <img src="{{ asset('storage/dishes/thumbnail/' . $dish->src) }}"
+                                        class="img-fluid " alt="Image">
+                                </figure>
+                            </div>
+                            <div class="col-lg-8 col-12">
+                                <div class="info">
+                                    <div class="title">
+                                        <span class="name">{{ $dish->name }}</span>
+                                        <span class="price">
+                                            <span class="amount">{{ $dish->price }}€</span>
+                                        </span>
+                                    </div>
+                                    <p>{{ $dish->text }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        @if ($dishescount > 4)
+            <div class="row text-center d-block m-auto">
+                <div class="text-black">{{ $dishes->links() }}</div>
+            </div>
+        @endif
 
-    <!-- ========== CONTACT V2 ========== -->
-    <section class="contact-v2 gray">
+    </div>
+</section>
+<!-- ========== NEWS ==========-->
+<section class="news">
+    <div class="container">
+        <div class="section-title">
+            <h4 class="title">{{ $text->title_news }}</h4>
+            <p class="section-subtitle">{{ $text->under_title_news }}</p>
+        </div>
+        <div class="row">
+            <!-- ITEM -->
+            @foreach ($blogpost as $new)
+                <div class="col-md-4">
+                    <div class="news-grid-item">
+                        <figure class="gradient-overlay-hover link-icon">
+                            <a href="blog-post.html">
+                                <img src="{{ asset('/storage/blog/thumbnail/' . $new->src) }}" class="img-fluid"
+                                    alt="Image">
+                            </a>
+                        </figure>
+                        <div class="news-info">
+                            <h4 class="title">
+                                <a href="/blog/.{{ $new->id }}">{{ $new->title }}</a>
+                            </h4>
+                            <p>{{ $new->long_desc }}</p>
+                            <div class="post-meta">
+                                <span class="author">
+                                    <a href="#"><img
+                                            src="{{ asset('storage/users/thumbnail/' . $new->users->src) }}"
+                                            width="16" alt="Image">
+                                        {{ $new->users->name }}</a>
+                                </span>
+                                <span class="date">
+                                    <i class="fa fa-clock-o"></i>
+                                    {{ date('d-m-Y', strtotime($new->updated_at)) }}</span>
+                                <span class="comments">
+                                    <a href="#">
+                                        <i class="fa fa-commenting-o"></i>
+                                        {{ $new->comments->count() }} Comment</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+<!-- ========== VIDEO ========== -->
+<section class="video np parallax gradient-overlay op6"
+    data-src="{{ asset('/storage/backgrounds/thumbnail/' . $text->background_image_video) }}"
+    data-parallax="scroll" data-speed="0.3" data-mirror-selector=".wrapper" data-z-index="0">
+    <div class="inner gradient-overlay">
         <div class="container">
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="section-title">
-                        <h4>{{ $text->title_contact1 }}</h4>
-                        <p class="section-subtitle">{{ $text->under_title_contact1 }}</p>
-                    </div>
-                    <ul class="contact-details">
-                        @foreach ($hotelinfo as $info)
-                            <li>
-                                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                {{ $info->address }}
-                            </li>
-                            <li>
-                                <i class="fa fa-phone" aria-hidden="true"></i>
-                                Phone: {{ $info->phone }}
-                            </li>
-                            <li>
-                                <i class="fa fa-fax"></i>
-                                Fax: {{ $info->phone }}
-                            </li>
-                            <li>
-                                <i class="fa fa-globe"></i>
-                                Web: {{ $info->website }}
-                            </li>
-                            <li>
-                                <i class="fa fa-envelope"></i>
-                                Email:
-                                <a href="mailto:{{ $info->email }}"> {{ $info->email }}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-                <div class="col-md-7">
-                    <div class="section-title">
-                        <h4>{{ $text->title_contact2 }}</h4>
-                        <p class="section-subtitle">{{ $text->under_title_contact2 }}</p>
-                    </div>
-                    <form id="contact-form" name="contact-form">
-                        <div class="form-group">
-                            <input class="form-control" name="name" placeholder="Your Name" type="text">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" name="email" type="email"
-                                placeholder="Your Email Address">
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" name="message" placeholder="Your Message"></textarea>
-                        </div>
-                        <button class="btn" type="submit">
-                            <i class="fa fa-location-arrow"></i>{{ $text->button_contact }}</button>
-                    </form>
-                </div>
+            <div class="video-popup">
+                <a class="popup-vimeo" href="{{ $text->video_link }}">
+                    <i class="fa fa-play"></i>
+                </a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- ========== CONTACT V2 ========== -->
+<section class="contact-v2 gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="section-title">
+                    <h4>{{ $text->title_contact1 }}</h4>
+                    <p class="section-subtitle">{{ $text->under_title_contact1 }}</p>
+                </div>
+                <ul class="contact-details">
+                    @foreach ($hotelinfo as $info)
+                        <li>
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            {{ $info->address }}
+                        </li>
+                        <li>
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            Phone: {{ $info->phone }}
+                        </li>
+                        <li>
+                            <i class="fa fa-fax"></i>
+                            Fax: {{ $info->phone }}
+                        </li>
+                        <li>
+                            <i class="fa fa-globe"></i>
+                            Web: {{ $info->website }}
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope"></i>
+                            Email:
+                            <a href="mailto:{{ $info->email }}"> {{ $info->email }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="col-md-7">
+                <div class="section-title">
+                    <h4>{{ $text->title_contact2 }}</h4>
+                    <p class="section-subtitle">{{ $text->under_title_contact2 }}</p>
+                </div>
+                <form id="contact-form" name="contact-form">
+                    <div class="form-group">
+                        <input class="form-control" name="name" placeholder="Your Name" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" name="email" type="email"
+                            placeholder="Your Email Address">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" name="message" placeholder="Your Message"></textarea>
+                    </div>
+                    <button class="btn" type="submit">
+                        <i class="fa fa-location-arrow"></i>{{ $text->button_contact }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 @endforeach
 @endsection

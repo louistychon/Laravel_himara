@@ -21,7 +21,7 @@
                        Message
                     </th>
                     <th scope="col" class="py-3 px-6">
-                        Edit from
+                        View
                     </th>
                     <th scope="col" class="py-3 px-6">
                         Delete

@@ -119,10 +119,13 @@ Route::controller(BlogController::class)->group(function () {
     Route::get('search', 'searcharticle')->name('blogsearch');
 });
 
+//booking
 
-//booking-form
+Route::controller(BookingController::class)->group(function () {
+    Route::get('/booking-form','index')->name('booking');
+    Route::post('/booking/store', 'store');
+});
 
-Route::get('/booking-form', [BookingController::class, 'index'])->name('booking');
 
 //room
 Route::controller(RoomController::class)->group(function () {
@@ -133,6 +136,7 @@ Route::controller(RoomController::class)->group(function () {
     Route::get('/back/room/{id}/show', 'show');
     Route::post('/back/room/create', 'store');
     Route::put('/back/room/{id}/update', 'update');
+    Route::delete('/back/room/{id}/delete', 'destroy');
 });
 
 //staff
@@ -178,3 +182,5 @@ Route::controller(MailController::class)->group(function () {
     Route::get('/mail/register', 'subscription')->name('subscription');
     Route::get('/mail/reservation', 'reservation')->name('reservation');
 });
+
+

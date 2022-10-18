@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('room_roomservices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rooms_id')->references('id')->on('rooms');
-            $table->foreignId('room_services_id')->references('id')->on('room_services');
+            $table->foreignId('rooms_id')->references('id')->on('rooms')->onDelete('cascade');
+            $table->foreignId('room_services_id')->references('id')->on('room_services')->onDelete('cascade');
             $table->timestamps();
         });
     }

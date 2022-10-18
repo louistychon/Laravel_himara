@@ -17,16 +17,32 @@ class BookingSeeder extends Seeder
     {
         DB::table('bookings')->insert([
             [
+                'reservation_id' => rand(1008158585, 2500000000),
                 'user_id' => 1,
-                'rooms_id' => 1,
-                'date_start' => '20/10/22',
-                'date_end' => '21/10/22',
+                'roomtype_id' => 1,
+                'number_adults' => 2,
+                'number_children' => 1,
+                'date_start' => '20-10-2022',
+                'date_end' => '21-10-2022',
+                'booking_comment' => '',
+                'name' => '',
+                'country' => '',
+                'phone' => '',
+                'email' => '',
             ],
             [
+                'reservation_id' => rand(1008158585, 2500000000),
                 'user_id' => 2,
-                'rooms_id' => 4,
-                'date_start' => '20/10/22',
-                'date_end' => '21/10/22',
+                'roomtype_id' => 4,
+                'number_adults' => 2,
+                'number_children' => 1,
+                'date_start' => '20-10-2022',
+                'date_end' => '21-10-2022',
+                'booking_comment' => '',
+                'name' => '',
+                'country' => '',
+                'phone' => '',
+                'email' => '',
             ],
         ]);
     }

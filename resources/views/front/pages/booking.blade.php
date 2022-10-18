@@ -16,32 +16,33 @@
                         recusandae perferendis modi voluptate, ad ratione saepe voluptas nam provident reiciendis velit
                         nulla repellendus illo consequuntur amet similique hic.</p>
                     <!-- BOOKING FORM -->
-                    <form class="booking-form-advanced" id="booking-form">
+                    <form class="booking-form-advanced" action="booking/store" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Your Name</label>
-                                    <input name="booking-name" type="text" class="form-control" placeholder="Your Name">
+                                    <input name="name" type="text" class="form-control" placeholder="Your Name" value="{{Auth::user()->name}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Email Address</label>
-                                    <input class="form-control" name="booking-email" type="email"
-                                        placeholder="Your Email Address">
+                                    <input class="form-control" name="email" type="email"
+                                        placeholder="Your Email Address" value="{{Auth::user()->email}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Phone Number</label>
-                                    <input name="booking-phone" type="text" class="form-control"
+                                    <input name="phone" type="text" class="form-control"
                                         placeholder="Your Phone Number">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Country</label>
-                                    <select name="booking-country" class="form-control" title="Select Your Country"
+                                    <select name="country" class="form-control" title="Select Your Country"
                                         data-header="Select Your Country" data-live-search="true" data-size="5">
                                         <option value="Afganistan">Afghanistan</option>
                                         <option value="Albania">Albania</option>
@@ -302,7 +303,7 @@
                                             <i class="fa fa-info-circle"></i>
                                         </a>
                                     </label>
-                                    <input type="text" class="datepicker form-control " name="booking-date"
+                                    <input type="text" class="datepicker form-control " name="date_start"
                                         readonly="readonly">
                                 </div>
                             </div>
@@ -329,7 +330,7 @@
                                                 </label>
                                                 <div class="guests-button">
                                                     <div class="minus"></div>
-                                                    <input type="text" name="booking-adults" class="booking-guests"
+                                                    <input type="text" name="number_adults" class="booking-guests"
                                                         value="0">
                                                     <div class="plus"></div>
                                                 </div>
@@ -344,7 +345,7 @@
                                                 </label>
                                                 <div class="guests-button">
                                                     <div class="minus"></div>
-                                                    <input type="text" name="booking-children" class="booking-guests"
+                                                    <input type="text" name="number_children" class="booking-guests"
                                                         value="0">
                                                     <div class="plus"></div>
                                                 </div>
@@ -356,24 +357,18 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Room Type</label>
-                                    <select name="booking-roomtype" class="form-control" title="Select Room Type"
+                                    <select name="roomtype_id" class="form-control" title="Select Room Type"
                                         data-header="Select Room Type">
-                                        <option value="Single Room"
-                                            data-subtext="<span class='badge badge-info'>€89 / night</span>">Single Room
-                                        </option>
-                                        <option value="Double Room"
-                                            data-subtext="<span class='badge badge-info'>€129 / night</span>">Double Room
-                                        </option>
-                                        <option value="Deluxe Room"
-                                            data-subtext="<span class='badge badge-info'>€89 / night</span>">Deluxe Room
-                                        </option>
+                                        @foreach ($roomtypes as $roomtype)
+                                            <option value="{{ $roomtype->id }}"  data-subtext="<span class='badge badge-info'>€{{ $roomtype->min_price }} / night</span>" >{{ $roomtype->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Your Comments</label>
-                                    <textarea class="form-control" name="booking-comments" placeholder="Your Comments..."></textarea>
+                                    <textarea class="form-control" name="booking_comment" placeholder="Your Comments..."></textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -385,7 +380,7 @@
                                 @else
                                     <button type="submit" class="btn mt50 float-right">
                                         <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                        hello
+                                       Log in first
                                     </button>
                                 @endif
                             </div>

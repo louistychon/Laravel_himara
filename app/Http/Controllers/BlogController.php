@@ -66,6 +66,12 @@ class BlogController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|unique:articles|max:255',
+            'long_desc' => 'required',
+            'categorie_id' => 'required|integer',
+            'src' => 'image | mimes:jpeg,png,jpg,gif',
+        ]);
 
         $store = new Article();
         $store->title = $request->title;
