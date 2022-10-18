@@ -95,7 +95,7 @@ class RoomController extends Controller
             'sofa_bed' => 'required',
             'king_bed' => 'required',
             'surface' => 'required',
-            'src' => 'image | mimes:jpeg,png,jpg,gif',
+            'src' => 'image | mimes:jpeg,png,jpg,gif | required',
         ]);
 
         $allrooms = Room::all();
@@ -187,7 +187,7 @@ class RoomController extends Controller
             'sofa_bed' => 'required',
             'king_bed' => 'required',
             'surface' => 'required',
-            'src' => 'image | mimes:jpeg,png,jpg,gif | max:20018',
+            'src' => 'image | mimes:jpeg,png,jpg,gif | required',
         ]);
 
 

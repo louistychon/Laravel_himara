@@ -70,7 +70,7 @@ class BlogController extends Controller
             'title' => 'required|unique:articles|max:255',
             'long_desc' => 'required',
             'categorie_id' => 'required|integer',
-            'src' => 'image | mimes:jpeg,png,jpg,gif',
+            'src' => 'image | mimes:jpeg,png,jpg,gif | required',
         ]);
 
         $store = new Article();

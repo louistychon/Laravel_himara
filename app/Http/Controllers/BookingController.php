@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ReservationConfirmed;
+use App\Mail\SubscriptionConfirmed;
 use App\Models\Booking;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
 {
@@ -30,6 +33,18 @@ class BookingController extends Controller
         $store->phone = $request->phone;
         $store->booking_comment = $request->booking_comment;
         $store->save();
+
+        $bookinginfo = ['name' => $request->get('name'),
+        'email' => $request->get('email'),
+        'date_start' => $store['date_start'],
+        'date_end' => $store['date_end'],
+        'number_adults' => $request->get('number_adults'),
+        'number_children' => $request->get('number_children'),
+        'phone' => $request->get('phone'),
+        'booking_comment' => $request->get('booking_comment'),
+        'reservation_id' => $store['reservation_id'],];
+
+        Mail::to('louis.tychon1@gmail.com')->send(new ReservationConfirmed($bookinginfo));
 
         return redirect('/')->with('success', 'Check your email, we will get back to you soon');
     }

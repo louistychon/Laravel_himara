@@ -8,12 +8,10 @@ use App\Models\GalleryImg;
 use App\Models\Hometext;
 use App\Models\Partner;
 use App\Models\Room;
-use App\Models\RoomService;
 use App\Models\RoomType;
 use App\Models\Service;
 use App\Models\Slider;
 use App\Models\Testimonial;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -46,28 +44,28 @@ class HomeController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'title_intro' => 'required|max:100',
+            'title_intro' => 'required|max:200',
             'title_card' => 'required',
             'text_card' => 'required',
-            'title_rooms' => 'required|max:100',
-            'title_services' => 'required|max:100',
-            'title_gallery' => 'required|max:100',
-            'title_testimonial' => 'required|max:100',
-            'title_restaurant' => 'required|max:100',
-            'title_news' => 'required|max:100',
-            'title_contact1' => 'required|max:100',
-            'title_contact2' => 'required|max:100',
+            'title_rooms' => 'required|max:200',
+            'title_services' => 'required|max:200',
+            'title_gallery' => 'required|max:200',
+            'title_testimonial' => 'required|max:200',
+            'title_restaurant' => 'required|max:200',
+            'title_news' => 'required|max:200',
+            'title_contact1' => 'required|max:200',
+            'title_contact2' => 'required|max:200',
             'text_intro' => 'required',
-            'under_title_intro' => 'required',
-            'under_title_rooms' => 'required',
-            'under_title_services' => 'required',
-            'under_title_gallery' => 'required',
-            'under_title_testimonial' => 'required',
-            'under_title_restaurant' => 'required',
-            'under_title_news' => 'required',
-            'under_title_contact1' => 'required',
-            'under_title_contact2' => 'required',
-            'button_contact' => 'required',
+            'under_title_intro' => 'required|max:200',
+            'under_title_rooms' => 'required|max:200',
+            'under_title_services' => 'required|max:200',
+            'under_title_gallery' => 'required|max:200',
+            'under_title_testimonial' => 'required|max:200',
+            'under_title_restaurant' => 'required|max:200',
+            'under_title_news' => 'required|max:200',
+            'under_title_contact1' => 'required|max:200',
+            'under_title_contact2' => 'required|max:200',
+            'button_contact' => 'required|max:100',
             'video_link' => 'required',
             'src' => 'image | mimes:jpeg,png,jpg,gif',
         ]);

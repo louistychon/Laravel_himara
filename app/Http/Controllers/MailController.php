@@ -42,19 +42,21 @@ class MailController extends Controller
 
     public function subscription(Request $request)
     {
-        $store = new mails();
-        $store->name = $request->name;
-        $store->email = $request->email;
-        $store->subject = $request->subject;
-        $store->phone = $request->phone;
-        $store->message = $request->message;
-        $store->save();
+        $maildatassubscription = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'city' => $request->city,
+            'country' => $request->country,
+          ];
+
+        Mail::to('louis.tychon1@gmail.com')->send(new SubscriptionConfirmed($maildatassubscription));
+
 
     }
 
     public function reservation()
     {
-        // Mail::to('louis.tychon1@gmail.com')->send(new ReservationConfirmed());
+        //
     }
 
 

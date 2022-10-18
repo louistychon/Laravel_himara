@@ -1,33 +1,20 @@
 @component('mail::message')
-HOTEL HIMARA
+<p>
+    <h3>HOTEL HIMARA</h3>
+    New Reservation !
+    Reservation Details:<br/>
+    Booking ID : {{$data2['reservation_id']}} <br/>
+    Name :	{{$data2['name']}}<br/>
+   @if($data2['email'] != null) Email :	{{$data2['email']}}<br/>@endif
+   @if($data2['phone'] != null) Phone : {{$data2['phone']}}<br/>@endif
+    Adults : {{$data2['number_adults']}}<br/>
+    Children : {{$data2['number_adults']}}<br/>
+    Arrival : {{$data2['date_start']}}<br/>
+    Departure : {{$data2['date_end']}}<br/>
+    @if($data2['phone'] != null) Comments :  {{$data2['booking_comment'] }}<br/>@endif
 
-Reservation Details
-
-
-Hello Louis Tychon,
-
-your reservation has been submitted to us and we'll contact you as quickly as possible to complete your booking. If you have any question please don't hesitate to contact us via email louis.himara@gmail.com or via phone number +1 888 123 4567.
-
-
-Reservation Details:
-Booking ID	16660800251256319425
-Name	Louis Tychon
-Email	louis.tychon1@gmail.com
-Phone
-Room Type	Single
-Adults	2
-Children	1
-Arrival	18-10-2022
-Departure	23-10-2022
-Country
-Comments
-
-
-Thank You,
-Hotel Himara
-
-
-Thanks,
-
+    Thank You,
+    Hotel Himara
+</p>
 
 @endcomponent

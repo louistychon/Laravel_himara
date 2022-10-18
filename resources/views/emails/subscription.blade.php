@@ -1,15 +1,12 @@
 @component('mail::message')
+    <p>Thanks for creating your account with the following details :
 
-New customer account !
-
-{{$data3['name']}}
-{{$data3['city']}}
-{{$data3['country']}}
-{{$data3['email']}}
-
-@component('mail::button', ['url' => 'localhost:8000'])
-Back on Himara
-@endcomponent
-
-
+        {{ $data3['name'] }} <br />
+        {{ $data3['city'] }} <br />
+        {{ $data3['country'] }}<br />
+        {{ $data3['email'] }}<br />
+    </p>
+    @component('mail::button', ['url' => 'localhost:8000'])
+        Back on Himara
+    @endcomponent
 @endcomponent
