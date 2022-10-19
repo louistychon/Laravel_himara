@@ -18,6 +18,11 @@ use Intervention\Image\Facades\Image;
 class BlogController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'index2', 'searcharticle']);
+    }
+
     public function index(Request $request)
     {
         $tags = Tags::all();

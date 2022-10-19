@@ -18,6 +18,11 @@ use Intervention\Image\Facades\Image;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index']);
+    }
+
     public function index(){
         $allslider = Slider::orderBy('place')->get();
         $dishes = Dish::all();

@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
 {
+
+
+    
     public function index(){
         $roomtypes = RoomType::all();
         return view('front.pages.booking', compact('roomtypes'));

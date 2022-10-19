@@ -12,11 +12,11 @@ use Intervention\Image\Facades\Image;
 
 class ServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $allservices = Service::all();
@@ -71,10 +71,6 @@ class ServiceController extends Controller
         $icons = Icon::all();
         $show = Service::find($id);
         return view('back.pages.services.show', compact('show', 'icons'));
-    }
-
-    public function edit()
-    {
     }
 
     public function update(Request $request, $id)

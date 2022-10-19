@@ -20,6 +20,11 @@ use Intervention\Image\Facades\Image;
 class RoomController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['indexall']);
+    }
+
     public function indexall()
     {
         $allrooms = Room::all();

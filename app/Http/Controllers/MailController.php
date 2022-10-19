@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Mail;
 
 class MailController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['mailcontact']);
+    }
+
     public function index(){
         $allmails = mails::all();
         return view('back.pages.mails.index', compact('allmails'));

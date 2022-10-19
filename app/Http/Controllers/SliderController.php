@@ -10,6 +10,11 @@ use Intervention\Image\Facades\Image;
 class SliderController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $allslider = Slider::orderBy('place')->get();
@@ -21,7 +26,6 @@ class SliderController extends Controller
 
         return view('back.pages.slider.create');
     }
-
 
     public function store(Request $request)
     {
@@ -61,10 +65,6 @@ class SliderController extends Controller
         $slides = Slider::all();
         $show = Slider::find($id);
         return view('back.pages.slider.show', compact('show', 'slides'));
-    }
-
-    public function edit()
-    {
     }
 
     public function update(Request $request, $id)

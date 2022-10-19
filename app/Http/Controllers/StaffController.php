@@ -10,6 +10,11 @@ use Intervention\Image\Facades\Image;
 
 class StaffController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index']);
+    }
+
     public function index()
     {
         $showceo = Staff::all()->where('id', '=', 1);

@@ -12,6 +12,10 @@ use Intervention\Image\Facades\Image;
 
 class GalleryImgController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index']);
+    }
 
     public function index(){
         $allimgs = GalleryImg::all();

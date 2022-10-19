@@ -9,6 +9,10 @@ use Intervention\Image\Facades\Image;
 
 class RestaurantController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index(){
         $alldishes = Dish::all();
