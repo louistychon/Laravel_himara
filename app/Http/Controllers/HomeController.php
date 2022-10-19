@@ -71,7 +71,7 @@ class HomeController extends Controller
             'under_title_contact1' => 'required|max:200',
             'under_title_contact2' => 'required|max:200',
             'button_contact' => 'required|max:100',
-            'video_link' => 'required',
+            'video_link' => 'required|max:100',
             'src' => 'image | mimes:jpeg,png,jpg,gif',
         ]);
 

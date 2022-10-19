@@ -14,7 +14,7 @@ class BookingController extends Controller
 {
 
 
-    
+
     public function index(){
         $roomtypes = RoomType::all();
         return view('front.pages.booking', compact('roomtypes'));
@@ -22,6 +22,11 @@ class BookingController extends Controller
 
     public function store(Request $request){
         $arr = explode(" - ", $request->date_start, 2);
+
+        $request->validate([
+            'number_adults' => 'required|integer|max:8',
+            'number_children' => 'required|integer|max:8',
+        ]);
 
         $store = new Booking();
         $store->date_start = $arr[0];
