@@ -18,18 +18,25 @@ class UserController extends Controller
 
     public function index()
     {
+        $this->middleware('isModerator');
+
         $allusers = User::all();
         return view('back.pages.users.index', compact('allusers'));
     }
 
     public function create()
     {
+        $this->middleware('isAdmin');
+
+
         $roles = Role::all();
         return view('back.pages.users.create', compact('roles'));
     }
 
     public function store(Request $request)
     {
+        $this->middleware('isAdmin');
+
         $store = new User;
         $store->name = $request->name;
         $store->email = $request->email;
@@ -66,6 +73,9 @@ class UserController extends Controller
 
     public function show($id)
     {
+        $this->middleware('isAdmin');
+
+
         $show = User::find($id);
         $roles = Role::all();
         return view('back.pages.users.show', compact('show', 'roles'));
@@ -73,12 +83,17 @@ class UserController extends Controller
 
     public function edit()
     {
+        $this->middleware('isAdmin');
+
         $allusers = User::all();
         return view('back.pages.users.edit', compact('allusers'));
     }
 
     public function update(Request $request, $id)
     {
+        $this->middleware('isAdmin');
+
+
         $update = User::find($id);
         $update->name = $request->name;
         $update->email = $request->email;
@@ -113,6 +128,8 @@ class UserController extends Controller
 
     public function destroy($id)
     {
+        $this->middleware('isAdmin');
+
         $todelete = User::find($id);
         Storage::delete('storage/users/thumbnail/' . $todelete->src);
         Storage::delete('storage/users/' . $todelete->src);

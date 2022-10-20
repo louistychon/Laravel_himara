@@ -13,7 +13,7 @@ class MailController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['mailcontact']);
+        $this->middleware(['auth', 'isModerator'])->except(['mailcontact']);
     }
 
     public function index(){

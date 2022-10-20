@@ -22,7 +22,7 @@ class RoomController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except(['indexall']);
+        $this->middleware(['auth', 'isEditor'])->except(['indexall']);
     }
 
     public function indexall()
