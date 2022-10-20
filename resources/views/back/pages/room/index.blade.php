@@ -14,6 +14,9 @@
                         Name
                     </th>
                     <th scope="col" class="py-3 px-6">
+                        Validated ?
+                    </th>
+                    <th scope="col" class="py-3 px-6">
                         Text
                     </th>
                     <th scope="col" class="py-3 px-6">
@@ -40,6 +43,10 @@
                         </td>
                         <td class="py-4 px-6">
                             {{ $rooms->name }}
+                        </td>
+
+                        <td class="py-4 px-6">
+                            {{$rooms->show == 1 ? 'Validated' : 'To validate' }}
                         </td>
                         <td class="py-4 px-6">
                             {{ $rooms->text }}

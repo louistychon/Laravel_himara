@@ -21,8 +21,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        FacadesGate::define('isCurrentUser', function (User $user) {
-            return Auth::user()->id === $user->id;
+        FacadesGate::define('isCurrentUser', function (User $user, User $users) {
+            return $user->id == $users->id;
+        });
+
+        FacadesGate::define('isAdmin', function (User $user, User $users) {
+            return $user->roles_id === 1;
         });
     }
 }

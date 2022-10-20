@@ -22,6 +22,12 @@ class MailController extends Controller
     }
 
 
+    public function index2(){
+        $allmails = mails::all();
+        return view('back.pages.mails.index', compact('allmails'));
+    }
+
+
     public function mailcontact(Request $request)
     {
         $store = new mails();

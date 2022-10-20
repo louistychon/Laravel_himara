@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Roomtodelete;
+use App\Mail\Roomtostores;
+use App\Mail\Roomtoupdate;
 use App\Models\Room;
 use App\Models\Room_roomservices;
 use App\Models\Room_tags;
@@ -13,6 +16,8 @@ use App\Models\Service;
 use App\Models\Testimonial;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
@@ -89,6 +94,7 @@ class RoomController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required|unique:rooms|max:255',
             'long_desc' => 'required',
@@ -107,6 +113,7 @@ class RoomController extends Controller
 
         $store = new Room();
         $store->name = $request->name;
+        $store->user_id = Auth::user()->id;
         $store->long_desc = $request->long_desc;
         $store->long_desc2 = $request->long_desc2;
         $store->roomtypes_id = $request->roomtypes_id;
@@ -122,6 +129,13 @@ class RoomController extends Controller
             return redirect('/back/room/create')->with('warning', 'There are too many rooms');
         }
 
+        if (Auth::user()->roles->id > 2) {
+            $store->show = 0;
+            $roominfo = ['name' => $request->get('name')];
+            Mail::to('louis.tychon1@gmail.com')->send(new Roomtostores($roominfo));
+        }else{
+            $store->show = 1;
+        }
         $store->save();
 
         if ($request->hasFile('src')) {
@@ -182,7 +196,7 @@ class RoomController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|unique:rooms|max:255',
+            'name' => 'required|max:255',
             'long_desc' => 'required',
             'long_desc2' => 'required',
             'roomtypes_id' => 'required',
@@ -192,13 +206,16 @@ class RoomController extends Controller
             'sofa_bed' => 'required',
             'king_bed' => 'required',
             'surface' => 'required',
-            'src' => 'image | mimes:jpeg,png,jpg,gif | required',
+            'src' => 'image | mimes:jpeg,png,jpg,gif',
         ]);
 
 
 
         $update = Room::find($id);
         $update->name = $request->name;
+        $update->user_id = Auth::user()->id;
+
+
         $update->long_desc = $request->long_desc;
         $update->long_desc2 = $request->long_desc2;
         $update->roomtypes_id = $request->roomtypes_id;
@@ -242,15 +259,33 @@ class RoomController extends Controller
         $checked2 = $request->input('services');
         $update->services()->sync($checked2);
 
+        if (Auth::user()->roles->id > 2) {
+            $update->show = 0;
+            $roominfo = ['name' => $update['name']];
+            Mail::to('louis.tychon1@gmail.com')->send(new Roomtoupdate($roominfo));
+            return redirect('/back/room')->with('warning', 'your modifications are submitted and waiting for moderation');
+        }else{
+            $update->show = 1;
+        }
+
         return redirect()->back();
     }
 
     public function destroy($id)
     {
+
         $todelete = Room::find($id);
-        Storage::delete('storage/room/thumbnail/' . $todelete->src);
-        Storage::delete('storage/room/' . $todelete->src);
-        $todelete->delete();
-        return redirect('/back/room/create')->with('warning', 'room deleted successfully');
+        if (Auth::user()->roles->id > 2) {
+            $todelete->todelete = 1;
+            $roominfo = ['name' => $todelete['name']];
+            Mail::to('louis.tychon1@gmail.com')->send(new Roomtodelete($roominfo));
+            return redirect('/back/room')->with('warning', 'waiting approval to delete room');
+        }
+        else {
+            Storage::delete('storage/room/thumbnail/' . $todelete->src);
+            Storage::delete('storage/room/' . $todelete->src);
+            $todelete->delete();
+            return redirect('/back/room/create')->with('warning', 'room deleted successfully');
+        }
     }
 }

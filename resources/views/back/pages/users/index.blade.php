@@ -56,19 +56,27 @@
                             {{ $user->roles->name }}
                         </td>
                         <td class="py-4 px-6">
+                            @if(Auth::user()->roles_id == 1)
                             <a href="/back/users/{{ $user->id }}/show">
                                 <button type="button"
                                     class="btn-logout font-medium text-sm px-5 py-2.5 mr-2 mb-2 rounded-lg">Edit</button>
                             </a>
+                            @elseif($user->id == Auth::user()->id)
+                            <a href="/back/users/{{ $user->id }}/show">
+                                <button type="button"
+                                    class="btn-logout font-medium text-sm px-5 py-2.5 mr-2 mb-2 rounded-lg">Edit</button>
+                            </a>
+                            @endif
                         </td>
                         <td class="py-4 px-6">
-                            @if($user->id != Auth::user()->id)
+                            @if($user->id != Auth::user()->id && Auth::user()->roles_id === 1)
                             <form action="/back/users/{{ $user->id }}/delete" method="post">
                                 @csrf
                                 @method('delete')
                                 <button type="submit"
                                     class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Delete</button>
                             </form>
+
                             @endif
                         </td>
                     </tr>

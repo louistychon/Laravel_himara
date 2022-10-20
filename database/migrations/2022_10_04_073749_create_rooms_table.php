@@ -17,6 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('roomtypes_id')->references('id')->on('room_types');
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->boolean('show');
+            $table->boolean('todelete');
             $table->integer('king_bed');
             $table->integer('sofa_bed');
             $table->integer('max_guests');

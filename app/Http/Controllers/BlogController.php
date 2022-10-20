@@ -20,7 +20,7 @@ class BlogController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'isModerator'])->except(['index', 'index2', 'searcharticle']);
+        $this->middleware(['auth', 'isModerator'])->except(['index', 'searcharticle']);
     }
 
     public function index(Request $request)

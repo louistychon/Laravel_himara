@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('reservation_id');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('roomtype_id')->references('id')->on('room_types')->onDelete('cascade');
+            $table->foreignId('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->integer('number_adults');
             $table->integer('number_children');
             $table->string('date_start');

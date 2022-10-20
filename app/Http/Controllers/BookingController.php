@@ -13,7 +13,10 @@ use Illuminate\Support\Facades\Mail;
 class BookingController extends Controller
 {
 
-
+    public function dashboard(){
+        $bookings = Booking::all();
+        return view('back.pages.dashboard', compact('bookings'));
+    }
 
     public function index(){
         $roomtypes = RoomType::all();

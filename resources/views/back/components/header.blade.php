@@ -92,7 +92,7 @@
                                 <a href="{{route('staffback')}}" class="block py-2 px-4 uppercase">Team</a>
                             </li>
                             <li class="dropdown_item">
-                                <a href="{{route('contactback')}}" class="block py-2 px-4 uppercase">Contact</a>
+                                <a href="{{route('mails')}}" class="block py-2 px-4 uppercase">Contact</a>
                             </li>
                         </ul>
                     </div>

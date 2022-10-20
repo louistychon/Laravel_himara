@@ -1,16 +1,12 @@
 @component('mail::message')
-    New contact request from : {{ $data['name'] }}.
-
-    Details of the request :
-    Email: {{ $data['email'] }} @php
-        echo "\n";
-    @endphp
-    Phone: {{ $data['phone'] }}@php
-        echo "\n";
-    @endphp
-    Subject: {{ $data['subject'] }}
-    Message: {{ $data['message'] }}
-
+<p>
+    New contact request from : {{ $data['name'] }}.<br/>
+    Details of the request : <br/>
+    Email: {{ $data['email'] }} <br/>
+    Phone: {{ $data['phone'] }} <br/>
+    Subject: {{ $data['subject'] }} <br/>
+    Message: {{ $data['message'] }} <br/>
+</p>
     @component('mail::button', ['url' => 'http://localhost:8000'])
         Back to website
     @endcomponent

@@ -31,7 +31,7 @@
                 @foreach ($alldishes as $dishes)
                     <tr class="">
                         <td class="py-4 px-6">
-                            <img class="img-responsive" src="{{asset('storage/dishes/'. $dishes->src)}}">
+                            <img class="img-responsive" src="{{asset('storage/dishes/thumbnail/'. $dishes->src)}}">
                         </td>
                         <td class="py-4 px-6">
                             {{ $dishes->name }}

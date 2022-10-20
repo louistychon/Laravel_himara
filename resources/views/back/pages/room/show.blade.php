@@ -90,6 +90,14 @@
                 </div>
             @endforeach
         </div>
+
+        <div class="mb-6">
+            <label for="show" class="block mb-2 text-sm font-medium">Validated ? </label>
+            <input type="checkbox" class="focus:ring-0" id="show"
+            name="show" value="{{ $show->show }}" @if($show->show == 1) checked @endif>
+        </div>
+
+
         <button type="submit" class="btn-logout font-medium text-sm px-5 py-2.5 mr-2 mb-2">Confirm modifications</button>
     </form>
 @endsection

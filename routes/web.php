@@ -18,9 +18,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/dashboard', function () {
-    return view('back.pages.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard',[BookingController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
 
@@ -36,11 +34,11 @@ Route::controller(HotelInfoController::class)->group(function () {
 //users
 
 Route::controller(UserController::class)->group(function () {
-    Route::get('/back/users', 'index')->name("users");
+    Route::get('/back/users', 'index')->middleware('isModerator')->name("users");
     Route::get('/back/users/create', 'create')->middleware('isAdmin')->name("userscreate");
-    Route::get('/back/users/{id}/show', 'show')->middleware('isAdmin');
+    Route::get('/back/users/{id}/show', 'show')->middleware('isModerator');
     Route::post('/back/users/create', 'store')->middleware('isAdmin');
-    Route::put('/back/users/{id}/update', 'update')->middleware('isAdmin');
+    Route::put('/back/users/{id}/update', 'update')->middleware('isModerator');
     Route::delete('/back/users/{id}/delete', 'destroy')->middleware('isAdmin');
 });
 
@@ -162,22 +160,19 @@ Route::controller(GalleryImgController::class)->group(function () {
     Route::delete('/gallery/{id}/delete', 'destroy');
 });
 
-//contact
+//contact frontend
+
 Route::controller(ContactController::class)->group(function () {
     Route::get('/contact', 'index')->name('contact');
-    Route::get('/back/contact', 'index2')->name("contactback");
-    Route::get('/back/contact/create', 'create')->name("contactcreate");
-    Route::get('/back/contact/{id}/show', 'show');
-    Route::post('/back/contact/create', 'store');
-    Route::put('/back/contact/{id}/update', 'update');
 });
 
-//mails
+
+//mails backend menu contact
 
 Route::controller(MailController::class)->group(function () {
     Route::get('/mail/{id}/show', 'show');
     Route::delete('/mail/{id}/delete', 'destroy');
-    Route::get('/mail', 'index');
+    Route::get('/mail', 'index')->name('mails');
     Route::post('/mail/contact', 'mailcontact')->name('mailcontact');
     Route::get('/mail/register', 'subscription')->name('subscription');
     Route::get('/mail/reservation', 'reservation')->name('reservation');

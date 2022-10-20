@@ -35,10 +35,10 @@
                 value={{ $show->city }}>
         </div>
 
+        @if(Auth::user()->roles_id === 1)
         <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Role</label>
         <select id="role" name="roles_id"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 focus:ring-0">
-
             @foreach ($roles as $role)
                 @if ($role->id == $show->roles->id)
                     <option value="{{ $role->id }}" name="roles_id" selected>{{ $role->name }}</option>
@@ -46,6 +46,7 @@
                     <option value="{{ $role->id }}" name="roles_id">{{ $role->name }}</option>
                 @endif
             @endforeach
+        @endif
 
         </select>
         <button type="submit"
