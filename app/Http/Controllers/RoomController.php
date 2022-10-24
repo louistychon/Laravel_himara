@@ -25,7 +25,7 @@ class RoomController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'isEditor'])->except(['indexall', 'showfront', 'tag', 'searchroom', 'searchtags']);
+        $this->middleware(['auth', 'isEditor'])->except(['indexall', 'showfront', 'searchroom', 'searchtags']);
     }
 
     public function indexall()
@@ -184,16 +184,12 @@ class RoomController extends Controller
         return view('back.pages.room.show', compact('show', 'tags', 'services', 'roomtypes'));
     }
 
-    public function searchtags($tag)
+    public function searchtags(Roomtags $tag)
     {
-        $name = $tag;
-        if(\request('searchtags')){
-        $search =  Room::with('tags')
-        ->whereHas('tags', function (Builder $query) use($name){
-            $query->where('name', 'like', '%'.$name.'%');
+        $search =  Room::whereHas('tags', function (Builder $query) use($tag){
+            $query->where('name', 'like', '%'.$tag.'%');
         })
         ->get();
-    }
         return view('front.pages.roomlist', compact('search'));
     }
 
@@ -202,8 +198,8 @@ class RoomController extends Controller
     {
         $allrooms = Room::query();
         if (isset($request->search)) {
-            $allrooms = Room::where('name', 'like', '%' . $request->search . '%')->paginate(10);
-            return view('front.pages.roomlist', compact('rooms'));
+            $allrooms = Room::where('name', 'like', '%' . $request->search . '%')->get();
+            return view('front.pages.roomlist', compact('allrooms'));
         } else {
             return redirect()->back();
         }

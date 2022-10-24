@@ -96,7 +96,7 @@
                 <h4 class="widget-title">Tags</h4>
                 <div class="tagcloud">
                     @foreach ($roomtags as $tag)
-                        <a href="?searchtag={{ $tag->name }}">
+                        <a href="/roomlist?tag={{ $tag->name }}">
                             <span class="tag">{{ $tag->name }}</span></a>
                     @endforeach
                 </div>

@@ -135,7 +135,7 @@ Route::controller(RoomController::class)->group(function () {
     Route::post('/back/room/create', 'store');
     Route::put('/back/room/{id}/update', 'update');
     Route::delete('/back/room/{id}/delete', 'destroy');
-    Route::get('searchtag={tag}', 'searchtags');
+    Route::get('/roomlist?searchtag={tag}', 'searchtags');
     Route::get('searchfield={field}', 'searchroom');
 });
 

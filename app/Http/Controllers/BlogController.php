@@ -37,8 +37,6 @@ class BlogController extends Controller
     public function searcharticle(Request $request)
     {
         $tags = Tags::all();
-        $articles = Article::all();
-        // $categories = CategorieBlog::all();
         $categories = CategorieBlog::withCount('articles')->get();
         $articles = Article::query();
 
