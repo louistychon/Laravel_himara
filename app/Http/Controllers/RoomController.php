@@ -189,8 +189,8 @@ class RoomController extends Controller
         $search =  Room::whereHas('tags', function (Builder $query) use($tag){
             $query->where('name', 'like', '%'.$tag.'%');
         })
-        ->get();
-        return view('front.pages.roomlist', compact('search'));
+        ->paginate(10)->get();
+        return view('front.pages.rooms-list', compact('search'));
     }
 
 
@@ -198,8 +198,8 @@ class RoomController extends Controller
     {
         $allrooms = Room::query();
         if (isset($request->search)) {
-            $allrooms = Room::where('name', 'like', '%' . $request->search . '%')->get();
-            return view('front.pages.roomlist', compact('allrooms'));
+            $allrooms = Room::where('name', 'like', '%' . $request->search . '%')->paginate(10)->get();
+            return view('front.pages.rooms-list', compact('allrooms'));
         } else {
             return redirect()->back();
         }
