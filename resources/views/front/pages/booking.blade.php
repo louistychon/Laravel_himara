@@ -360,7 +360,7 @@
                                     <select name="roomtype_id" class="form-control" title="Select Room Type"
                                         data-header="Select Room Type">
                                         @foreach ($roomtypes as $roomtype)
-                                            <option value="{{ $roomtype->id }}"  data-subtext="<span class='badge badge-info'>€{{ $roomtype->min_price }} / night</span>" >{{ $roomtype->name }}</option>
+                                            <option value="{{ $roomtype->id }}" >{{ $roomtype->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -388,6 +388,7 @@
                     </form>
                 </div>
                 <!-- SIDEBAR -->
+
                 <div class="col-lg-3 col-12">
                     <div class="sidebar">
                         <div class="contact-details">
@@ -395,56 +396,32 @@
                                 <h4>OFFERS</h4>
                                 <p class="section-subtitle">CHECK OUT OUR SPECIAL OFFERS</p>
                             </div>
+                            @foreach ($rooms as $room )
+                            @if($room->discount != 0)
                             <div class="offer-item sm mb50">
                                 <figure class="gradient-overlay-hover link-icon">
-                                    <a href="offer.html">
-                                        <img src="images/offers/offer1.jpg" class="img-fluid" alt="Image">
+                                    <a href="room/{{$room->id}}/show">
+                                        @foreach ($roomimgs as $i => $roomimg )
+                                        @if($i == 1)
+                                        @break
+                                        @endif
+                                        <img src="{{asset('storage/room/thumbnail/'.$roomimg->src)}}" class="img-fluid" alt="Image">
+                                        @endforeach
                                     </a>
                                 </figure>
                                 <div class="ribbon">
                                     <span>HOT OFFER</span>
                                 </div>
                                 <div class="offer-price uppercase">
-                                    5 nights for €1,875
+                                    {{$room->discount * 100}}%
                                 </div>
                                 <h3 class="offer-title">
-                                    <a href="offer.html">x</a>
+                                    <a href="{{$room->id}}">{{$room->name}}</a>
                                 </h3>
                             </div>
-                            <!-- ITEM -->
-                            <div class="offer-item sm mb50">
-                                <figure class="gradient-overlay-hover link">
-                                    <a href="offer.html">
-                                        <img src="images/offers/offer2.jpg" class="img-fluid" alt="Image">
-                                    </a>
-                                </figure>
-                                <div class="ribbon">
-                                    <span>HOT OFFER</span>
-                                </div>
-                                <div class="offer-price">
-                                    8 nights for €2,000
-                                </div>
-                                <h3 class="offer-title">
-                                    <a href="offer.html">All-Inclusive Family Package</a>
-                                </h3>
-                            </div>
-                            <!-- ITEM -->
-                            <div class="offer-item sm mb50">
-                                <figure class="gradient-overlay-hover link">
-                                    <a href="offer.html">
-                                        <img src="images/offers/offer3.jpg" class="img-fluid" alt="Image">
-                                    </a>
-                                </figure>
-                                <div class="ribbon">
-                                    <span>HOT OFFER</span>
-                                </div>
-                                <div class="offer-price">
-                                    3 nights for €268
-                                </div>
-                                <h3 class="offer-title">
-                                    <a href="offer.html">Fly, Stay and Save Over 30%</a>
-                                </h3>
-                            </div>
+                            @endif
+                            @endforeach
+
                         </div>
                     </div>
                 </div>

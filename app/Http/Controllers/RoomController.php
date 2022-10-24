@@ -5,21 +5,19 @@ namespace App\Http\Controllers;
 use App\Mail\Roomtodelete;
 use App\Mail\Roomtostores;
 use App\Mail\Roomtoupdate;
+use App\Models\Booking;
 use App\Models\Room;
-use App\Models\Room_roomservices;
-use App\Models\Room_tags;
 use App\Models\RoomImg;
 use App\Models\RoomService;
 use App\Models\Roomtags;
 use App\Models\RoomType;
-use App\Models\Service;
 use App\Models\Testimonial;
-use Illuminate\Http\Client\Request as ClientRequest;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Contracts\Database\Query\Builder as QueryBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 
 class RoomController extends Controller
@@ -27,16 +25,18 @@ class RoomController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'isEditor'])->except(['indexall']);
+        $this->middleware(['auth', 'isEditor'])->except(['indexall', 'showfront', 'tag', 'searchroom', 'searchtags']);
     }
 
     public function indexall()
     {
-        $allrooms = Room::all();
+        $allrooms = Room::where('show', 1)->paginate(10);
         $roomtypes = RoomType::withCount('rooms')->get();
+        $bookings = Booking::all();
+        $roomtags = Roomtags::all();
         $testimonials = Testimonial::all();
         $allroomsimg = RoomImg::all();
-        return view('front.pages.rooms-list', ['allrooms' => Room::paginate(10)], compact('allrooms', 'roomtypes', 'testimonials'));
+        return view('front.pages.rooms-list', compact('allrooms', 'roomtypes', 'testimonials', 'roomtags', 'bookings'));
     }
 
     public function showfront($id)
@@ -44,6 +44,7 @@ class RoomController extends Controller
         $testimonials = Testimonial::where('rooms_id', '=', $id)->get();
         $room = Room::find($id);
         $rooms = Room::all()->take(3);
+        $roomtypes = RoomType::all();
         $services = RoomService::all();
         $ratings = $testimonials->avg('rating');
         $ratingcount = $testimonials->count();
@@ -72,7 +73,7 @@ class RoomController extends Controller
             }
         }
 
-        return view('front.pages.room', compact('room', 'services', 'testimonials', 'rooms', 'ratings', 'ratingcount', 'numberrating1', 'numberrating2', 'numberrating3', 'numberrating4', 'numberrating5'));
+        return view('front.pages.room', compact('room', 'roomtypes', 'services', 'testimonials', 'rooms', 'ratings', 'ratingcount', 'numberrating1', 'numberrating2', 'numberrating3', 'numberrating4', 'numberrating5'));
     }
 
     public function index2()
@@ -133,7 +134,7 @@ class RoomController extends Controller
             $store->show = 0;
             $roominfo = ['name' => $request->get('name')];
             Mail::to('louis.tychon1@gmail.com')->send(new Roomtostores($roominfo));
-        }else{
+        } else {
             $store->show = 1;
         }
         $store->save();
@@ -182,15 +183,23 @@ class RoomController extends Controller
         return view('back.pages.room.show', compact('show', 'tags', 'services', 'roomtypes'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Room  $room
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Room $room)
+    public function searchtags(Roomtags $tag)
     {
-        //
+        $roomfiltered = Roomtags::where('room_id', '=', 1)->get();
+        return view('front.pages.roomlist', compact('roomfiltered'));
+    }
+
+
+    public function searchroom(Request $request)
+    {
+
+        $allrooms = Room::query();
+        if (isset($request->search)) {
+            $allrooms = Room::where('name', 'like', '%' . $request->search . '%')->paginate(10)->get();
+            return view('front.pages.roomlist', compact('allrooms'));
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function update(Request $request, $id)
@@ -209,13 +218,9 @@ class RoomController extends Controller
             'src' => 'image | mimes:jpeg,png,jpg,gif',
         ]);
 
-
-
         $update = Room::find($id);
         $update->name = $request->name;
         $update->user_id = Auth::user()->id;
-
-
         $update->long_desc = $request->long_desc;
         $update->long_desc2 = $request->long_desc2;
         $update->roomtypes_id = $request->roomtypes_id;
@@ -225,7 +230,6 @@ class RoomController extends Controller
         $update->max_guests = $request->max_guests;
         $update->price = $request->price;
         $update->discount = $request->discount;
-
         $update->save();
 
         if ($request->hasFile('src')) {
@@ -248,23 +252,21 @@ class RoomController extends Controller
             $newroomimg->src = $filenametostore;
             $newroomimg->room_id = $update->id;
             $newroomimg->save();
+            $update->imgs()->attach($newroomimg->id);
         }
-
-        $update->imgs()->attach($newroomimg->id);
 
         $checked = $request->input('tag');
         $update->tags()->sync($checked);
 
-
         $checked2 = $request->input('services');
         $update->services()->sync($checked2);
-
         if (Auth::user()->roles->id > 2) {
             $update->show = 0;
             $roominfo = ['name' => $update['name']];
             Mail::to('louis.tychon1@gmail.com')->send(new Roomtoupdate($roominfo));
+            $update->save();
             return redirect('/back/room')->with('warning', 'your modifications are submitted and waiting for moderation');
-        }else{
+        } else {
             $update->show = 1;
         }
 
@@ -280,8 +282,7 @@ class RoomController extends Controller
             $roominfo = ['name' => $todelete['name']];
             Mail::to('louis.tychon1@gmail.com')->send(new Roomtodelete($roominfo));
             return redirect('/back/room')->with('warning', 'waiting approval to delete room');
-        }
-        else {
+        } else {
             Storage::delete('storage/room/thumbnail/' . $todelete->src);
             Storage::delete('storage/room/' . $todelete->src);
             $todelete->delete();

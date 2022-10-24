@@ -218,147 +218,164 @@
                 <p>{{ $room->long_desc2 }}
                 </p>
                 <!-- ROOM REVIEWS -->
-                @if($ratingcount != 0)
-                <div id="room-reviews" class="room-reviews">
-                    <div class="section-title sm">
-                        <h4>ROOM REVIEWS</h4>
-                        <p class="section-subtitle">What our guests are saying about us</p>
-                    </div>
-                    <div class="rating-details">
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="review-summary">
-                                    <div class="average">{{$ratings}}</div>
+                @if ($ratingcount != 0)
+                    <div id="room-reviews" class="room-reviews">
+                        <div class="section-title sm">
+                            <h4>ROOM REVIEWS</h4>
+                            <p class="section-subtitle">What our guests are saying about us</p>
+                        </div>
+                        <div class="rating-details">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="review-summary">
+                                        <div class="average">{{ $ratings }}</div>
+                                        <div class="rating">
+                                            <i class="fa fa-star voted" aria-hidden="true"></i>
+                                            <i class="fa fa-star voted" aria-hidden="true"></i>
+                                            <i class="fa fa-star voted" aria-hidden="true"></i>
+                                            <i class="fa fa-star voted" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        </div>
+                                        <small>Based on {{ $ratingcount }} ratings</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <!-- ITEM -->
+                                    <div class="progress-item">
+                                        <div class="row">
+                                            <div class="col-lg-2 col-sm-2 col-3">
+                                                <div class="progress-stars">5 star</div>
+                                            </div>
+                                            <div class="col-lg-9 col-sm-9 col-8">
+                                                <div class="progress">
+
+
+                                                    <div class="progress-bar" role="progressbar"
+                                                        style="width:{{ round(((float) $numberrating5 / $ratingcount) * 100) }}%"
+                                                        aria-valuenow="{{ $numberrating5 / $ratingcount }}"
+                                                        aria-valuemin="0" aria-valuemax="100">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1 col-sm-1 col-1">
+                                                <div class="progress-value">
+                                                    {{ round(((float) $numberrating5 / $ratingcount) * 100) . '%' }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- ITEM -->
+                                    <div class="progress-item">
+                                        <div class="row">
+                                            <div class="col-lg-2 col-sm-2 col-3">
+                                                <div class="progress-stars">4 star</div>
+                                            </div>
+                                            <div class="col-lg-9 col-sm-9 col-8">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar"
+                                                        style="width: {{ round(((float) $numberrating4 / $ratingcount) * 100) }}%"
+                                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1 col-sm-1 col-1">
+                                                <div class="progress-value">
+                                                    {{ round(((float) $numberrating4 / $ratingcount) * 100) }}%
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- ITEM -->
+                                    <div class="progress-item">
+                                        <div class="row">
+                                            <div class="col-lg-2 col-sm-2 col-3">
+                                                <div class="progress-stars">3 star</div>
+                                            </div>
+                                            <div class="col-lg-9 col-sm-2 col-8">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar"
+                                                        style="width: {{ round(((float) $numberrating3 / $ratingcount) * 100) }}%"
+                                                        aria-valuenow="8" aria-valuemin="0" aria-valuemax="100">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1 col-sm-1 col-1">
+                                                <div class="progress-value">
+                                                    {{ round(((float) $numberrating3 / $ratingcount) * 100) }}%
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- ITEM -->
+                                    <div class="progress-item">
+                                        <div class="row">
+                                            <div class="col-lg-2 col-sm-2 col-3">
+                                                <div class="progress-stars">2 star</div>
+                                            </div>
+                                            <div class="col-lg-9 col-sm-9 col-8">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar"
+                                                        style="width: {{ round(((float) $numberrating2 / $ratingcount) * 100) }}%"
+                                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1 col-sm-1 col-1">
+                                                <div class="progress-value">
+                                                    {{ round(((float) $numberrating2 / $ratingcount) * 100) }}%
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- ITEM -->
+                                    <div class="progress-item">
+                                        <div class="row">
+                                            <div class="col-lg-2 col-sm-2 col-3">
+                                                <div class="progress-stars">1 star</div>
+                                            </div>
+                                            <div class="col-lg-9 col-sm-9 col-8">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar"
+                                                        style="width: {{ round(((float) $numberrating1 / $ratingcount) * 100) }}%"
+                                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1 col-sm-1 col-1">
+                                                <div class="progress-value">
+                                                    {{ round(((float) $numberrating1 / $ratingcount) * 100) }}%
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @foreach ($testimonials as $testimonial)
+                            <div class="review-box">
+                                <figure class="review-author">
+                                    <img src="{{ asset('storage/users/thumbnail/' . $testimonial->user->src) }}"
+                                        alt="Image">
+                                </figure>
+                                <div class="review-contentt">
                                     <div class="rating">
-                                        <i class="fa fa-star voted" aria-hidden="true"></i>
-                                        <i class="fa fa-star voted" aria-hidden="true"></i>
-                                        <i class="fa fa-star voted" aria-hidden="true"></i>
-                                        <i class="fa fa-star voted" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        @for ($i = 0; $i < $testimonial->rating; $i++)
+                                            <i class="fa fa-star voted" aria-hidden="true"></i>
+                                        @endfor
                                     </div>
-                                    <small>Based on {{$ratingcount}} ratings</small>
-                                </div>
-                            </div>
-                            <div class="col-lg-9">
-                                <!-- ITEM -->
-                                <div class="progress-item">
-                                    <div class="row">
-                                        <div class="col-lg-2 col-sm-2 col-3">
-                                            <div class="progress-stars">5 star</div>
-                                        </div>
-                                        <div class="col-lg-9 col-sm-9 col-8">
-                                            <div class="progress">
-
-
-                                                <div class="progress-bar" role="progressbar" style="width:{{round((float)$numberrating5/$ratingcount * 100)}}%"
-                                                    aria-valuenow="{{$numberrating5/$ratingcount}}" aria-valuemin="0" aria-valuemax="100">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-1 col-sm-1 col-1">
-                                            <div class="progress-value">{{round((float)$numberrating5/$ratingcount * 100 ) . '%'}}</div>
-                                        </div>
+                                    <div class="review-info">
+                                        {{ $testimonial->user->name }} –
+                                        {{ date('d-m-Y', strtotime($testimonial->created_at)) }}
                                     </div>
-                                </div>
-                                <!-- ITEM -->
-                                <div class="progress-item">
-                                    <div class="row">
-                                        <div class="col-lg-2 col-sm-2 col-3">
-                                            <div class="progress-stars">4 star</div>
-                                        </div>
-                                        <div class="col-lg-9 col-sm-9 col-8">
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width: {{round((float)$numberrating4/$ratingcount * 100)}}%"
-                                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-1 col-sm-1 col-1">
-                                            <div class="progress-value">{{round((float)$numberrating4/$ratingcount * 100)}}%</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- ITEM -->
-                                <div class="progress-item">
-                                    <div class="row">
-                                        <div class="col-lg-2 col-sm-2 col-3">
-                                            <div class="progress-stars">3 star</div>
-                                        </div>
-                                        <div class="col-lg-9 col-sm-2 col-8">
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width: {{round((float)$numberrating3/$ratingcount * 100)}}%"
-                                                    aria-valuenow="8" aria-valuemin="0" aria-valuemax="100">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-1 col-sm-1 col-1">
-                                            <div class="progress-value">{{round((float)$numberrating3/$ratingcount * 100)}}%</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- ITEM -->
-                                <div class="progress-item">
-                                    <div class="row">
-                                        <div class="col-lg-2 col-sm-2 col-3">
-                                            <div class="progress-stars">2 star</div>
-                                        </div>
-                                        <div class="col-lg-9 col-sm-9 col-8">
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width: {{round((float)$numberrating2/$ratingcount * 100)}}%"
-                                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-1 col-sm-1 col-1">
-                                            <div class="progress-value">{{round((float)$numberrating2/$ratingcount * 100)}}%</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- ITEM -->
-                                <div class="progress-item">
-                                    <div class="row">
-                                        <div class="col-lg-2 col-sm-2 col-3">
-                                            <div class="progress-stars">1 star</div>
-                                        </div>
-                                        <div class="col-lg-9 col-sm-9 col-8">
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width: {{round((float)$numberrating1/$ratingcount * 100)}}%"
-                                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-1 col-sm-1 col-1">
-                                            <div class="progress-value">{{round((float)$numberrating1/$ratingcount * 100)}}%</div>
-                                        </div>
+                                    <div class="review-text">
+                                        <p>
+                                            {{ $testimonial->text }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                    @foreach ($testimonials as $testimonial)
-                        <div class="review-box">
-                            <figure class="review-author">
-                                <img src="{{ asset('storage/users/thumbnail/' . $testimonial->user->src) }}"
-                                    alt="Image">
-                            </figure>
-                            <div class="review-contentt">
-                                <div class="rating">
-                                    @for ($i = 0; $i < $testimonial->rating; $i++)
-                                        <i class="fa fa-star voted" aria-hidden="true"></i>
-                                    @endfor
-                                </div>
-                                <div class="review-info">
-                                    {{ $testimonial->user->name }} – {{ date('d-m-Y', strtotime($testimonial->created_at)) }}
-                                </div>
-                                <div class="review-text">
-                                    <p>
-                                        {{ $testimonial->text }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
                 @endif
                 <div class="similar-rooms">
                     <div class="section-title sm">
@@ -367,41 +384,43 @@
                     </div>
                     <div class="row">
                         <!-- ITEM -->
-                        @foreach ($rooms as $room)
-                            <div class="col-md-4">
-                                <div class="room-grid-item">
-                                    <figure class="gradient-overlay-hover link-icon">
-                                        <a href="/room/{{ $room->id }}/show">
-                                            @foreach ($room->imgs as $i => $imgs)
-                                                @if ($i >= 1)
+                        @foreach ($rooms as $roomboucl)
+                            @if ($roomboucl->type->id == $room->type->id)
+                                <div class="col-md-4">
+                                    <div class="room-grid-item">
+                                        <figure class="gradient-overlay-hover link-icon">
+                                            <a href="/room/{{ $roomboucl->id }}/show">
+                                                @foreach ($roomboucl->imgs as $i => $imgs)
+                                                    @if ($i >= 1)
+                                                    @break
+                                                @endif
+                                                <img src="{{ asset('storage/room/thumbnail/' . $imgs->src) }}"
+                                                    class="img-fluid" alt="Image">
+                                            @endforeach
+                                        </a>
+                                        <div class="room-services">
+                                            @foreach ($roomboucl->services as $i => $service)
+                                                @if ($i >= 3)
                                                 @break
                                             @endif
-                                            <img src="{{ asset('storage/room/thumbnail/' . $imgs->src) }}"
-                                                class="img-fluid" alt="Image">
+                                            <i class="fa {{ $service->icon_classname }}"
+                                                aria-hidden="true" data-toggle="popover"
+                                                data-placement="right" data-trigger="hover"
+                                                data-content="{{ $service->small_desc }}"
+                                                data-original-title="{{ $service->name }}"></i>
                                         @endforeach
-                                    </a>
-                                    <div class="room-services">
-                                        @foreach ($room->services as $i => $service)
-                                            @if ($i >= 3)
-                                            @break
-                                        @endif
-                                        <i class="fa {{ $service->icon_classname }}" aria-hidden="true"
-                                            data-toggle="popover" data-placement="right"
-                                            data-trigger="hover"
-                                            data-content="{{ $service->small_desc }}"
-                                            data-original-title="{{ $service->name }}"></i>
-                                    @endforeach
+                                    </div>
+                                    <div class="room-price">€{{ $roomboucl->price }} / night</div>
+                                </figure>
+                                <div class="room-info">
+                                    <h2 class="room-title">
+                                        <a href="room.html">{{ $roomboucl->name }}</a>
+                                    </h2>
+                                    <p>Enjoy our {{ $roomboucl->type->name }}</p>
                                 </div>
-                                <div class="room-price">€{{ $room->price }} / night</div>
-                            </figure>
-                            <div class="room-info">
-                                <h2 class="room-title">
-                                    <a href="room.html">{{ $room->name }}</a>
-                                </h2>
-                                <p>Enjoy our {{ $room->type->name }}</p>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
             </div>
         </div>
@@ -413,30 +432,34 @@
             <aside class="widget noborder">
                 <div class="vertical-booking-form">
                     <div id="booking-notification" class="notification"></div>
-                    <h3 class="form-title">BOOK YOUR ROOM</h3>
+                    <h3 class="form-title">BOOK ROOM {{strtoupper($room->name)}}</h3>
                     <div class="inner">
-                        <form id="booking-form">
+                        <form action="/booking/store" method="post">
+                            @csrf
                             <!-- EMAIL -->
                             <div class="form-group">
-                                <input class="form-control" name="booking-email" type="email"
-                                    placeholder="Your Email Address" value="{{ Auth::user() ? Auth::user()->email : null }}" disabled>
+                                <input class="form-control" name="email" type="email"
+                                    placeholder="Your Email Address"
+                                    value="{{ Auth::user() ? Auth::user()->email : null }}" disabled>
                             </div>
-                              <!-- ROOM NAME -->
-                              <div class="form-group">
-                                <input class="form-control" name="booking-roomname"
-                                    title="Room Name" data-header="Room Name" value="{{$room->name}}" disabled>
+                            <!-- ROOM NAME -->
+                            <div class="form-group">
+                                <input name="room_id" value="{{$room->id}}" hidden>
                             </div>
 
                             <!-- ROOM TYPE -->
                             <div class="form-group">
-                                <input class="form-control" name="booking-roomtype"
-                                    title="Room Type" data-header="Room Type" value="{{$room->type->name}}" disabled>
+                                        @foreach ($roomtypes as $roomtype)
+                                        @if($roomtype->id == $room->type->id)
+                                            <input  class="form-control" name="roomtype_id" value="{{ $roomtype->id }}" hidden>
+                                        @endif
+                                        @endforeach
                             </div>
                             <!-- DATE -->
                             <div class="form-group">
                                 <div class="form_date">
                                     <input type="text" class="datepicker form-control"
-                                        name="booking-checkin"
+                                        name="date_start"
                                         placeholder="Slect Arrival & Departure Date" readonly="readonly">
                                 </div>
                             </div>
@@ -457,13 +480,13 @@
                                             </label>
                                             <div class="guests-button">
                                                 <div class="minus"></div>
-                                                <input type="text" name="booking-adults"
+                                                <input type="text" name="number_adults"
                                                     class="booking-guests" value="0">
                                                 <div class="plus"></div>
                                             </div>
                                         </div>
                                         <div class="guests-buttons">
-                                            <label>Cildren
+                                            <label>Children
                                                 <a href="#" title="" data-toggle="popover"
                                                     data-placement="top" data-trigger="hover"
                                                     data-content="Under 18 years"
@@ -473,7 +496,7 @@
                                             </label>
                                             <div class="guests-button">
                                                 <div class="minus"></div>
-                                                <input type="text" name="booking-children"
+                                                <input type="text" name="number_children"
                                                     class="booking-guests" value="0">
                                                 <div class="plus"></div>
                                             </div>
