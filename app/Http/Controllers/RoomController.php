@@ -118,6 +118,7 @@ class RoomController extends Controller
         $store->long_desc = $request->long_desc;
         $store->long_desc2 = $request->long_desc2;
         $store->roomtypes_id = $request->roomtypes_id;
+        $store->todelete = 0;
         $store->surface = $request->surface;
         $store->king_bed = $request->king_bed;
         $store->sofa_bed = $request->sofa_bed;
@@ -183,20 +184,26 @@ class RoomController extends Controller
         return view('back.pages.room.show', compact('show', 'tags', 'services', 'roomtypes'));
     }
 
-    public function searchtags(Roomtags $tag)
+    public function searchtags($tag)
     {
-        $roomfiltered = Roomtags::where('room_id', '=', 1)->get();
-        return view('front.pages.roomlist', compact('roomfiltered'));
+        $name = $tag;
+        if(\request('searchtags')){
+        $search =  Room::with('tags')
+        ->whereHas('tags', function (Builder $query) use($name){
+            $query->where('name', 'like', '%'.$name.'%');
+        })
+        ->get();
+    }
+        return view('front.pages.roomlist', compact('search'));
     }
 
 
     public function searchroom(Request $request)
     {
-
         $allrooms = Room::query();
         if (isset($request->search)) {
-            $allrooms = Room::where('name', 'like', '%' . $request->search . '%')->paginate(10)->get();
-            return view('front.pages.roomlist', compact('allrooms'));
+            $allrooms = Room::where('name', 'like', '%' . $request->search . '%')->paginate(10);
+            return view('front.pages.roomlist', compact('rooms'));
         } else {
             return redirect()->back();
         }
