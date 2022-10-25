@@ -12,8 +12,6 @@ use App\Models\RoomService;
 use App\Models\Roomtags;
 use App\Models\RoomType;
 use App\Models\Testimonial;
-use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Contracts\Database\Query\Builder as QueryBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -30,7 +28,7 @@ class RoomController extends Controller
 
     public function indexall()
     {
-        $allrooms = Room::where('show', 1)->paginate(10);
+        $allrooms = Room::where('show', 1)->where('todelete', 0)->paginate(10);
         $roomtypes = RoomType::withCount('rooms')->get();
         $bookings = Booking::all();
         $roomtags = Roomtags::all();
@@ -46,8 +44,10 @@ class RoomController extends Controller
         $room = Room::find($id);
         $rooms = Room::all()->take(3);
         $roomtypes = RoomType::all();
+        $randrooms = Room::all()->shuffle()->take(3);
         $services = RoomService::all();
         $ratings = $testimonials->avg('rating');
+        $ratings = number_format($ratings, 2);
         $ratingcount = $testimonials->count();
 
         if ($testimonials->count() == 0) {
@@ -74,7 +74,7 @@ class RoomController extends Controller
             }
         }
 
-        return view('front.pages.room', compact('room', 'roomtypes', 'services', 'testimonials', 'rooms', 'ratings', 'ratingcount', 'numberrating1', 'numberrating2', 'numberrating3', 'numberrating4', 'numberrating5'));
+        return view('front.pages.room', compact('room', 'roomtypes', 'services', 'testimonials', 'rooms', 'ratings', 'ratingcount', 'numberrating1', 'numberrating2', 'numberrating3', 'numberrating4', 'numberrating5', 'randrooms'));
     }
 
     public function index2()
@@ -103,10 +103,9 @@ class RoomController extends Controller
             'long_desc2' => 'required',
             'roomtypes_id' => 'required',
             'price' => 'required',
-            'discount' => 'required',
-            'max_guests' => 'required',
-            'sofa_bed' => 'required',
-            'king_bed' => 'required',
+            'max_guests' => 'required|max:15',
+            'sofa_bed' => 'required|max:10',
+            'king_bed' => 'required|max:10',
             'surface' => 'required',
             'src' => 'image | mimes:jpeg,png,jpg,gif | required',
         ]);
@@ -187,23 +186,29 @@ class RoomController extends Controller
 
     public function searchtags(Roomtags $tag)
     {
-        $search =  Room::whereHas('tags', function (Builder $query) use($tag){
-            $query->where('name', 'like', '%'.$tag.'%');
-        })
-        ->paginate(10)->get();
-        return view('front.pages.rooms-list', compact('search'));
+        $allrooms = Room::with('tags')->whereDoesntHave('tags', function ($q) {
+            $q->where('tag', '=', 'id');
+        });
+
+        return view('front.pages.rooms-list', compact('allrooms'));
     }
 
 
+    public function searchcategory($category)
+    {
+        $allrooms = Room::whereHas('room_types', function ($query) {
+            return $query->where('name', '=', \request('category'));
+        })->get();
+
+        return view('front.pages.rooms-list', compact('allrooms'));
+    }
+
     public function searchroom(Request $request)
     {
-        $allrooms = Room::query();
-        if (isset($request->search)) {
-            $allrooms = Room::where('name', 'like', '%' . $request->search . '%')->paginate(10)->get();
-            return view('front.pages.rooms-list', compact('allrooms'));
-        } else {
-            return redirect()->back();
-        }
+        $query = $request->searchbar;
+        $allrooms = Room::query()->where('name', 'LIKE', "%$query%")->get();
+        return view('front.pages.rooms-list', compact('allrooms'));
+
     }
 
     public function update(Request $request, $id)
@@ -214,10 +219,9 @@ class RoomController extends Controller
             'long_desc2' => 'required',
             'roomtypes_id' => 'required',
             'price' => 'required',
-            'discount' => 'required',
-            'max_guests' => 'required',
-            'sofa_bed' => 'required',
-            'king_bed' => 'required',
+            'max_guests' => 'required|max:15',
+            'sofa_bed' => 'required|max:10',
+            'king_bed' => 'required|max:10',
             'surface' => 'required',
             'src' => 'image | mimes:jpeg,png,jpg,gif',
         ]);

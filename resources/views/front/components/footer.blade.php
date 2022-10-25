@@ -44,19 +44,17 @@
                          <div class="inner">
                              <ul class="useful-links">
                                  <li>
-                                     <a href="about-us.html">About Us</a>
+                                     <a href="{{route('contact')}}">About Us</a>
                                  </li>
                                  <li>
-                                     <a href="contact.html">Contact Us</a>
+                                     <a href="{{route('contact')}}">Contact Us</a>
+                                 </li>
+
+                                 <li>
+                                     <a href="{{route('gallery')}}">Himara Gallery</a>
                                  </li>
                                  <li>
-                                     <a href="shop.html">Shop</a>
-                                 </li>
-                                 <li>
-                                     <a href="gallery.html">Himara Gallery</a>
-                                 </li>
-                                 <li>
-                                     <a href="location.html">Our Location</a>
+                                     <a href="{{route('contact')}}">Our Location</a>
                                  </li>
                              </ul>
                          </div>

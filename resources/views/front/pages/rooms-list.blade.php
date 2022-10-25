@@ -91,9 +91,9 @@
         <div class="sidebar">
             <aside class="widget noborder">
                 <div class="search">
-                    <form class="widget-search" >
-                        <input type="search" placeholder="Search" name="search">
-                        <button class="btn-search" id="searchsubmit" type="submit">
+                    <form class="widget-search" method="get">
+                        <input type="search" placeholder="Search" name="searchbar">
+                        <button class="btn-search" type="submit">
                             <i class="fa fa-search"></i>
                         </button>
                     </form>
@@ -105,7 +105,7 @@
                 <ul class="categories">
                     @foreach ($roomtypes as $roomtype)
                         <li>
-                            <a href="#">{{ $roomtype->name }}<span
+                            <a href="/roomlist?category={{$roomtype->name}}">{{ $roomtype->name }}<span
                                     class="posts-num">{{ $roomtype->rooms_count }}</span></a>
                         </li>
                     @endforeach
@@ -116,7 +116,7 @@
                 <h4 class="widget-title">Tags</h4>
                 <div class="tagcloud">
                     @foreach ($roomtags as $tag)
-                        <a href="/roomlist?tag={{ $tag->name }}">
+                        <a href="/roomlist?tag={{ $tag->id }}">
                             <span class="tag">{{ $tag->name }}</span></a>
                     @endforeach
                 </div>

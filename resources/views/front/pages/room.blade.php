@@ -384,13 +384,13 @@
                     </div>
                     <div class="row">
                         <!-- ITEM -->
-                        @foreach ($rooms as $roomboucl)
-                            @if ($roomboucl->type->id == $room->type->id)
+                        @foreach ($randrooms as $randroom)
+                            @if ($randroom->type->id = $room->type->id)
                                 <div class="col-md-4">
                                     <div class="room-grid-item">
                                         <figure class="gradient-overlay-hover link-icon">
-                                            <a href="/room/{{ $roomboucl->id }}/show">
-                                                @foreach ($roomboucl->imgs as $i => $imgs)
+                                            <a href="/room/{{ $randroom->id }}/show">
+                                                @foreach ($randroom->imgs as $i => $imgs)
                                                     @if ($i >= 1)
                                                     @break
                                                 @endif
@@ -399,7 +399,7 @@
                                             @endforeach
                                         </a>
                                         <div class="room-services">
-                                            @foreach ($roomboucl->services as $i => $service)
+                                            @foreach ($randroom->services as $i => $service)
                                                 @if ($i >= 3)
                                                 @break
                                             @endif
@@ -410,13 +410,13 @@
                                                 data-original-title="{{ $service->name }}"></i>
                                         @endforeach
                                     </div>
-                                    <div class="room-price">€{{ $roomboucl->price }} / night</div>
+                                    <div class="room-price">€{{ $randroom->price }} / night</div>
                                 </figure>
                                 <div class="room-info">
                                     <h2 class="room-title">
-                                        <a href="room.html">{{ $roomboucl->name }}</a>
+                                        <a href="room.html">{{ $randroom->name }}</a>
                                     </h2>
-                                    <p>Enjoy our {{ $roomboucl->type->name }}</p>
+                                    <p>Enjoy our {{ $randroom->type->name }}</p>
                                 </div>
                             </div>
                         </div>
@@ -432,7 +432,7 @@
             <aside class="widget noborder">
                 <div class="vertical-booking-form">
                     <div id="booking-notification" class="notification"></div>
-                    <h3 class="form-title">BOOK ROOM {{strtoupper($room->name)}}</h3>
+                    <h3 class="form-title">BOOK ROOM {{ strtoupper($room->name) }}</h3>
                     <div class="inner">
                         <form action="/booking/store" method="post">
                             @csrf
@@ -444,23 +444,24 @@
                             </div>
                             <!-- ROOM NAME -->
                             <div class="form-group">
-                                <input name="room_id" value="{{$room->id}}" hidden>
+                                <input name="room_id" value="{{ $room->id }}" hidden>
                             </div>
 
                             <!-- ROOM TYPE -->
                             <div class="form-group">
-                                        @foreach ($roomtypes as $roomtype)
-                                        @if($roomtype->id == $room->type->id)
-                                            <input  class="form-control" name="roomtype_id" value="{{ $roomtype->id }}" hidden>
-                                        @endif
-                                        @endforeach
+                                @foreach ($roomtypes as $roomtype)
+                                    @if ($roomtype->id == $room->type->id)
+                                        <input class="form-control" name="roomtype_id"
+                                            value="{{ $roomtype->id }}" hidden>
+                                    @endif
+                                @endforeach
                             </div>
                             <!-- DATE -->
                             <div class="form-group">
                                 <div class="form_date">
                                     <input type="text" class="datepicker form-control"
-                                        name="date_start"
-                                        placeholder="Slect Arrival & Departure Date" readonly="readonly">
+                                        name="date_start" placeholder="Slect Arrival & Departure Date"
+                                        readonly="readonly">
                                 </div>
                             </div>
                             <!-- GUESTS -->
