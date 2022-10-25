@@ -28,14 +28,34 @@
                                 <h3 class="room-title">
                                     <a href="/room/{{ $roomii->id }}/show">{{ $roomii->name }}</a>
                                 </h3>
+                                @if($roomii->reviews->count() > 0)
                                 <span class="room-rates">
+                                    @if(floor($roomii->reviews->avg('rating')) == 5)
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star" aria-hidden="true"></i>
-                                    <a href="room.html#room-reviews">5.00 Based on 3 Ratings</a>
+                                    @elseif(floor($roomii->reviews->avg('rating')) == 4)
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    @elseif(floor($roomii->reviews->avg('rating')) == 3)
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    @elseif(floor($roomii->reviews->avg('rating')) == 2)
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    @elseif(floor($roomii->reviews->avg('rating')) == 1)
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    @endif
+                                    <a href="/room/{{ $roomii->id }}/show">
+                                        {{floor($roomii->reviews->avg('rating'))}} Based on {{$roomii->reviews->count()}} Ratings</a>
                                 </span>
+                                @endif
+
                                 <p>{{ Str::limit($roomii->long_desc, 50) }}</p>
                                 <div class="room-services">
                                     @foreach ($roomii->services as $i => $service)

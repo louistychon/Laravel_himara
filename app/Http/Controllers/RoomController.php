@@ -36,7 +36,8 @@ class RoomController extends Controller
         $roomtags = Roomtags::all();
         $testimonials = Testimonial::all();
         $allroomsimg = RoomImg::all();
-        return view('front.pages.rooms-list', compact('allrooms', 'roomtypes', 'testimonials', 'roomtags', 'bookings'));
+        $ratings = Testimonial::withCount('testimonial')->get();
+        return view('front.pages.rooms-list', compact('allrooms', 'roomtypes', 'testimonials', 'roomtags', 'bookings', 'ratings'));
     }
 
     public function showfront($id)

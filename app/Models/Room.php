@@ -29,4 +29,9 @@ class Room extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Testimonial::class, "rooms_id");
+    }
+
 }
