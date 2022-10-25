@@ -32,12 +32,12 @@
         </div>
         <div class="mb-6">
             <label for="king_bed" class="block mb-2 text-sm font-medium">King beds</label>
-            <input type="number" id="king_bed" name="king_bed" class="focus:ring-0" value="{{ old('king_bed') }}">
+            <input type="number" id="king_bed" name="king_bed" min="0" max="10" class="focus:ring-0" value="{{ old('king_bed') }}">
         </div>
 
         <div class="mb-6">
             <label for="sofa_bed" class="block mb-2 text-sm font-medium">Sofa beds</label>
-            <input type="number" id="sofa_bed" name="sofa_bed" class="focus:ring-0" value="{{ old('sofa_bed') }}">
+            <input type="number" id="sofa_bed" name="sofa_bed" min="0" max="10" class="focus:ring-0" value="{{ old('sofa_bed') }}">
         </div>
 
         <div class="mb-6">
