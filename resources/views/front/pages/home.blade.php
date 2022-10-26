@@ -228,8 +228,8 @@
                                 </div>
                                 @else
                                 <div class="col-md-2">
-                                    <a href="{{route('login')}}" target="_blank">
-                                        <button class="btn btn-book">Log in first</button>
+                                    <a href="{{route('login')}}" class="btn btn-book" target="_blank">
+                                        Log in first
                                     </a>
                                 </div>
                                 @endif
