@@ -114,6 +114,7 @@ Route::controller(BlogController::class)->group(function () {
     Route::get('/back/blog/{id}/show', 'show');
     Route::post('/back/blog/create', 'store');
     Route::put('/back/blog/{id}/update', 'update');
+    Route::delete('/back/blog/{id}/delete', 'destroy');
     Route::get('search', 'searcharticle')->name('blogsearch');
 });
 

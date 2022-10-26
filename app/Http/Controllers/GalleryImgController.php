@@ -39,7 +39,6 @@ class GalleryImgController extends Controller
     {
         $request->validate([
             'caption' => 'required',
-            'long_desc' => 'required',
             'filtergalleries_id' => 'required|integer',
             'src' => 'image | mimes:jpeg,png,jpg,gif',
         ]);

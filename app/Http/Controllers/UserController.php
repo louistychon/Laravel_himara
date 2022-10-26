@@ -46,8 +46,6 @@ class UserController extends Controller
         $store->roles_id = 4;
 
         if ($request->hasFile('src')) {
-            Storage::delete('storage/users/thumbnail/' . $store->src);
-            Storage::delete('storage/users/' . $store->src);
             //get filename with extension
             $filenamewithextension = $request->file('src')->getClientOriginalName();
             //get filename without extension
@@ -98,7 +96,8 @@ class UserController extends Controller
         $update->email = $request->email;
         $update->country = $request->country;
         $update->city = $request->city;
-        $update->roles_id = $request->roles_id;
+        if ($request->has('roles_id')){
+        $update->roles_id = $request->roles_id;}
 
         if ($request->hasFile('src')) {
             Storage::delete('storage/users/thumbnail/' . $update->src);
@@ -119,9 +118,9 @@ class UserController extends Controller
             $img = Image::make($thumbnailpath)->resize(500,500);
             $img->save();
             $update->src = $filenametostore;
+            $update->save();
         }
 
-        $update->save();
         return redirect()->back();
     }
 

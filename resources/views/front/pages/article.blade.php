@@ -138,13 +138,12 @@
                         <div class="room-slider">
                             <div id="room-main-image" class="owl-carousel image-gallery">
                                 <!-- ITEM -->
-
                                 <div class="item">
                                     <figure class="gradient-overlay-hover image-icon">
-                                        <a href="/{{ $show->id }}">
+                                        <a href="/blog/{{ $show->id }}">
                                             <img class="img-fluid"
-                                                src="{{ asset('storage/blog/thumbnail/' . $show->src) }}"
-                                                alt="Image">
+                                            src="{{ asset('storage/blog/thumbnail/' . $show->src) }}"
+                                            alt="Image">
                                         </a>
                                     </figure>
                                 </div>
@@ -155,14 +154,15 @@
                             <p class="dropcap">{{ $show->long_desc }}</p>
                         </div>
 
+                        @if($comments->count() > 0)
                         <h4 class="my-5">All comments</h4>
-
                         @foreach ($comments as $comment)
                             <div>
                                 <p>Commented by {{ $comment->user->name }}</p>
                                 {{ $comment->comment }}
                             </div>
                         @endforeach
+                        @endif
                     </div>
                 </div>
         </main>
@@ -215,19 +215,17 @@
                                 <div class="inner">
                                     <ul class="useful-links">
                                         <li>
-                                            <a href="about-us.html">About Us</a>
+                                            <a href="{{route('contact')}}">About Us</a>
                                         </li>
                                         <li>
-                                            <a href="contact.html">Contact Us</a>
+                                            <a href="{{route('contact')}}">Contact Us</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{{route('gallery')}}">Himara Gallery</a>
                                         </li>
                                         <li>
-                                            <a href="shop.html">Shop</a>
-                                        </li>
-                                        <li>
-                                            <a href="gallery.html">Himara Gallery</a>
-                                        </li>
-                                        <li>
-                                            <a href="location.html">Our Location</a>
+                                            <a href="{{route('contact')}}">Our Location</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -276,8 +274,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="copyrights">&copy; 2018 Hotel Himara. Designed by
-                                <a href="https://eagle-themes.com/" target="_blank">Eagle-Themes</a>.
+                            <div class="copyrights">&copy; 2022. Designed by Louis Tychon
                             </div>
                         </div>
                         <div class="col-md-6">

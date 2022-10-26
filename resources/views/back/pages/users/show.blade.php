@@ -3,9 +3,8 @@
     <form action="/back/users/{{ $show->id }}/update" method="post">
         @csrf
         @method('put')
-
         <div class="mb-6">
-            <label for="src" class="">Image (expected:500x500px) </label>
+            <label for="src" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Image (expected:500x500px) </label>
             <img src="{{asset('storage/users/thumbnail/'. $show->src)}}" alt="user">
             <input type="file" id="src" name="src" class="mt-4">
         </div>

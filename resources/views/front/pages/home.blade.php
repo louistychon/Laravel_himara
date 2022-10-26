@@ -379,7 +379,7 @@
 @else
 @endif
 <!-- ========== GALLERY ========== -->
-@if ($galleryimgs->count() == 0)
+@if ($galleryimgs->count() > 0)
     <section class="gallery">
         <div class="container">
             <div class="section-title">
@@ -402,7 +402,6 @@
             </div>
         </div>
     </section>
-@else
 @endif
 <!-- ========== TESTIMONIALS ========== -->
 <section class="testimonials gray">
@@ -439,6 +438,7 @@
     </div>
 </section>
 <!-- ========== RESTAURANT ========== -->
+@if ($dishes->count() > 0)
 <section class="restaurant image-bg parallax gradient-overlay op5"
     data-src="{{ asset('/storage/backgrounds/thumbnail/' . $text->background_image_restaurant) }}"
     data-parallax="scroll" data-speed="0.3" data-mirror-selector=".wrapper" data-z-index="0">
@@ -484,6 +484,7 @@
 
     </div>
 </section>
+@endif
 <!-- ========== NEWS ==========-->
 <section class="news">
     <div class="container">
@@ -497,19 +498,19 @@
                 <div class="col-md-4">
                     <div class="news-grid-item">
                         <figure class="gradient-overlay-hover link-icon">
-                            <a href="blog-post.html">
+                            <a href="/blog/{{ $new->id }}">
                                 <img src="{{ asset('/storage/blog/thumbnail/' . $new->src) }}" class="img-fluid"
                                     alt="Image">
                             </a>
                         </figure>
                         <div class="news-info">
                             <h4 class="title">
-                                <a href="/blog/.{{ $new->id }}">{{ $new->title }}</a>
+                                <a href="/blog/{{ $new->id }}">{{ $new->title }}</a>
                             </h4>
                             <p>{{ $new->long_desc }}</p>
                             <div class="post-meta">
                                 <span class="author">
-                                    <a href="#"><img
+                                    <a href="/blog/{{ $new->id }}"><img
                                             src="{{ asset('storage/users/thumbnail/' . $new->users->src) }}"
                                             width="16" alt="Image">
                                         {{ $new->users->name }}</a>
@@ -518,7 +519,7 @@
                                     <i class="fa fa-clock-o"></i>
                                     {{ date('d-m-Y', strtotime($new->updated_at)) }}</span>
                                 <span class="comments">
-                                    <a href="#">
+                                    <a href="/blog/{{ $new->id }}">
                                         <i class="fa fa-commenting-o"></i>
                                         {{ $new->comments->count() }} Comment</a>
                                 </span>
