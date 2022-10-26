@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('title');
             $table->text('long_desc');
             $table->integer('categorie_id')->references('id')->on('categorie_blogs');
-            $table->foreignId('users_id')->references('id')->on('users');
+            $table->foreignId('users_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('src');
             $table->timestamps();
         });

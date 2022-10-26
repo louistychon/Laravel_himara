@@ -198,7 +198,7 @@
                                 <h3>LATEST ROOMS</h3>
                                 <div class="inner">
                                     <ul class="latest-posts">
-                                        @foreach ($rooms4 as $room)
+                                        @foreach ($rooms5 as $room)
                                             <li>
                                                 <a href="room/{{ $room->id }}/show">{{ ucfirst(strtolower($room->name)) }}
                                                     - {{ $room->type->name }}</a>

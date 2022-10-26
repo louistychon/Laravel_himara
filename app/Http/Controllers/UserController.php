@@ -93,7 +93,6 @@ class UserController extends Controller
     {
         $this->middleware('isAdmin');
 
-
         $update = User::find($id);
         $update->name = $request->name;
         $update->email = $request->email;
