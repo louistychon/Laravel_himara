@@ -51,31 +51,35 @@ class BookingController extends Controller
         $store->reservation_id = rand(1008158585, 2500000000);
         $store->user_id = Auth::user()->id;
         $store->roomtype_id = $request->roomtype_id;
-        if ($request->room_id != null) {
-            $store->room_id = $request->room_id;
-            $roombooked = Room::where('id', '=', $request->room_id)->first();
-            $roombooked->show = 0;
-            $roombooked->save();
-        } else {
-            $randomroom = Room::where('roomtypes_id', $request->roomtype_id)
-            ->inRandomOrder()
-            ->pluck('id')
-            ->first();
-            $store->room_id = $randomroom;
-            $roombooked2 = Room::where('id', $randomroom)->first();
-            $roombooked2->show = 0;
-            $roombooked2->save();
-        }
         $store->number_adults = $request->number_adults;
         $store->number_children = $request->number_children;
         $store->name = $request->name;
         $store->email = $request->email;
         $store->phone = $request->phone;
         $store->booking_comment = $request->booking_comment;
+
+        //check si le room_id existe (res rapide ou res complete = au hasard. Res sur show rooms = room_id de la room )
+
+        if ($request->room_id != null) {
+            $store->room_id = $request->room_id;
+            //marque la room réservée
+            $roombooked = Room::where('id', '=', $request->room_id)->first();
+            $roombooked->show = 0;
+            $roombooked->save();
+        } else {
+            $randomroom = Room::where('roomtypes_id', $request->roomtype_id)
+                ->inRandomOrder()
+                ->pluck('id')
+                ->first();
+            $store->room_id = $randomroom;
+            //marque la room réservée
+            $roombooked2 = Room::where('id', $randomroom)->first();
+            $roombooked2->show = 0;
+            $roombooked2->save();
+        }
         $store->save();
-        
-        //marque la room réservée
-        
+
+
 
 
         //envoie les infos par mail

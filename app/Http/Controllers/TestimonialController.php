@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateTestimonialRequest;
 use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class TestimonialController extends Controller
@@ -26,15 +27,15 @@ class TestimonialController extends Controller
 
     public function create()
     {
-        $users = User::all();
         $rooms = Room::all();
-        return view('back.pages.testimonial.create', compact('users', 'rooms'));
+        return view('back.pages.testimonial.create', compact('rooms'));
     }
 
     public function store(Request $request)
     {
         $store = new Testimonial();
-        $store->user_id = $request->user_id;
+        $store->users_id = Auth::user()->id;
+        $store->rooms_id = $request->rooms_id;
         $store->rating = $request->rating;
         $store->text = $request->text;
         $store->save();
@@ -54,11 +55,12 @@ class TestimonialController extends Controller
     public function update(Request $request, $id)
     {
         $update = Testimonial::find($id);
-        $update->user_id = $request->user_id;
+        $update->users_id = Auth::user()->id;
+        $update->rooms_id = $request->rooms_id;
         $update->rating = $request->rating;
         $update->text = $request->text;
-
         $update->save();
+
         return redirect()->back();
     }
 

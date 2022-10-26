@@ -56,7 +56,7 @@
                                 </span>
                                 @endif
 
-                                <p>{{ Str::limit($roomii->long_desc, 50) }}</p>
+                                <p>{{ Str::limit($roomii->long_desc, 10) }}</p>
                                 <div class="room-services">
                                     @foreach ($roomii->services as $i => $service)
                                         @if ($i > 2)

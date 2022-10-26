@@ -2,16 +2,15 @@
 @section('content')
     <form action="/back/testimonials/create" method="post" enctype="multipart/form-data">
         @csrf
+      
         <div class="mb-6">
-            <label for="users_id" class="block mb-2 text-sm font-medium">User</label>
-        <select name="users_id" id="users_id">
-            @foreach ($users as $user)
-
-                    <option value="{{ $user->id }}" name="users_id" >{{ $user->name }}</option>
-            @endforeach
-        </select>
+            <label for="rooms_id" class="block mb-2 text-sm font-medium">Room</label>
+            <select name="rooms_id" >
+                @foreach ($rooms as $room)
+                <option value="{{ $room->id }}"  >{{ $room->name }}</option>
+                @endforeach
+            </select>
         </div>
-
         <div class="mb-6">
             <label for="rating" class="block mb-2 text-sm font-medium">rating</label>
             <input type="number" id="rating" min="0" max="5" name="rating" class="focus:ring-0">

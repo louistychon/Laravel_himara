@@ -4,21 +4,20 @@
         @csrf
         @method('put')
         <div class="mb-6">
-            <label for="users_id" class="block mb-2 text-sm font-medium">User</label>
-        <select name="users_id" id="users_id">
-            @foreach ($users as $user)
-                @if ($alltestimonials->user->id == $user->id)
-                    <option value="{{ $user->id }}" name="users_id" selected>{{ $user->name }}</option>
-                @else
-                    <option value="{{ $user->id }}" name="users_id" >{{ $user->name }}</option>
-                @endif
-            @endforeach
-        </select>
+            <label for="rooms_id" class="block mb-2 text-sm font-medium">Room</label>
+            <select name="rooms_id" class="flex justify-between mt-4 focus:ring-0" id="category">
+                @foreach ($rooms as $room)
+                    @if ($alltestimonials->rooms_id == $room->id)
+                        <option value="{{ $room->id }}" selected>{{ $room->name }}</option>
+                    @else
+                        <option value="{{ $room->id }}">{{ $room->name }}</option>
+                    @endif
+                @endforeach
+            </select>
         </div>
-
         <div class="mb-6">
             <label for="rating" class="block mb-2 text-sm font-medium">rating</label>
-            <input type="number" id="rating" min="0" max="5" name="rating" class="focus:ring-0" value="{{ $alltestimonials->rating }}">
+            <input type="number" id="rating" min="0" max="5" name="rating" class="focus:ring-0" value="{{$alltestimonials->rating}}">
         </div>
 
         <div class="mb-6">

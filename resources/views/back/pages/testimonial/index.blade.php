@@ -13,6 +13,9 @@
                         Rating
                     </th>
                     <th scope="col" class="py-3 px-6">
+                        Room
+                    </th>
+                    <th scope="col" class="py-3 px-6">
                         text
                     </th>
                     <th scope="col" class="py-3 px-6">
@@ -31,6 +34,9 @@
                         </td>
                         <td class="py-4 px-6">
                             {{ $testimonial->rating }}
+                        </td>
+                        <td class="py-4 px-6">
+                            {{ $testimonial->rooms_id}}
                         </td>
                         <td class="py-4 px-6">
                             {{ $testimonial->text }}

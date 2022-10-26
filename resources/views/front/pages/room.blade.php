@@ -440,7 +440,7 @@
                             <div class="form-group">
                                 <input class="form-control" name="email" type="email"
                                     placeholder="Your Email Address"
-                                    value="{{ Auth::user() ? Auth::user()->email : null }}" disabled>
+                                    value="{{ Auth::user() ? Auth::user()->email : "" }}" disabled>
                             </div>
                             <!-- ROOM ID -->
                             <div class="form-group">
@@ -452,7 +452,7 @@
                                 @foreach ($roomtypes as $roomtype)
                                     @if ($roomtype->id == $room->type->id)
                                         <input class="form-control" name="roomtype_id"
-                                            value="{{ $roomtype->id }}" hidden>
+                                            value="{{ $roomtype->id }}">
                                     @endif
                                 @endforeach
                             </div>
