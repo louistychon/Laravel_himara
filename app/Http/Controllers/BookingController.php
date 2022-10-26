@@ -39,7 +39,6 @@ class BookingController extends Controller
         //valide la requete
         $request->validate([
             'name' => 'required',
-            'user_id' => 'required',
             'roomtype_id' => 'required',
             'number_adults' => 'required|integer|max:10|min:1',
             'number_children' => 'required|integer|max:8',
@@ -52,14 +51,20 @@ class BookingController extends Controller
         $store->reservation_id = rand(1008158585, 2500000000);
         $store->user_id = Auth::user()->id;
         $store->roomtype_id = $request->roomtype_id;
-        if ($request->has('room_id')) {
-            $reserve = $request->room_id;
-            $store->room_id = $reserve;
+        if ($request->room_id != null) {
+            $store->room_id = $request->room_id;
+            $roombooked = Room::where('id', '=', $request->room_id)->first();
+            $roombooked->show = 0;
+            $roombooked->save();
         } else {
-            $store->room_id = Room::where('roomtypes_id', '=', $request->roomtype_id)
+            $randomroom = Room::where('roomtypes_id', $request->roomtype_id)
             ->inRandomOrder()
             ->pluck('id')
             ->first();
+            $store->room_id = $randomroom;
+            $roombooked2 = Room::where('id', $randomroom)->first();
+            $roombooked2->show = 0;
+            $roombooked2->save();
         }
         $store->number_adults = $request->number_adults;
         $store->number_children = $request->number_children;
@@ -68,12 +73,9 @@ class BookingController extends Controller
         $store->phone = $request->phone;
         $store->booking_comment = $request->booking_comment;
         $store->save();
-
+        
         //marque la room réservée
-
-        $roombooked = Room::find($reserve);
-        $roombooked->show = 0;
-        $roombooked->save();
+        
 
 
         //envoie les infos par mail
