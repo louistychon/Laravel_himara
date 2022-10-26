@@ -48,7 +48,7 @@ class MailController extends Controller
 
         Mail::to('louis.tychon1@gmail.com')->send(new ContactformRequest($maildata));
 
-        return redirect('/contact');
+        return redirect('/')->with('success', ' Your message was successfully sent!');
     }
 
     public function subscription(Request $request)
