@@ -29,8 +29,12 @@ class AuthServiceProvider extends ServiceProvider
             return $user->roles_id <= 2;
         });
 
-        FacadesGate::define('isAdmin', function (User $user, User $users) {
+        FacadesGate::define('isAdmin', function (User $user) {
             return $user->roles_id === 1;
+        });
+
+        FacadesGate::define('isEditor', function (User $user) {
+            return $user->roles_id <= 3;
         });
     }
 }
