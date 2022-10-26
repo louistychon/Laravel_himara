@@ -30,6 +30,12 @@ class MailController extends Controller
 
     public function mailcontact(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'message' => 'required',
+        ]);
+
         $store = new mails();
         $store->name = $request->name;
         $store->email = $request->email;

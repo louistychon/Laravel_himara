@@ -10,8 +10,8 @@
                     <p class="text-gray-400">You are logged in as : {{ Auth::user()->name }}</p>
                     <p class="text-gray-400">Your e-mail is : {{ Auth::user()->email }}</p>
                     <p class="text-gray-400">Your role is : {{ Auth::user()->roles->name }}</p>
-                    <a href="/back/users/{{ Auth::user()->id }}/show"><button class="btn-logout p-2 mt-2">Edit my
-                            info</button></a>
+                    @can('isAdmin')<a href="/back/users/{{ Auth::user()->id }}/show"><button class="btn-logout p-2 mt-2">Edit my
+                            info</button></a>@endcan
                 </div>
             </div>
         </div>

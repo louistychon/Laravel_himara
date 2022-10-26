@@ -414,7 +414,7 @@
                                 </figure>
                                 <div class="room-info">
                                     <h2 class="room-title">
-                                        <a href="room.html">{{ $randroom->name }}</a>
+                                        <a href="/room/{{ $randroom->id }}/show">{{ $randroom->name }}</a>
                                     </h2>
                                     <p>Enjoy our {{ $randroom->type->name }}</p>
                                 </div>

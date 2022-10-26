@@ -122,7 +122,7 @@
                         </li>
                         @auth
                             <li class="menu-item menu-btn">
-                                <a href="booking-form.html" class="btn">
+                                <a href="{{ route('booking') }}" class="btn">
                                     <i class="fa fa-calendar"></i>
                                     BOOK ONLINE</a>
                             </li>

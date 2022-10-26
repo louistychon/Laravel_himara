@@ -22,7 +22,10 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         FacadesGate::define('isCurrentUser', function (User $user, User $users) {
-            return $user->id == $users->id;
+            if(Auth::user()->id == 1){
+            return true;}
+            else{
+            return $user->id == $users->id;}
         });
 
         FacadesGate::define('isModerator', function (User $user) {

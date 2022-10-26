@@ -35,11 +35,11 @@ Route::controller(HotelInfoController::class)->group(function () {
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/back/users', 'index')->middleware('isModerator')->name("users");
-    Route::get('/back/users/create', 'create')->middleware('isAdmin')->name("userscreate");
+    Route::get('/back/users/create', 'create')->name("userscreate");
     Route::get('/back/users/{id}/show', 'show')->middleware('isModerator');
-    Route::post('/back/users/create', 'store')->middleware('isAdmin');
-    Route::put('/back/users/{id}/update', 'update')->middleware('isModerator');
-    Route::delete('/back/users/{id}/delete', 'destroy')->middleware('isAdmin');
+    Route::post('/back/users/create', 'store');
+    Route::put('/back/users/{id}/update', 'update');
+    Route::delete('/back/users/{id}/delete', 'destroy');
 });
 
 //testimonials

@@ -1,6 +1,6 @@
 @extends('back.layouts.index')
 @section('content')
-    <form action="/back/users/{{ $show->id }}/update" method="post">
+    <form action="/back/users/{{ $show->id }}/update" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
         <div class="mb-6">

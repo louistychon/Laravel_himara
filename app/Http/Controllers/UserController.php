@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -13,12 +14,11 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'isAdmin'])->except('index', 'show', 'update');
     }
 
     public function index()
     {
-        $this->middleware('isModerator');
 
         $allusers = User::all();
         return view('back.pages.users.index', compact('allusers'));
@@ -26,7 +26,6 @@ class UserController extends Controller
 
     public function create()
     {
-        $this->middleware('isAdmin');
 
 
         $roles = Role::all();
@@ -35,7 +34,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $this->middleware('isAdmin');
 
         $store = new User;
         $store->name = $request->name;
@@ -59,7 +57,7 @@ class UserController extends Controller
             $request->file('src')->storeAs('storage/users/thumbnail/', $filenametostore);
             //Resize image here
             $thumbnailpath = public_path('storage/users/thumbnail/' . $filenametostore);
-            $img = Image::make($thumbnailpath)->resize(500,500);
+            $img = Image::make($thumbnailpath)->resize(500, 500);
             $img->save();
             $store->src = $filenametostore;
         }
@@ -71,9 +69,6 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $this->middleware('isAdmin');
-
-
         $show = User::find($id);
         $roles = Role::all();
         return view('back.pages.users.show', compact('show', 'roles'));
@@ -81,7 +76,6 @@ class UserController extends Controller
 
     public function edit()
     {
-        $this->middleware('isAdmin');
 
         $allusers = User::all();
         return view('back.pages.users.edit', compact('allusers'));
@@ -89,44 +83,38 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->middleware('isAdmin');
+        $this->authorize('isCurrentUser', User::find($id));
 
         $update = User::find($id);
         $update->name = $request->name;
         $update->email = $request->email;
         $update->country = $request->country;
         $update->city = $request->city;
-        if ($request->has('roles_id')){
-        $update->roles_id = $request->roles_id;}
+        if ($request->has('roles_id')) {
+            $update->roles_id = $request->roles_id;
+        }
 
         if ($request->hasFile('src')) {
             Storage::delete('storage/users/thumbnail/' . $update->src);
             Storage::delete('storage/users/' . $update->src);
-            //get filename with extension
             $filenamewithextension = $request->file('src')->getClientOriginalName();
-            //get filename without extension
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-            //get file extension
             $extension = $request->file('src')->getClientOriginalExtension();
-            //filename to store
             $filenametostore = $filename . '_' . time() . '.' . $extension;
-            //Upload File
             $request->file('src')->storeAs('storage/users/', $filenametostore);
             $request->file('src')->storeAs('storage/users/thumbnail/', $filenametostore);
-            //Resize image here
             $thumbnailpath = public_path('storage/users/thumbnail/' . $filenametostore);
-            $img = Image::make($thumbnailpath)->resize(500,500);
+            $img = Image::make($thumbnailpath)->resize(500, 500);
             $img->save();
             $update->src = $filenametostore;
-            $update->save();
         }
 
+        $update->save();
         return redirect()->back();
     }
 
     public function destroy($id)
     {
-        $this->middleware('isAdmin');
 
         $todelete = User::find($id);
         Storage::delete('storage/users/thumbnail/' . $todelete->src);
