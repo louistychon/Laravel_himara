@@ -25,8 +25,7 @@
                 <input type="text" id="text_intro" name="text_intro" class="focus:ring-0"
                     value="{{ $text->text_intro }}">
             </div>
-
-
+            
             <div class="mb-6">
                 <label for="stars" class="block mb-2 text-sm font-medium">Stars card</label>
                 <input type="number" id="stars" name="stars" class="focus:ring-0" value="{{ $text->stars }}">
@@ -35,6 +34,11 @@
                 <label for="text_card" class="block mb-2 text-sm font-medium">Text in card about</label>
                 <input type="text" id="text_card" name="text_card" class="focus:ring-0" value="{{ $text->text_card }}">
             </div>
+            <div class="mb-6">
+                <label for="title_card" class="block mb-2 text-sm font-medium">Title card</label>
+                <input type="text" id="title_card" name="title_card" class="focus:ring-0" value="{{ $text->title_card }}">
+            </div>
+
             <div class="mb-6">
                 <label for="title_rooms" class="block mb-2 text-sm font-medium">Title rooms</label>
                 <input type="title_rooms" id="title_rooms" name="title_rooms" class="focus:ring-0"
@@ -56,6 +60,18 @@
                 <label for="under_title_services" class="block mb-2 text-sm font-medium">Under title services</label>
                 <input type="text" id="under_title_services" name="under_title_services" class="focus:ring-0"
                     value="{{ $text->under_title_services }}">
+            </div>
+
+            <div class="mb-6">
+                <label for="title_restaurant" class="block mb-2 text-sm font-medium">Title services</label>
+                <input type="text" id="title_restaurant" name="title_restaurant" class="focus:ring-0"
+                    value="{{ $text->title_restaurant}}">
+            </div>
+
+            <div class="mb-6">
+                <label for="under_title_restaurant" class="block mb-2 text-sm font-medium">Under title services</label>
+                <input type="text" id="under_title_restaurant" name="under_title_restaurant" class="focus:ring-0"
+                    value="{{ $text->under_title_restaurant }}">
             </div>
 
             <div class="mb-6">

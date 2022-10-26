@@ -73,6 +73,8 @@ class HomeController extends Controller
             'button_contact' => 'required|max:100',
             'video_link' => 'required|max:100',
             'src' => 'image | mimes:jpeg,png,jpg,gif',
+            'background_image_video' => 'image | mimes:jpeg,png,jpg,gif',
+            'background_image_restaurant' => 'image | mimes:jpeg,png,jpg,gif',
         ]);
 
 
@@ -131,8 +133,8 @@ class HomeController extends Controller
             //filename to store
             $filenametostore = $filename . '_' . time() . '.' . $extension;
             //Upload File
-            $request->file('background_image_restaurant')->storeAs('storage/', $filenametostore);
-            $request->file('background_image_restaurant')->storeAs('storage/thumbnail/', $filenametostore);
+            $request->file('background_image_restaurant')->storeAs('storage/backgrounds/', $filenametostore);
+            $request->file('background_image_restaurant')->storeAs('storage/backgrounds/thumbnail/', $filenametostore);
             //Resize image here
             $thumbnailpath = public_path('storage/backgrounds/thumbnail/' . $filenametostore);
             $img = Image::make($thumbnailpath)->resize(1392, 394);

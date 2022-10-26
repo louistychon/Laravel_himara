@@ -33,6 +33,14 @@ class TestimonialController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'rooms_id' => 'required|integer',
+            'rating' => 'required|integer',
+            'text' => 'required|min:50'
+        ]);
+
+
+
         $store = new Testimonial();
         $store->users_id = Auth::user()->id;
         $store->rooms_id = $request->rooms_id;
@@ -54,6 +62,12 @@ class TestimonialController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'rooms_id' => 'required|integer',
+            'rating' => 'required|integer',
+            'text' => 'required|min:50'
+        ]);
+
         $update = Testimonial::find($id);
         $update->users_id = Auth::user()->id;
         $update->rooms_id = $request->rooms_id;
