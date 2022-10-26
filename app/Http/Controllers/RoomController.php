@@ -184,7 +184,7 @@ class RoomController extends Controller
         return view('back.pages.room.show', compact('show', 'tags', 'services', 'roomtypes'));
     }
 
-    public function searchtags(Roomtags $tag)
+    public function searchtags(Roomtags $q)
     {
         $allrooms = Room::with('tags')->whereDoesntHave('tags', function ($q) {
             $q->where('tag', '=', 'id');
