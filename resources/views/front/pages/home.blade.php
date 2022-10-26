@@ -217,22 +217,24 @@
                                 </div>
                             </div>
                             <!-- BOOKING BUTTON -->
-                            <div class="col-md-2">
-                                @auth
+                                @if(Auth::check() == true)
+                                <div class="col-md-2">
                                     <button type="submit" class="btn btn-book">BOOK A ROOM</button>
                                     <div class="advanced-form-link">
                                         <a href="{{route('booking')}}">
                                             Advanced Booking Form
                                         </a>
                                     </div>
-                                @endauth
-                                @guest
-                                    <a href="{{ route('login') }}">
-                                        <button type="submit" class="btn btn-book">Log in first</button></a>
-                                @endguest
-                            </div>
-                        </div>
-                    </form>
+                                </div>
+                                @else
+                                <div class="col-md-2">
+                                    <a href="{{route('login')}}" target="_blank">
+                                        <button class="btn btn-book">Log in first</button>
+                                    </a>
+                                </div>
+                                @endif
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -586,7 +588,8 @@
                     <h4>{{ $text->title_contact2 }}</h4>
                     <p class="section-subtitle">{{ $text->under_title_contact2 }}</p>
                 </div>
-                <form id="contact-form" name="contact-form">
+                <form name="contact-form" method="post" action="/mail/contact">
+                    @csrf
                     <div class="form-group">
                         <input class="form-control" name="name" placeholder="Your Name" type="text">
                     </div>
