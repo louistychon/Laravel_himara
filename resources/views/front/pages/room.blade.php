@@ -171,7 +171,7 @@
                         <div class="col-sm-4">
                             <ul class="list-unstyled">
                                 @foreach ($services as $i => $service)
-                                    @if ($i > 0 && $i <= 4)
+                                    @if ($i >= 0 && $i <= 3)
                                         <li>
                                             <i
                                                 class="fa
@@ -186,7 +186,7 @@
                         <div class="col-sm-4">
                             <ul class="list-unstyled">
                                 @foreach ($services as $i => $service)
-                                    @if ($i > 4 && $i <= 8)
+                                    @if ($i >= 4 && $i <= 7)
                                         <li>
                                             <i
                                                 class="fa
@@ -201,7 +201,7 @@
                         <div class="col-sm-4">
                             <ul class="list-unstyled">
                                 @foreach ($services as $i => $service)
-                                    @if ($i > 8 && $i <= 12)
+                                    @if ($i >= 8 && $i <= 12)
                                         <li>
                                             <i
                                                 class="fa
