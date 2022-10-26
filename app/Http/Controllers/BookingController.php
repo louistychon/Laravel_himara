@@ -31,16 +31,21 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
+
+        //découpe la date
+
         $arr = explode(" - ", $request->date_start, 2);
 
+        //valide la requete
         $request->validate([
             'name' => 'required',
+            'user_id' => 'required',
             'roomtype_id' => 'required',
             'number_adults' => 'required|integer|max:10|min:1',
             'number_children' => 'required|integer|max:8',
         ]);
 
-
+        //store le nouveau booking en DB
         $store = new Booking();
         $store->date_start = $arr[0];
         $store->date_end = $arr[1];
@@ -48,7 +53,8 @@ class BookingController extends Controller
         $store->user_id = Auth::user()->id;
         $store->roomtype_id = $request->roomtype_id;
         if ($request->has('room_id')) {
-            $store->room_id = $request->room_id;
+            $reserve = $request->room_id;
+            $store->room_id = $reserve;
         } else {
             $store->room_id = Room::where('roomtypes_id', '=', $request->roomtype_id)
             ->inRandomOrder()
@@ -62,6 +68,15 @@ class BookingController extends Controller
         $store->phone = $request->phone;
         $store->booking_comment = $request->booking_comment;
         $store->save();
+
+        //marque la room réservée
+
+        $roombooked = Room::find($reserve);
+        $roombooked->show = 0;
+        $roombooked->save();
+
+
+        //envoie les infos par mail
 
         $bookinginfo = [
             'name' => $request->get('name'),

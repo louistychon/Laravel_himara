@@ -385,7 +385,7 @@
                     <div class="row">
                         <!-- ITEM -->
                         @foreach ($randrooms as $randroom)
-                            @if ($randroom->type->id = $room->type->id)
+                            @if ($randroom->roomtypes_id == $room->roomtypes_id && $randroom->id != $room->id)
                                 <div class="col-md-4">
                                     <div class="room-grid-item">
                                         <figure class="gradient-overlay-hover link-icon">
@@ -442,9 +442,9 @@
                                     placeholder="Your Email Address"
                                     value="{{ Auth::user() ? Auth::user()->email : null }}" disabled>
                             </div>
-                            <!-- ROOM NAME -->
+                            <!-- ROOM ID -->
                             <div class="form-group">
-                                <input name="room_id" value="{{ $room->id }}" hidden>
+                                <input name="room_id" value="{{ $room->id }}">
                             </div>
 
                             <!-- ROOM TYPE -->
@@ -567,19 +567,16 @@
                 <div class="inner">
                     <ul class="useful-links">
                         <li>
-                            <a href="about-us.html">About Us</a>
+                            <a href="{{route('contact')}}">About Us</a>
                         </li>
                         <li>
-                            <a href="contact.html">Contact Us</a>
+                            <a href="{{route('contact')}}">Contact Us</a>
                         </li>
                         <li>
-                            <a href="shop.html">Shop</a>
+                            <a href="{{route('gallery')}}">Himara Gallery</a>
                         </li>
                         <li>
-                            <a href="gallery.html">Himara Gallery</a>
-                        </li>
-                        <li>
-                            <a href="location.html">Our Location</a>
+                            <a href="{{route('contact')}}">Our Location</a>
                         </li>
                     </ul>
                 </div>
@@ -628,8 +625,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <div class="copyrights">&copy; 2018 Hotel Himara. Designed by
-                <a href="https://eagle-themes.com/" target="_blank">Eagle-Themes</a>.
+            <div class="copyrights">&copy; Designed by Louis Tychon
             </div>
         </div>
         <div class="col-md-6">

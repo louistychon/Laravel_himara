@@ -44,7 +44,7 @@ class RoomController extends Controller
         $room = Room::find($id);
         $rooms = Room::all()->take(3);
         $roomtypes = RoomType::all();
-        $randrooms = Room::all()->shuffle()->take(3);
+        $randrooms = Room::all();
         $services = RoomService::all();
         $ratings = $testimonials->avg('rating');
         $ratings = number_format($ratings, 2);

@@ -41,7 +41,7 @@
         </div>
 
         <div class="mb-6">
-            <label for="max_guests" class="block mb-2 text-sm font-medium">Max guests</label>
+            <label for="max_guests" class="block mb-2 text-sm font-medium" max="15" min="1">Max guests</label>
             <input type="number" id="max_guests" name="max_guests" class="focus:ring-0" value="{{ old('max_guests') }}">
         </div>
 
