@@ -34,9 +34,12 @@ class BookingController extends Controller
         $arr = explode(" - ", $request->date_start, 2);
 
         $request->validate([
-            'number_adults' => 'required|integer|max:8',
+            'name' => 'required',
+            'roomtype_id' => 'required',
+            'number_adults' => 'required|integer|max:10|min:1',
             'number_children' => 'required|integer|max:8',
         ]);
+
 
         $store = new Booking();
         $store->date_start = $arr[0];
@@ -48,9 +51,9 @@ class BookingController extends Controller
             $store->room_id = $request->room_id;
         } else {
             $store->room_id = Room::where('roomtypes_id', '=', $request->roomtype_id)
-                ->inRandomOrder()
-                ->pluck('id')
-                ->first();
+            ->inRandomOrder()
+            ->pluck('id')
+            ->first();
         }
         $store->number_adults = $request->number_adults;
         $store->number_children = $request->number_children;

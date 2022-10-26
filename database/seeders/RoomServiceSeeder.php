@@ -18,7 +18,7 @@ class RoomServiceSeeder extends Seeder
         DB::table('room_services')->insert([
             ['name' => 'TV', 'small_desc' => 'Plasma TV with cable channels','icon_classname' => 'fa-tv'],
             ['name' => 'DOUBLE BED', 'small_desc' => 'Big bed for you and your loved one', 'icon_classname' => 'fa-bed'],
-            ['name' => 'FREE INTERNET', 'small_desc' => 'Free internet', 'icon_classname' => 'fa-wifi'],
+            ['name' => 'FREE INTERNET', 'small_desc' => 'Free internet', 'icon_classname' => 'fa-suitcase'],
             ['name' => 'FREE WI-FI', 'small_desc' => 'Free wi-fi in rooms', 'icon_classname' => 'fa-wifi'],
             ['name' => 'BREAKFAST INCLUDED', 'small_desc' => 'Best breakfast in town', 'icon_classname' => 'fa-coffee'],
             ['name' => 'PRIVATE BALCONY', 'small_desc' => 'The balcony is private', 'icon_classname' => 'fa-building'],

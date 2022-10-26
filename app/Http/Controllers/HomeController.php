@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index(){
         $allslider = Slider::orderBy('place')->get();
         $dishes = Dish::all();
-        $galleryimgs = GalleryImg::take(8);
+        $galleryimgs = GalleryImg::all()->take(8);
         $partners = Partner::all();
         $services = Service::all()->take(4);
         $blogpost = Article::all()->take(3);

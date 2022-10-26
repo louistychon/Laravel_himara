@@ -33,7 +33,7 @@
                                     data-responsive_offset="on" data-whitespace="nowrap"
                                     data-frames='[{"delay":2400,"speed":1500,"frame":"0","from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","mask":"x:0px;y:[100%];s:inherit;e:inherit;","to":"o:1;","ease":"Power2.easeInOut"},{"delay":"wait","speed":500,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
                                     style="z-index: 11;">
-                                    <a class="btn" href="booking-form.html">
+                                    <a class="btn" href="/booking-form">
                                         <i class="fa fa-calendar"></i>{{ $slide->button1_text }}</a>
                                 </div>
                             @endif
@@ -55,7 +55,7 @@
                                 data-responsive_offset="on" data-whitespace="nowrap"
                                 data-frames='[{"delay":2400,"speed":1500,"frame":"0","from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","mask":"x:0px;y:[100%];s:inherit;e:inherit;","to":"o:1;","ease":"Power2.easeInOut"},{"delay":"wait","speed":500,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
                                 style="z-index: 11;">
-                                <a class="btn" href="contact.html">
+                                <a class="btn" href="/contact">
                                     <i class="fa fa-envelope-o" aria-hidden="true"></i>{{ $slide->button2_text }}</a>
                             </div>
                         @endif
@@ -325,7 +325,7 @@
                         </figure>
                         <div class="room-info">
                             <h2 class="room-title">
-                                <a href="room.html">{{ $room->name }}</a>
+                                <a href="/room/{{ $room->id }}/show">{{ $room->name }}</a>
                             </h2>
                             <p>Enjoy our {{ $room->type->name }}</p>
                         </div>
