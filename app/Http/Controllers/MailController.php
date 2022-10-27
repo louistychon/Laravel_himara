@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactformRequest;
+use App\Mail\Reviewtovalidate;
 use App\Mail\SubscriptionConfirmed;
 use App\Models\mails;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -66,13 +68,30 @@ class MailController extends Controller
           ];
 
         Mail::to('louis.tychon1@gmail.com')->send(new SubscriptionConfirmed($maildatassubscription));
+    }
 
 
+
+    public function reviewtovalidate(Request $request)
+    {
+        $store = new Testimonial();
+        $store->rooms_id = $request->rooms_id;
+        $store->text = $request->text;
+        $store->rating = $request->rating;
+        $store->save();
+
+        $inforeviewtovalidate = [
+            'rooms_id' => $request->rooms_id,
+            'text' => $request->text,
+            'rating' => $request->rating,
+          ];
+
+        Mail::to('louis.tychon1@gmail.com')->send(new Reviewtovalidate($inforeviewtovalidate));
     }
 
     public function reservation()
     {
-        //
+        //instructions in the booking controller
     }
 
 

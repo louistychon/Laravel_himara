@@ -15,7 +15,7 @@ class TestimonialController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'isModerator']);
+        $this->middleware(['auth', 'isModerator'])->except('store');
     }
 
     public function index()
@@ -38,16 +38,26 @@ class TestimonialController extends Controller
             'rating' => 'required|integer',
             'text' => 'required|min:50'
         ]);
-
-
-
+        if(Auth::user()->roles_id <=2){
         $store = new Testimonial();
         $store->users_id = Auth::user()->id;
         $store->rooms_id = $request->rooms_id;
         $store->rating = $request->rating;
+        $store->show = 1;
         $store->text = $request->text;
         $store->save();
-        return redirect()->back();
+        return redirect('/')->with('success', 'Review successfully created');
+        }
+        else{
+        $store = new Testimonial();
+        $store->users_id = Auth::user()->id;
+        $store->rooms_id = $request->rooms_id;
+        $store->rating = $request->rating;
+        $store->show = 0;
+        $store->text = $request->text;
+        $store->save();
+        return redirect('/')->with('success', 'After approval of our team, your review will be published.');}
+
     }
 
     public function show($id)
