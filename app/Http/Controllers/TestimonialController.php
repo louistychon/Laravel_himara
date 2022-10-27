@@ -48,7 +48,7 @@ class TestimonialController extends Controller
         $store->show = 1;
         $store->text = $request->text;
         $store->save();
-        return redirect('/')->with('success', 'Review successfully created');
+        return redirect('/back/testimonials/')->with('success', 'Review successfully created');
         }
         else{
         $store = new Testimonial();
@@ -91,7 +91,7 @@ class TestimonialController extends Controller
         $update->text = $request->text;
         $update->save();
 
-        return redirect()->back();
+        return redirect('/back/testimonials/')->with('success', 'review updated.');
     }
 
     public function destroy($id)

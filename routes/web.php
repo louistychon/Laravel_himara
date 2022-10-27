@@ -115,7 +115,6 @@ Route::controller(BlogController::class)->group(function () {
     Route::post('/back/blog/create', 'store');
     Route::put('/back/blog/{id}/update', 'update');
     Route::delete('/back/blog/{id}/delete', 'destroy');
-    Route::get('search', 'searcharticle')->name('blogsearch');
 });
 
 //booking

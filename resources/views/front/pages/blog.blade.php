@@ -54,16 +54,18 @@
 
               </div>
               <!-- ========== PAGINATION ========== -->
+              @if(! \request('searchbar') && ! \request('category'))
              {{$articles->links()}}
+             @endif
             </div>
             <!-- SIDEBAR -->
             <div class="col-lg-3 col-12">
               <div class="sidebar">
                 <aside class="widget noborder">
                   <div class="search">
-                    <form class="widget-search" action={{url('search')}} method="get">
-                      <input type="search" placeholder="Search" name="search" value="{{Request::get('search')}}">
-                      <button class="btn-search" id="searchsubmit" type="submit" data-action="{{ route('blogsearch')}}">
+                    <form class="widget-search">
+                      <input type="search" placeholder="Search" name="searchbar">
+                      <button class="btn-search" id="searchsubmit" type="submit">
                         <i class="fa fa-search"></i>
                       </button>
                     </form>
@@ -74,9 +76,8 @@
                     <h4 class="widget-title">CATEGORIES</h4>
                     <ul class="categories">
                         @foreach ($categories as $category)
-
                         <li>
-                            <a href="#">{{$category->name}}<span class="posts-num">{{$category->articles_count}}</span></a>
+                            <a href="?category={{$category->id}}">{{$category->name}}<span class="posts-num">{{$category->articles_count}}</span></a>
                         </li>
                         @endforeach
                     </ul>

@@ -25,8 +25,17 @@ class BlogController extends Controller
 
     public function index(Request $request)
     {
-        $tags = Tags::all();
         $articles = Article::all();
+        $searchbar = \request('searchbar');
+        if(\request('searchbar')){
+            $articles = Article::where('title', 'Like', "%". $searchbar ."%")->get();
+        }
+
+        if(\request('category')){
+            $articles = Article::where('categorie_id',\request('category'))->get();
+        }
+
+        $tags = Tags::all();
         // $categories = CategorieBlog::all();
         $categories = CategorieBlog::withCount('articles')->get(); //compte le nombre de categories + renvoie les infos
 
