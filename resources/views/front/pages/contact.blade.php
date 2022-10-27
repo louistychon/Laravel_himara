@@ -51,7 +51,7 @@
                                 allowfullscreen
                                 referrerpolicy="no-referrer-when-downgrade"
                                 src="https://www.google.com/maps/embed/v1/place?key=AIzaSyALbVaXhUfCrNshLggJurnIsKAp6OUD1xw
-                                  &q={{$info->search_map}}&center={{$info->coordinates_x}},{{$info->coordinates_y}}">
+                                  &q={{$info->search_map}}">
                               </iframe>
                               @endforeach
                             </div>

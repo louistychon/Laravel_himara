@@ -52,6 +52,11 @@
                 <label for="coordinates_y" class="block mb-2 text-sm font-medium">Coordinates Y</label>
                 <input type="text" id="coordinates_y" name="coordinates_y" class="focus:ring-0" value="{{ $info->coordinates_y }}">
             </div>
+            <div class="mb-6">
+                <label for="search_map" class="block mb-2 text-sm font-medium">Search on the map (pointer)</label>
+                <input type="text" id="search_map" name="search_map" class="focus:ring-0" value="{{ $info->search_map }}">
+            </div>
+
         @endforeach
         <button type="submit" class="btn-logout font-medium text-sm px-5 py-2.5 mr-2 mb-2">Confirm modifications</button>
     </div>
