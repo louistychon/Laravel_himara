@@ -44,8 +44,8 @@
                             <div id="map-canvas">
                                 @foreach ($hotelinfo as $info)
                                 <iframe
-                                width="600"
-                                height="450"
+                                width="350"
+                                height="400"
                                 style="border:0"
                                 loading="lazy"
                                 allowfullscreen
