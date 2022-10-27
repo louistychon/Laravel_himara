@@ -406,6 +406,7 @@
     </section>
 @endif
 <!-- ========== TESTIMONIALS ========== -->
+@if($testimonials->count() > 0)
 <section class="testimonials gray">
     <div class="container">
         <div class="section-title">
@@ -439,6 +440,7 @@
     </div>
     </div>
 </section>
+@endif
 <!-- ========== RESTAURANT ========== -->
 @if ($dishes->count() > 0)
 <section class="restaurant image-bg parallax gradient-overlay op5"
@@ -488,6 +490,7 @@
 </section>
 @endif
 <!-- ========== NEWS ==========-->
+@if ($blogpost->count() > 0)
 <section class="news">
     <div class="container">
         <div class="section-title">
@@ -509,7 +512,7 @@
                             <h4 class="title">
                                 <a href="/blog/{{ $new->id }}">{{ $new->title }}</a>
                             </h4>
-                            <p>{{ $new->long_desc }}</p>
+                            <p>{{ Str::limit($new->long_desc, 100) }}</p>
                             <div class="post-meta">
                                 <span class="author">
                                     <a href="/blog/{{ $new->id }}"><img
@@ -533,6 +536,7 @@
         </div>
     </div>
 </section>
+@endif
 <!-- ========== VIDEO ========== -->
 <section class="video np parallax gradient-overlay op6"
     data-src="{{ asset('/storage/backgrounds/thumbnail/' . $text->background_image_video) }}"

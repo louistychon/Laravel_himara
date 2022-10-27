@@ -52,7 +52,7 @@
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     @endif
                                     <a href="/room/{{ $roomii->id }}/show">
-                                        {{floor($roomii->reviews->avg('rating'))}} Based on {{$roomii->reviews->count()}} Ratings</a>
+                                        {{floor($roomii->reviews->avg('rating'))}} Based on {{$roomii->reviews->where('show', 1)->count()}} Ratings</a>
                                 </span>
                                 @endif
 

@@ -17,10 +17,10 @@
             <input type="text" class="focus:ring-0" id="caption" name="caption">
         </div>
         <label for="icon" class="block mb-2 text-sm font-medium dark:text-gray-400">Icon</label>
-        <fieldset id="role" name="icon_id">
+        <fieldset id="role" name="icon_id" class="">
             <div class="flex">
                 @foreach ($icons as $icon)
-                    <div class="flex flex-col justify-between items-center m-auto">
+                <div class="flex flex-col justify-between items-center m-auto">
                         <i class="{{ 'fa ' . $icon->src }}" class="ms-0"></i>
                         <input type="radio" value="{{ $icon->id }}" class="mt-2 focus:ring-0" name="icon_id">
                     </div>

@@ -21,19 +21,21 @@
 
         <label for="icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Icon</label>
         <fieldset id="icon" name="icon_id" class="focus:ring-0">
-            @foreach ($icons as $icon)
-                @if ($show->icon_id == $icon['id'])
-                <div class="flex flex-col justify-between items-center m-auto">
-                    <i class="{{ 'fa ' . $icon->src }}"></i>
-                    <input type="radio" class="focus:ring-0" value="{{ $icon->id }}" name="icon_id" checked>
+            <div class="flex justify-between items-center m-auto">
+                @foreach ($icons as $icon)
+                @if ($show->icon_id == $icon->id)
+                <div class="flex flex-col justify-between items-center">
+                    <i class="{{ 'fa ' . $icon->src }}" class="ms-0"></i>
+                    <input type="radio" class="mt-2 focus:ring-0" value="{{ $icon->id }}" name="icon_id" checked>
                 </div>
                 @else
-                <div class="flex flex-col justify-between items-center m-auto">
-                    <i class="{{ 'fa ' . $icon->src }}"></i>
-                    <input type="radio" class="focus:ring-0" value="{{ $icon->id }}" name="icon_id">
+                <div class="flex flex-col justify-between items-center">
+                    <i class="{{ 'fa ' . $icon->src }}" class="ms-0"></i>
+                    <input type="radio" class="mt-2 focus:ring-0" value="{{ $icon->id }}" name="icon_id">
                 </div>
                 @endif
             @endforeach
+            </div>
         </fieldset>
 
         <div class="mb-6">

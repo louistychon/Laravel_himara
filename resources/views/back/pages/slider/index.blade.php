@@ -48,7 +48,7 @@
                             <p class="text-gray-400">{{$slide->place}}</p>
                         </td>
                         <td class="py-4 px-6">
-                            <img class="" src="{{asset('storage/slider/thumnail/'. $slide->src)}}">
+                            <img class="" src="{{asset('storage/slider/thumbnail/'. $slide->src)}}">
                         </td>
                         <td class="py-4 px-6">
                             {{ $slide->header_stars}}

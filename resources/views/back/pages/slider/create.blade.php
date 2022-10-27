@@ -3,6 +3,14 @@
     <form action="/back/slider/create" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-6">
+            <label for="place" class="block mb-2 text-sm font-medium">place in slide</label>
+        <select name="place" id="place">
+            @for ($i = 1; $i <= 15; $i++)
+                    <option name="place" value="{{ $i }}">{{ $i }}</option>
+            @endfor
+        </select>
+    </div>
+        <div class="mb-6">
             <label for="src" class="block mb-2 text-sm font-medium">Image</label>
             <input type="file" id="src" name="src" class="mt-4 border border-gray-300 form-control">
         </div>

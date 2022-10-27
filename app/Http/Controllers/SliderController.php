@@ -29,6 +29,7 @@ class SliderController extends Controller
 
     public function store(Request $request)
     {
+
         $store = new Slider();
         $store->header_stars = $request->header_stars;
         $store->number_stars = $request->number_stars;
@@ -36,6 +37,7 @@ class SliderController extends Controller
         $store->slogan = $request->slogan;
         $store->button1_text = $request->button1_text;
         $store->button2_text = $request->button2_text;
+        $store->place = $request->place;
 
         if ($request->hasFile('src')) {
             //get filename with extension
@@ -53,8 +55,8 @@ class SliderController extends Controller
             $thumbnailpath = public_path('storage/slider/thumbnail/' . $filenametostore);
             $img = Image::make($thumbnailpath)->resize(1920, 1280);
             $img->save();
+            $store->src = $filenametostore;
         }
-        $store->src = $filenametostore;
         $store->save();
         return redirect()->back();
     }
