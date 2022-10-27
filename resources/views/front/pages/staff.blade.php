@@ -12,7 +12,7 @@
                         <div class="staff-item">
                             <figure>
                                 <img src="{{ asset('storage/staff/thumbnail/' . $ceo->src) }}" class="img-fluid" alt="Image">
-                                <div class="position">{{ $ceo->title }}</div>
+                                <div class="position">{{ $ceo->role->name  }}</div>
                             </figure>
                             <div class="details">
                                 <h5>{{ $ceo->name }}</h5>
@@ -27,7 +27,7 @@
                             <figure>
                                 <img src="{{ asset('storage/staff/thumbnail/' . $staffmember->src) }}" class="img-fluid"
                                     alt="Image">
-                                <div class="position">{{ $staffmember->title }}</div>
+                                <div class="position">{{ $staffmember->role->name }}</div>
                             </figure>
                             <div class="details">
                                 <h5>{{ $staffmember->name }}</h5>

@@ -16,7 +16,15 @@
 
         <div class="mb-6">
             <label for="title" class="block mb-2 text-sm font-medium">Title</label>
-            <input type="text" id="title" name="title" class="focus:ring-0" value="{{ $show->title }}">
+            <select name="title" >
+                @foreach ($staffroles as $staffrole)
+                @if ($show->role->id == $staffrole->id)
+                <option value="{{ $staffrole->id }}" name="filtergalleries_id" selected>{{ $staffrole->name }}</option>
+            @else
+                <option value="{{ $staffrole->id }}" name="filtergalleries_id" >{{ $staffrole->name }}</option>
+            @endif
+                @endforeach
+            </select>
         </div>
 
         <div class="mb-6">

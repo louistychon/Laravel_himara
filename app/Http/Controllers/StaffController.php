@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Staff;
+use App\Models\Staffroles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -17,6 +18,7 @@ class StaffController extends Controller
 
     public function index()
     {
+
         $showceo = Staff::all()->where('id', '=', 1);
         $ceo = [1];
         $allstaff = Staff::inRandomOrder()->whereNotIn('id', $ceo)->take(7)->get();
@@ -31,7 +33,8 @@ class StaffController extends Controller
 
     public function create()
     {
-        return view('back.pages.staff.create');
+        $staffroles = Staffroles::all();
+        return view('back.pages.staff.create', compact('staffroles'));
     }
 
 
@@ -66,8 +69,9 @@ class StaffController extends Controller
 
     public function show($id)
     {
+        $staffroles = Staffroles::all();
         $show = Staff::find($id);
-        return view('back.pages.staff.show', compact('show'));
+        return view('back.pages.staff.show', compact('show', 'staffroles'));
     }
 
     public function update(Request $request, $id)

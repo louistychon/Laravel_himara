@@ -293,7 +293,7 @@
         <section class="rooms gray">
             <div class="container">
                 <div class="section-title">
-                    <h4>{{ $text->title_rooms }}</h4>
+                    <h4>{!! $text->title_rooms !!}</h4>
                     <p class="section-subtitle">{{ $text->under_title_rooms }}</p>
                     <a href="{{ route('List of rooms') }}" class="view-all">View all rooms</a>
                 </div>
@@ -343,7 +343,7 @@
     <section class="services">
         <div class="container">
             <div class="section-title">
-                <h4>{{ $text->title_services }}</span></h4>
+                <h4>{!! $text->title_services !!}</span></h4>
                 <p class="section-subtitle">{{ $text->under_title_services }}</p>
             </div>
             <div class="row">
@@ -385,7 +385,7 @@
     <section class="gallery">
         <div class="container">
             <div class="section-title">
-                <h4>{{ $text->title_gallery }}</h4>
+                <h4>{!! $text->title_gallery !!}</h4>
                 <p class="section-subtitle">{{ $text->under_title_gallery }}</p>
                 <a href="{{ route('gallery') }}" class="view-all">View gallery images</a>
             </div>
@@ -409,7 +409,7 @@
 <section class="testimonials gray">
     <div class="container">
         <div class="section-title">
-            <h4>{{ $text->title_testimonial }}</h4>
+            <h4>{!! $text->title_testimonial !!}</h4>
             <p class="section-subtitle">{{ $text->under_title_services }}</p>
         </div>
         <div class="owl-carousel testimonials-owl">
@@ -446,7 +446,7 @@
     data-parallax="scroll" data-speed="0.3" data-mirror-selector=".wrapper" data-z-index="0">
     <div class="container">
         <div class="section-title">
-            <h4>{{ $text->title_restaurant }}</h4>
+            <h4>{!! $text->title_restaurant !!}</h4>
             <p class="section-subtitle">{{ $text->under_title_restaurant }}</p>
         </div>
         <div class="row">
@@ -491,7 +491,7 @@
 <section class="news">
     <div class="container">
         <div class="section-title">
-            <h4 class="title">{{ $text->title_news }}</h4>
+            <h4 class="title">{!! $text->title_news !!}</h4>
             <p class="section-subtitle">{{ $text->under_title_news }}</p>
         </div>
         <div class="row">
@@ -554,7 +554,7 @@
         <div class="row">
             <div class="col-md-5">
                 <div class="section-title">
-                    <h4>{{ $text->title_contact1 }}</h4>
+                    <h4>{!! $text->title_contact1 !!}</h4>
                     <p class="section-subtitle">{{ $text->under_title_contact1 }}</p>
                 </div>
                 <ul class="contact-details">
@@ -585,7 +585,7 @@
             </div>
             <div class="col-md-7">
                 <div class="section-title">
-                    <h4>{{ $text->title_contact2 }}</h4>
+                    <h4>{!! $text->title_contact2 !!}</h4>
                     <p class="section-subtitle">{{ $text->under_title_contact2 }}</p>
                 </div>
                 <form name="contact-form" method="post" action="/mail/contact">

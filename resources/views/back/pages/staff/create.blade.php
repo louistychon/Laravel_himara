@@ -14,7 +14,11 @@
 
         <div class="mb-6">
             <label for="title" class="block mb-2 text-sm font-medium">Title</label>
-            <input type="title" id="title" name="title" class="focus:ring-0">
+            <select name="title" >
+                @foreach ($staffroles as $staffrole)
+                <option value="{{ $staffrole->id }}"  >{{ $staffrole->name }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="mb-6">

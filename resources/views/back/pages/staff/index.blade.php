@@ -37,7 +37,7 @@
                             {{ $staff->name }}
                         </td>
                         <td class="py-4 px-6">
-                            {{ $staff->title}}
+                            {{ $staff->role->name}}
                         </td>
                         <td class="py-4 px-6">
                             {{ $staff->text }}

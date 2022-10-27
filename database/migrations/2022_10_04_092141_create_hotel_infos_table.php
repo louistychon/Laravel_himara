@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('logo');
             $table->string('logo_square');
+            $table->string('search_map');
             $table->string('coordinates_x');
             $table->string('coordinates_y');
             $table->timestamps();

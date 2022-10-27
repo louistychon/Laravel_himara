@@ -5,11 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Staff extends Model
+class Staffroles extends Model
 {
     use HasFactory;
-
-    public function role(){
-        return $this->hasOne(Staffroles::class, 'id', 'title');
-    }
 }
