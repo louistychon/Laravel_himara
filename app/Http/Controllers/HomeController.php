@@ -14,6 +14,7 @@ use App\Models\Slider;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 
 
 class HomeController extends Controller
@@ -79,18 +80,18 @@ class HomeController extends Controller
 
 
         $update = Hometext::first();
-        $update->title_intro = $request->title_intro;
+        $update->title_intro = Str::of($request->title_intro)->replaceArray('$', ['<span class="text-himara">','</span>'],$request->title_intro);
         $update->title_card = $request->title_card;
         $update->stars = $request->stars;
         $update->text_card = $request->text_card;
-        $update->title_rooms = $request->title_rooms;
-        $update->title_services = $request->title_services;
-        $update->title_gallery = $request->title_gallery;
-        $update->title_testimonial = $request->title_testimonial;
-        $update->title_restaurant = $request->title_restaurant;
-        $update->title_news = $request->title_news;
-        $update->title_contact1 = $request->title_contact1;
-        $update->title_contact2 = $request->title_contact2;
+        $update->title_rooms = Str::of($request->title_rooms)->replaceArray('$', ['<span class="text-himara">','</span>'],$request->title_rooms);
+        $update->title_services = Str::of($request->title_services)->replaceArray('$', ['<span class="text-himara">','</span>'],$request->title_services);
+        $update->title_gallery = Str::of($request->title_gallery)->replaceArray('$', ['<span class="text-himara">','</span>'],$request->title_gallery);
+        $update->title_testimonial = Str::of($request->title_testimonial)->replaceArray('$', ['<span class="text-himara">','</span>'],$request->title_testimonial);
+        $update->title_restaurant = Str::of($request->title_restaurant)->replaceArray('$', ['<span class="text-himara">','</span>'],$request->title_restaurant);
+        $update->title_news = Str::of($request->title_news)->replaceArray('$', ['<span class="text-himara">','</span>'],$request->title_news);
+        $update->title_contact1 = Str::of($request->title_contact1)->replaceArray('$', ['<span class="text-himara">','</span>'],$request->title_contact1);
+        $update->title_contact2 = Str::of($request->title_contact2)->replaceArray('$', ['<span class="text-himara">','</span>'],$request->title_contact2);
         $update->text_intro = $request->text_intro;
         $update->under_title_intro = $request->under_title_intro;
         $update->under_title_rooms = $request->under_title_rooms;

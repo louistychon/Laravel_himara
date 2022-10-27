@@ -246,7 +246,7 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="section-title">
-                            <h4 class="text-uppercase">{{ $text->title_intro }}</h4>
+                            <h4 class="text-uppercase">{!! $text->title_intro !!}</h4>
                             <p class="section-subtitle">{{ $text->under_title_intro }}</p>
                         </div>
                         <div class="info-branding">
