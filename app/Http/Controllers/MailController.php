@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactformRequest;
-use App\Mail\ReservationConfirmed;
 use App\Mail\SubscriptionConfirmed;
 use App\Models\mails;
 use Illuminate\Http\Request;

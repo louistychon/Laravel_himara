@@ -503,8 +503,7 @@
                             </div>
                             <!-- BOOKING BUTTON -->
                             @if (Auth::check() == true)
-                                <button type="submit"
-                                    class="btn btn-dark btn-fw mt20 mb20">BOOK A
+                                <button type="submit" class="btn btn-dark btn-fw mt20 mb20">BOOK A
                                     ROOM</button>
                             @else
                                 <a href="{{ route('login') }}" class="btn btn-dark btn-fw mt20 mb20">LOGIN FIRST</a>

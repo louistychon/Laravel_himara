@@ -12,14 +12,8 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-            $bookings = Booking::all();
-            foreach ($bookings as $booking) {
-               if($booking->date_end > now()){
-                Mail::to('louis.tychon1@gmail.com')->send(new askreview());
-               }
-            }
-        })->daily();
+        $schedule->command('askreview:daily')
+        ->everyFourHours();
     }
 
 

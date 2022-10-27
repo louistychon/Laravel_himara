@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Booking;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class askreview extends Command
 {
@@ -11,22 +13,23 @@ class askreview extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'askreview:daily';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Ask for a review';
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
     public function handle()
     {
-        return Command::SUCCESS;
+        $bookings = Booking::all();
+        foreach ($bookings as $booking) {
+           if($booking->date_end > now()){
+            Mail::to('louis.tychon1@gmail.com')->send(new askreview());
+           }
+        }
+        $this->info('Successfully sent a review request to past trips');
     }
 }
