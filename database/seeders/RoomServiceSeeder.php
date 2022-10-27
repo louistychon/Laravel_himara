@@ -24,9 +24,9 @@ class RoomServiceSeeder extends Seeder
             ['name' => 'PRIVATE BALCONY', 'small_desc' => 'The balcony is private', 'icon_classname' => 'fa-building'],
             ['name' => 'FREE NEWSPAPER', 'small_desc' => 'Newspaper delivered at your place every day', 'icon_classname' => 'fa-newspaper-o'],
             ['name' => 'FLAT SCREEN TV', 'small_desc' => 'Big TV screen to enjoy movies', 'icon_classname' => 'fa-television'],
-            ['name' => 'FULL AC', 'small_desc' => 'The room should be fresh', 'icon_classname' => 'fa-solid fa-fan'],
-            ['name' => 'BEACH VIEW', 'small_desc' => 'View on the beach from the room', 'icon_classname' => 'fa-umbrella-beach'],
-            ['name' => 'ROOM SERVICE', 'small_desc' => 'Room service included', 'icon_classname' => 'fa-bell-concierge'],
+            ['name' => 'FULL AC', 'small_desc' => 'The room should be fresh', 'icon_classname' => 'fa-window-close-o'],
+            ['name' => 'BEACH VIEW', 'small_desc' => 'View on the beach from the room', 'icon_classname' => 'fa-lemon-o'],
+            ['name' => 'ROOM SERVICE', 'small_desc' => 'Room service included', 'icon_classname' => 'fa-map-o'],
         ]);
     }
 }
