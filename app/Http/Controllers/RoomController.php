@@ -29,12 +29,27 @@ class RoomController extends Controller
     public function indexall()
     {
         $allrooms = Room::where('show', 1)->where('todelete', 0)->paginate(10);
+        $searchbar = \request('searchbar');
+        if(\request('searchbar')){
+            $allrooms = Room::where('show', 1)->where('todelete', 0)->where('name', 'Like', "%". $searchbar ."%")->get();
+        }
+
+        if(\request('category')){
+            $allrooms = Room::where('show', 1)->where('todelete', 0)->where('roomtypes_id',\request('category'))->get();
+        }
+        if(\request('tag')){
+            $allrooms = Room::where('show', 1)->where('todelete', 0)->whereHas('tags', function($q){
+                return $q->where('roomtags_id', \request('tag'));
+            })->get();
+        }
+
         $roomtypes = RoomType::withCount('rooms')->get();
         $bookings = Booking::all();
         $roomtags = Roomtags::all();
-        $testimonials = Testimonial::all()->where('show', 1);
+        $testimonials = Testimonial::where('show', 1)->get();
         $allroomsimg = RoomImg::all();
         $ratings = Testimonial::withCount('testimonial')->get();
+
         return view('front.pages.rooms-list', compact('allrooms', 'roomtypes', 'testimonials', 'roomtags', 'bookings', 'ratings'));
     }
 
@@ -182,33 +197,6 @@ class RoomController extends Controller
         $services = RoomService::all();
         $tags = Roomtags::all();
         return view('back.pages.room.show', compact('show', 'tags', 'services', 'roomtypes'));
-    }
-
-    public function searchtags(Roomtags $q)
-    {
-        $allrooms = Room::with('tags')->whereDoesntHave('tags', function ($q) {
-            $q->where('tag', '=', 'id');
-        });
-
-        return view('front.pages.rooms-list', compact('allrooms'));
-    }
-
-
-    public function searchcategory($category)
-    {
-        $allrooms = Room::whereHas('room_types', function ($query) {
-            return $query->where('name', '=', \request('category'));
-        })->get();
-
-        return view('front.pages.rooms-list', compact('allrooms'));
-    }
-
-    public function searchroom(Request $request)
-    {
-        $query = $request->searchbar;
-        $allrooms = Room::query()->where('name', 'LIKE', "%$query%")->get();
-        return view('front.pages.rooms-list', compact('allrooms'));
-
     }
 
     public function update(Request $request, $id)

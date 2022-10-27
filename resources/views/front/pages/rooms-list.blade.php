@@ -85,7 +85,9 @@
             </div>
         @endforeach
         <!-- PAGINATION -->
+        @if(! \request('tag') && ! \request('searchbar') && ! \request('category'))
         {{ $allrooms->links() }}
+        @endif
     </div>
     <div class="col-lg-3 col-12">
         <div class="sidebar">
@@ -105,7 +107,7 @@
                 <ul class="categories">
                     @foreach ($roomtypes as $roomtype)
                         <li>
-                            <a href="/roomlist?category={{$roomtype->name}}">{{ $roomtype->name }}<span
+                            <a href="?category={{$roomtype->id}}">{{ $roomtype->name }}<span
                                     class="posts-num">{{ $roomtype->rooms_count }}</span></a>
                         </li>
                     @endforeach
@@ -116,7 +118,7 @@
                 <h4 class="widget-title">Tags</h4>
                 <div class="tagcloud">
                     @foreach ($roomtags as $tag)
-                        <a href="/roomlist?tag={{ $tag->id }}">
+                        <a href="?tag={{ $tag->id }}">
                             <span class="tag">{{ $tag->name }}</span></a>
                     @endforeach
                 </div>
