@@ -13,7 +13,7 @@
             <div class="mb-6">
                 <label for="title_intro" class="block mb-2 text-sm font-medium">Title intro</label>
                 <input type="text" id="title_intro" name="title_intro" class="focus:ring-0"
-                    value="{{ $text->title_intro }}" {{old('title_intro')}}>
+                    value="{{ $text->title_intro }}">
             </div>
             <div class="mb-6">
                 <label for="under_title_intro" class="block mb-2 text-sm font-medium">Under title intro</label>
