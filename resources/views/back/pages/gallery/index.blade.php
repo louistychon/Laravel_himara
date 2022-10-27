@@ -31,7 +31,7 @@
                 @foreach ($allimgs as $img)
                     <tr class="">
                         <td class="py-4 px-6">
-                            <img class="img-responsive" src="{{asset('storage/gallery/'. $img->src)}}">
+                            <img class="img-responsive" src="{{asset('storage/gallery/thumbnail/'. $img->src)}}">
                         </td>
                         <td class="py-4 px-6">
                             {{ $img->src }}

@@ -31,7 +31,7 @@
                 @foreach ($allstaff as $staff)
                     <tr class="">
                         <td class="py-4 px-6">
-                            <img class="" src="{{asset('storage/staff/'. $staff->src)}}">
+                            <img class="" src="{{asset('storage/staff/thumbnail/'. $staff->src)}}">
                         </td>
                         <td class="py-4 px-6">
                             {{ $staff->name }}

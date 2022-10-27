@@ -61,9 +61,9 @@ class RoomController extends Controller
         $roomtypes = RoomType::all();
         $randrooms = Room::all();
         $services = RoomService::all();
-        $ratings = $testimonials->avg('rating');
+        $ratings = $testimonials->where('show', 1)->avg('rating');
         $ratings = number_format($ratings, 2);
-        $ratingcount = $testimonials->count();
+        $ratingcount = $testimonials->where('show', 1)->count();
 
         if ($testimonials->count() == 0) {
             $ratingcount = 0;

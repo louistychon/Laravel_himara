@@ -29,9 +29,6 @@ class RoomImgSeeder extends Seeder
             ['src' => 'family.jpg', 'room_id' => 7],
             ['src' => 'double.jpg', 'room_id' => 4],
             ['src' => 'deluxe.jpg', 'room_id' => 6],
-            ['src' => 'deluxe.jpg', 'room_id' => 9],
-            ['src' => 'deluxe.jpg', 'room_id' => 2],
-            ['src' => 'deluxe.jpg', 'room_id' => 3],
         ]);
     }
 }

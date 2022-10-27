@@ -38,7 +38,7 @@
         <div class="loader-inner">
           <div class="loader-logo">
             @foreach ($hotelinfo as $info )
-            <img src="{{asset('/storage/logo'.$info->logo)}}" alt="Hotel Himara">
+            <img src="{{asset('/storage/logo/thumbnail/'.$info->logo)}}" alt="Hotel Himara">
             @endforeach
           </div>
         </div>

@@ -30,6 +30,15 @@ class RoomRoomImgSeeder extends Seeder
             ['rooms_id' => 6, 'roomimg_id' => 2],
             ['rooms_id' => 6, 'roomimg_id' => 7],
             ['rooms_id' => 7, 'roomimg_id' => 1],
+            ['rooms_id' => 8, 'roomimg_id' => 1],
+            ['rooms_id' => 8, 'roomimg_id' => 2],
+            ['rooms_id' => 8, 'roomimg_id' => 3],
+            ['rooms_id' => 8, 'roomimg_id' => 4],
+            ['rooms_id' => 9, 'roomimg_id' => 2],
+            ['rooms_id' => 9, 'roomimg_id' => 3],
+            ['rooms_id' => 9, 'roomimg_id' => 4],
+            ['rooms_id' => 9, 'roomimg_id' => 5],
+            ['rooms_id' => 9, 'roomimg_id' => 6],
         ]);
     }
 }
