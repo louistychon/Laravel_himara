@@ -38,7 +38,7 @@ class BookingController extends Controller
 
         //valide la requete
         $request->validate([
-            'name' => 'required',
+            'email' => 'required',
             'roomtype_id' => 'required',
             'number_adults' => 'required|integer|max:10|min:1',
             'number_children' => 'required|integer|max:8',
@@ -78,9 +78,6 @@ class BookingController extends Controller
             $roombooked2->save();
         }
         $store->save();
-
-
-
 
         //envoie les infos par mail
 

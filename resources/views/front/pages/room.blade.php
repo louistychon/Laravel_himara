@@ -248,8 +248,6 @@
                                             </div>
                                             <div class="col-lg-9 col-sm-9 col-8">
                                                 <div class="progress">
-
-
                                                     <div class="progress-bar" role="progressbar"
                                                         style="width:{{ round(((float) $numberrating5 / $ratingcount) * 100) }}%"
                                                         aria-valuenow="{{ $numberrating5 / $ratingcount }}"
@@ -414,7 +412,8 @@
                                 </figure>
                                 <div class="room-info">
                                     <h2 class="room-title">
-                                        <a href="/room/{{ $randroom->id }}/show">{{ $randroom->name }}</a>
+                                        <a
+                                            href="/room/{{ $randroom->id }}/show">{{ $randroom->name }}</a>
                                     </h2>
                                     <p>Enjoy our {{ $randroom->type->name }}</p>
                                 </div>
@@ -437,11 +436,13 @@
                         <form action="/booking/store" method="post">
                             @csrf
                             <!-- EMAIL -->
+                            @if(Auth::user() == true)
                             <div class="form-group">
                                 <input class="form-control" name="email" type="email"
                                     placeholder="Your Email Address"
-                                    value="{{ Auth::user() ? Auth::user()->email : "" }}" disabled>
+                                    value="{{ Auth::user() ? Auth::user()->email : '' }}" disabled>
                             </div>
+                            @endif
                             <!-- ROOM ID -->
                             <div class="form-group">
                                 <input name="room_id" value="{{ $room->id }}">
@@ -449,12 +450,7 @@
 
                             <!-- ROOM TYPE -->
                             <div class="form-group">
-                                @foreach ($roomtypes as $roomtype)
-                                    @if ($roomtype->id == $room->type->id)
-                                        <input class="form-control" name="roomtype_id"
-                                            value="{{ $roomtype->id }}">
-                                    @endif
-                                @endforeach
+                                <input name="roomtype_id" value="{{ $room->type->id }}">
                             </div>
                             <!-- DATE -->
                             <div class="form-group">
@@ -506,8 +502,13 @@
                                 </div>
                             </div>
                             <!-- BOOKING BUTTON -->
-                            <button type="submit" class="btn btn-dark btn-fw mt20 mb20">BOOK A
-                                ROOM</button>
+                            @if (Auth::check() == true)
+                                <button type="submit"
+                                    class="btn btn-dark btn-fw mt20 mb20">BOOK A
+                                    ROOM</button>
+                            @else
+                                <a href="{{ route('login') }}" class="btn btn-dark btn-fw mt20 mb20">LOGIN FIRST</a>
+                            @endif
                         </form>
                     </div>
                 </div>
@@ -567,16 +568,16 @@
                 <div class="inner">
                     <ul class="useful-links">
                         <li>
-                            <a href="{{route('contact')}}">About Us</a>
+                            <a href="{{ route('contact') }}">About Us</a>
                         </li>
                         <li>
-                            <a href="{{route('contact')}}">Contact Us</a>
+                            <a href="{{ route('contact') }}">Contact Us</a>
                         </li>
                         <li>
-                            <a href="{{route('gallery')}}">Himara Gallery</a>
+                            <a href="{{ route('gallery') }}">Himara Gallery</a>
                         </li>
                         <li>
-                            <a href="{{route('contact')}}">Our Location</a>
+                            <a href="{{ route('contact') }}">Our Location</a>
                         </li>
                     </ul>
                 </div>
