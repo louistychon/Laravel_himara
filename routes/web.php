@@ -179,7 +179,7 @@ Route::controller(MailController::class)->group(function () {
     Route::get('/mail', 'index')->name('mails');
     Route::post('/mail/contact', 'mailcontact')->name('mailcontact');
     Route::get('/mail/register', 'subscription')->name('subscription');
-    Route::get('/mail/reservation', 'reservation')->name('reservation');
+    Route::get('/mail/review', 'review')->name('mailreview');
 });
 
 

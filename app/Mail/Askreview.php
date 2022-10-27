@@ -11,23 +11,15 @@ class Askreview extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public $data = [];
+
+    public function __construct(Array $reviewinfo)
     {
-        //
+        $this->data = $reviewinfo;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->markdown('emails.askreview');
     }
 }

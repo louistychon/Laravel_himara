@@ -31,7 +31,7 @@ class HomeController extends Controller
         $services = Service::all()->take(4);
         $blogpost = Article::all()->take(3);
         $hometext = Hometext::all();
-        $testimonials = Testimonial::all();
+        $testimonials = Testimonial::all()->where('show', 1);
         $rooms = Room::all()->sortByDesc('id')->take(3);
         $roomtypes = RoomType::all();
 

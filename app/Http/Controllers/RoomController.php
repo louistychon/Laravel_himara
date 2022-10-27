@@ -32,7 +32,7 @@ class RoomController extends Controller
         $roomtypes = RoomType::withCount('rooms')->get();
         $bookings = Booking::all();
         $roomtags = Roomtags::all();
-        $testimonials = Testimonial::all();
+        $testimonials = Testimonial::all()->where('show', 1);
         $allroomsimg = RoomImg::all();
         $ratings = Testimonial::withCount('testimonial')->get();
         return view('front.pages.rooms-list', compact('allrooms', 'roomtypes', 'testimonials', 'roomtags', 'bookings', 'ratings'));
@@ -40,7 +40,7 @@ class RoomController extends Controller
 
     public function showfront($id)
     {
-        $testimonials = Testimonial::where('rooms_id', '=', $id)->get();
+        $testimonials = Testimonial::where('rooms_id', '=', $id)->where('show', 1)->get();
         $room = Room::find($id);
         $rooms = Room::all()->take(3);
         $roomtypes = RoomType::all();

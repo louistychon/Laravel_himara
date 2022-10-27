@@ -1,6 +1,6 @@
 @component('mail::message')
-<p>Please leave a review about your booking !</p>
-    @component('mail::button', ['url' => 'http://localhost:8000/back/review'])
+<p>New review to validate !</p>
+    @component('mail::button', ['url' => 'http://localhost:8000/back/testimonials'])
         Here
     @endcomponent
 

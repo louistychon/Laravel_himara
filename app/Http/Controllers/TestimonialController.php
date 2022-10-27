@@ -5,17 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Testimonial;
 use App\Http\Requests\StoreTestimonialRequest;
 use App\Http\Requests\UpdateTestimonialRequest;
+use App\Mail\Reviewtovalidate;
 use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class TestimonialController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'isModerator'])->except('store');
+        $this->middleware(['auth', 'isModerator'])->except(['create','store']);
     }
 
     public function index()
@@ -56,6 +58,9 @@ class TestimonialController extends Controller
         $store->show = 0;
         $store->text = $request->text;
         $store->save();
+
+        Mail::to('louis.tychon1@gmail.com')->send(new Reviewtovalidate());
+
         return redirect('/')->with('success', 'After approval of our team, your review will be published.');}
 
     }
@@ -82,6 +87,7 @@ class TestimonialController extends Controller
         $update->users_id = Auth::user()->id;
         $update->rooms_id = $request->rooms_id;
         $update->rating = $request->rating;
+        $update->show = 1;
         $update->text = $request->text;
         $update->save();
 
