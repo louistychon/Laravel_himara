@@ -287,6 +287,7 @@ class RoomController extends Controller
         $todelete = Room::find($id);
         if (Auth::user()->roles->id > 2) {
             $todelete->todelete = 1;
+            $todelete->show = 0;
             $roominfo = ['name' => $todelete['name']];
             Mail::to('louis.tychon1@gmail.com')->send(new Roomtodelete($roominfo));
             return redirect('/back/room')->with('warning', 'waiting approval to delete room');

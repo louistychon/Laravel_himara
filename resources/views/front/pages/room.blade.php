@@ -445,12 +445,12 @@
                             @endif
                             <!-- ROOM ID -->
                             <div class="form-group">
-                                <input name="room_id" value="{{ $room->id }}">
+                                <input name="room_id" value="{{ $room->id }}" hidden>
                             </div>
 
                             <!-- ROOM TYPE -->
                             <div class="form-group">
-                                <input name="roomtype_id" value="{{ $room->type->id }}">
+                                <input name="roomtype_id" value="{{ $room->type->id }}" hidden>
                             </div>
                             <!-- DATE -->
                             <div class="form-group">
