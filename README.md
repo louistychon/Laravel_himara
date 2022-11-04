@@ -24,4 +24,4 @@ To send emails:
 You need to change .env configuration in order to be able to send emails from this template. Without doing that correctly, it's possible that some fonctionnalities won't work properly. 
 
 To make the Google map work on the page contact: 
-You will need an api key from the search console.
+You will need an api key from the Google Cloud Console. The current API key is deactivated.
