@@ -1,5 +1,5 @@
 # Laravel_himara
-This project is a backoffice for the Himara hotel owner & team. 
+This project is a backoffice for the Himara hotel owner & team. It was build in a local environnement.
 
 The Backoffice is built in Laravel and the front in JS, HTML & CSS. The front is similar from a Wordpress template and not made by me : 
 https://preview.eagle-themes.com/html/himara/index.html
